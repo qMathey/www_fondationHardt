@@ -7,18 +7,30 @@
 		function single_row($data)
 		{
 			global $post, $comment;
-
-			$comment = $data;
-			$the_comment_class = join( ' ', get_comment_class( wp_get_comment_status( $comment->comment_ID ) ) );
-
-			$post = get_post($comment->comment_post_ID);
 			
 			// Ajouter classe statut réservation
 			$rowClass = ( $data['state'] == 0 ) ? 'pending' : ( ( $data['state'] == 1 ) ? 'allowed' : 'declined') ;
+		
+			// si il y a un commentaire
+			if($comment != null) {
+				$comment = $data;
+				$the_comment_class = join( ' ', get_comment_class( wp_get_comment_status( $comment->comment_ID ) ) );
 
-			echo "<tr id='comment1-$comment->comment_ID' class='$rowClass'>";
-			echo $this->single_row_columns( $comment );
+				$post = get_post($comment->comment_post_ID);
+				
+				// affiche la ligne avec comment ID
+				echo "<tr id='comment1-".$comment->comment_ID."' class='$rowClass'>";
+			}
+			else {
+				$comment = '';
+				
+				// affiche la ligne sans comment D
+				echo "<tr class='$rowClass'>";
+			}
+				
+			echo $this->single_row_columns( $data );
 			echo "</tr>\n";
+		
 		}
 		
 		// Init
@@ -248,15 +260,16 @@
 			);
 			
 			$this->items = $this->found_data;
-					
+			
 			// Creer la pagination
 			$this->set_pagination_args( array(
 				'total_items' => $total_items, 
 				'per_page'    => $per_page,
 				'total_pages' => ceil($total_items/$per_page)
 			) );
+			
 		}
-
+		
 
 	}// Fin classe rmsReservation_datatable
 
