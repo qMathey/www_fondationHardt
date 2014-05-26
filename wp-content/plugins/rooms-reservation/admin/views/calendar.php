@@ -54,6 +54,8 @@
 			
 			$localPost = get_post( $resData -> post_id );
 			
+			$room_client = get_post_meta(  $resData -> post_id, 'rms_reservation_client', true );
+			
 			
 			$arrReservation[$i] = array(
 				get_field('rms_reservation_start', $resData -> post_id),
