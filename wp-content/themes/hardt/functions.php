@@ -104,7 +104,7 @@
 	// Modifier la structure de base du top_menu
 	class custom_walker_menu extends Walker_Nav_Menu 
 	{
-		function start_lvl(&$output, $depth) 
+		function start_lvl( &$output, $depth = 0, $args = array() )
 		{
 			$indent = str_repeat("\t", $depth);
 			$output .= "\n$indent<ul class=\"submenu\">\n";
