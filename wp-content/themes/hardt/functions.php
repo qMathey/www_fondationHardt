@@ -1,6 +1,6 @@
 <?php
 	add_theme_support( 'post-thumbnails' );
-	add_filter( 'gettext', 'wpse22764_gettext', 10, 2 );
+	//add_filter( 'gettext', 'wpse22764_gettext', 10, 2 );
 
 	// Label custom pour traduction des citations
 	function wpse22764_gettext( $translation, $original )
