@@ -9,6 +9,18 @@
 	// enqueue scripts and styles
 	function rooms_reservations_scripts() {
 		wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+		
+		// Ajouter custom style
+		wp_enqueue_style('rms_admin_css', plugins_url('/rooms-reservation/css/admin.css'));
+		
+		//wp_register_script( 'rms_admin_js',  plugins_url( '/../js/admin.js', __FILE__ ) );
+		wp_enqueue_script('rms_admin_js', plugins_url( '/../js/admin.js', __FILE__ ),'','',true);
+		
+		// Propriétés Ajax
+		wp_localize_script( 'rms_admin_js', 'rms_reservation_data',
+			array( 'ajax_url' => plugins_url('/rooms-reservation/frontend/frontend_ajax.php'))
+		);
+		
 	}
 	
 	// Custom post status, état archivé pour les réservations
@@ -686,16 +698,6 @@ add_action( 'save_post', 'prfx_meta_save' );
 	add_filter( 'custom_menu_order', '__return_true' );
 	add_filter( 'menu_order', 'custom_admin_menu_order' );
 	
-	// Ajouter custom style
-	wp_enqueue_style('rms_admin_css', plugins_url('/rooms-reservation/css/admin.css'));
-	
-	//wp_register_script( 'rms_admin_js',  plugins_url( '/../js/admin.js', __FILE__ ) );
-	wp_enqueue_script('rms_admin_js', plugins_url( '/../js/admin.js', __FILE__ ),'','',true);
-	
-	// Propriétés Ajax
-	wp_localize_script( 'rms_admin_js', 'rms_reservation_data',
-		array( 'ajax_url' => plugins_url('/rooms-reservation/frontend/frontend_ajax.php'))
-	);
 	
 	// Liste des champs de formulaire
 	function user_custom_fields()
