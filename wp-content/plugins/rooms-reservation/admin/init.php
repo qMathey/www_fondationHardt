@@ -3,7 +3,13 @@
 	add_action( 'edit_user_profile', 'custom_user_fields', 10);
 	add_action( 'show_user_profile', 'custom_user_fields', 10);
 	
-	wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+	// enqueue custom scripts/styles
+	add_action( 'wp_enqueue_scripts', 'rooms_reservations_scripts' );
+	
+	// enqueue scripts and styles
+	function rooms_reservations_scripts() {
+		wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+	}
 	
 	// Custom post status, état archivé pour les réservations
 	function rms_res_archived_post_status()
