@@ -1,0 +1,276 @@
+/* Réservations: Global */
+.hidden_step {
+	display: none;
+}
+
+/* Réservations: Menu */
+.form_step_menu {
+	z-index: 1;
+	float: right;
+	position: relative;
+	margin-right: 5px;
+}
+
+.form_step_menu ul {
+	list-style: none;
+	padding: 0;
+}
+
+.form_step_menu li {
+	color: #fff;
+	text-decoration: none;
+	padding: 0 3px 0;
+	display: table-cell;
+}
+
+.form_step_menu li a {
+	font-family: HelveticaLTStd-Light;
+	text-transform:uppercase;
+	color: #ececec;
+	text-decoration: none;
+}
+
+.form_step_menu li a:hover {
+	text-decoration: none;
+}
+
+.form_step_menu li.done, .form_step_menu li.active {
+	border-bottom: #003366 1px solid;
+}
+img.ui-datepicker-trigger {
+	display: inline;
+	float: right;
+}
+
+.ui-datepicker-div{
+	display:none;
+}
+
+.form_step_menu li.active a {
+	color: #003366;
+	text-decoration: none;
+}
+
+/* Réservations: Préambule */
+.rms_wrapper a {
+	font-family: HelveticaLTStd-Light;
+}
+
+.rms_wrapper a.active {
+	text-decoration: underline;
+}
+
+ul.premabule_actions {
+	list-style: none;
+	padding: 0 0 0 10px;
+}
+
+ul.premabule_actions li:before {
+	content: ">";
+}
+
+.rms_wrapper .login_form, .rms_wrapper .email_form {
+	display: none;
+}
+.rms_wrapper .login_form fieldset input[type="text"], .rms_wrapper .login_form fieldset input[type="password"] {
+	min-width: 160px;
+}
+
+.rms_wrapper fieldset{
+	border: none;
+	padding: 15px 0 0;
+	margin: 0;
+}
+
+.rms_wrapper label {
+	margin: 5px 0;
+}
+
+.rms_wrapper .right_col {
+	float: left;
+	width: 40%;
+	margin-left: 10%;
+}
+
+.rms_wrapper .right_col fieldset {
+	padding: 0;
+}
+
+.rms_wrapper fieldset input[type="text"], .rms_wrapper fieldset input[type="password"], textarea {
+	display: block;
+	margin: 0 0 10px;
+	border: 1px solid #FAFAFA;
+	background-color: #FAFAFA;
+	padding: 5px;
+	min-width: 100%;
+	width: 100%;
+}
+
+.rms_wrapper input[type="submit"], .rms_wrapper input.rms_edit_go_to_step {
+	font-family: HelveticaLT-Bold;
+	text-transform: uppercase;
+	background-color: #2c3e57;
+	color: #ffffff;
+	float: right;
+	margin: 5px 0;
+	border: none;
+	padding: 5px;
+}
+
+.rms_wrapper input[type="submit"]:hover, .rms_wrapper input.rms_edit_go_to_step:hover {
+	background-color: #ECECEC;
+	color: #2c3e57;
+	float: right;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.rms_wrapper fieldset select {
+	display: block;
+	margin: 5px 0;
+	border: none;
+	background-color: #FAFAFA;
+	padding: 5px;
+	min-width: 150px;
+}
+
+.rms_wrapper.step_4 fieldset {
+	line-height: 25px;
+	margin-top: 30px;
+}
+
+.rms_wrapper.step_4 fieldset .show_room input {
+	display: none;
+}
+
+.rms_wrapper .res_room_list article {
+	display: inline-block;
+	width: 96%;
+	background-color: #E9E9E9;
+	padding: 2%;
+	line-height: 25px;
+	margin-top: 0;
+}
+
+.rms_wrapper .rms_edit_go_to_step {
+	background-color: #2c3e57;
+	color: #ffffff;
+	float: right;
+	margin: 5px 0;
+	border: none;
+	padding: 5px;
+}
+
+.rms_wrapper .rms_room_title {
+	float: left;
+}
+
+.rms_wrapper .rms_room_price {
+	float: right;
+}
+
+.rms_wrapper .res_room_list input[type=submit] {
+	margin-top: 25px;
+}
+
+.rms_wrapper .rms_room_header {
+	display: inline-block;
+	width: 100%;
+	color: #003366;
+	font-size: 16px;
+}
+
+.rms_wrapper p.rms_wrapper_step_descr {
+	margin-bottom: 30px;
+}
+
+a.retrieve_password {
+	float: left;
+	margin-top: 10px;
+	font-size: 12px;
+	/*text-decoration: underline;*/
+}
+
+/* Réservation: Etape 1 */
+.fact_addr, .scolarship_form {
+	display: none;
+}
+
+.scolarship_form p {
+	margin: 1em 0 !important;
+}
+
+.fileinputs {
+	margin-bottom: 20px;
+}
+
+.fakefile {
+	margin-top: -22px;
+	z-index: 1;
+	height: 29px;
+	background-color: #FAFAFA;
+	padding: 0 40px;
+	background-image: url('../css/icons/icon_trombonne.jpg');
+	background-repeat: no-repeat;
+}
+
+input.file, input.cv_file {
+	position: relative;
+	text-align: right;
+	-moz-opacity:0 ;
+	filter:alpha(opacity: 0);
+	opacity: 0;
+	z-index: 2;
+}
+
+.rms_form_error_info {
+	display: none;
+}
+
+.rms_room_chosen {
+	border: 1px dashed #003366;
+}
+
+/* Classes de validation du formulaire */
+.rms_field_error {
+	border: 1px solid #f7afac !important;
+	background-color: #f7afac !important;
+}
+
+.rms_label_error {
+	color: #f7afac !important;
+}
+
+.ui-datepicker {  
+    width: 216px;  
+    height: auto;  
+    margin: 5px auto 0;  
+    font: 9pt Arial, sans-serif;  
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);  
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);  
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);  
+}
+
+.ui-widget-header {
+	font-weight: bold  !important;
+	background: none !important;
+	border: none !important;
+}
+
+.ui-datepicker-header .ui-state-disabled {
+	display: none;
+}
+
+.ui-datepicker th {
+	font-weight: normal !important;
+	color: red !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	border: none !important;
+	background: none !important;
+}
+
+.ui-state-active {
+	text-decoration: underline !important;
+}

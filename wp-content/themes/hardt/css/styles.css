@@ -1,0 +1,488 @@
+/* Fonts */
+/*@import url("//hello.myfonts.net/count/2a1c3d");
+@import url("//hello.myfonts.net/count/2a3765");*/
+  
+@font-face {font-family: 'HelveticaLTStd-Light';src: url('../../fonts/2A1C3D_0_0.eot');src: url('../fonts/2A1C3D_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2A1C3D_0_0.woff') format('woff'),url('../fonts/2A1C3D_0_0.ttf') format('truetype');}
+
+@font-face {font-family: 'HelveticaLT-Bold';src: url('../fonts/2A1C3D_1_0.eot');src: url('../fonts/2A1C3D_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2A1C3D_1_0.woff') format('woff'),url('../fonts/2A1C3D_1_0.ttf') format('truetype');}
+
+@font-face {font-family: 'ACaslon-Italic';src: url('../fonts/2A3765_0_0.eot');src: url('../fonts/2A3765_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2A3765_0_0.woff') format('woff'),url('../fonts/2A3765_0_0.ttf') format('truetype');}
+
+@font-face {font-family: 'ACaslon-Semibold';src: url('../fonts/2A3765_3_0.eot');src: url('../fonts/2A3765_3_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2A3765_3_0.woff') format('woff'),url('../fonts/2A3765_3_0.ttf') format('truetype');}
+
+@media (max-width: 1500px) {
+html,body {
+width: 100% !important;
+}
+    .container section{
+		position: relative !important;
+	/*	width: 1500px !important;*/
+		background-size: 1500px 1500px ! important;
+    }
+}
+
+html,body {
+	height: 100%;
+}
+
+body {
+	background-color: #fff;
+	margin: 0;
+	font-family: HelveticaLTStd-Light;
+	font-size: 14px;
+	color: #666666;
+	overflow-x: hidden;
+}
+
+/* Element globaux */ 
+.separator {
+	margin: 10px auto;
+	display: block !important;
+	color: #003366;
+	width: 100%;
+	height: 20px;
+}
+
+.scroll_arrow {
+	width: 108px;
+	height: 108px;
+	margin-bottom: 7px;
+	background: #ddd url(img/down-arrow.png) no-repeat center center;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	position:absolute;
+	bottom: 5px;
+	left: 50%;
+	margin-left: -54px;
+	opacity: 0.7;
+	z-index: 30;
+}
+
+.separator hr {
+	border: 0;
+	border-top: 2px solid #003366;
+	float: left;
+	width: 30px;
+}
+
+.no_margin {
+	margin: 0;
+}
+
+a {
+	color: #003366;
+	text-decoration: underline;
+}
+
+a.no_style {
+	font-family: HelveticaLTStd-Light;
+	color: #666666;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+h1 {
+	font-size: 19px;
+	color: #003366;
+	font-weight: normal;
+	text-transform: uppercase;
+	text-align: left;
+}
+
+p {
+	text-align: justify;
+}
+
+.page_content.auto_indent p {
+	text-indent: 50px;
+}
+
+.close_cross {
+	height: 8px;
+	width: 8px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.open_news .close_cross {
+	top: 5px;
+	right: 5px;
+}
+
+.open_square {
+	height: 10px;
+	width: 10px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.square_img {
+	background: url('img/open_btn.jpg') no-repeat;
+}
+
+.cross_img {
+	background: url('img/clost_btn.jpg') no-repeat;
+}
+
+.fixed, .menu_fixed {
+	position: fixed !important;
+}
+
+.shadow {
+	-webkit-box-shadow: 5px 9px 20px rgba(0,0,0,.40);
+	-moz-box-shadow: 5px 9px 20px rgba(0,0,0,.40);
+	box-shadow: 5px 9px 20px rgba(0,0,0,.40);
+}
+
+/* Menu principal */
+.navigation {
+	font-family: HelveticaLTStd-Light;
+	font-size: 13px;
+	display: inline;
+	margin: 0 auto;
+	width: 100%;
+	padding: 18px 0;
+	background-color: #ffffff;
+	z-index: 4;
+	top: 0;
+}
+
+.fix_width_menu {
+	width: 1090px;
+	margin: 0 auto;
+}
+
+.navigation .fix_width_menu > ul {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+.navigation li {
+	display: inline;
+	list-style-type: none;
+}
+
+.navigation a {
+	font-family: HelveticaLTStd-Light;
+	color: #666666;
+	text-decoration: none;
+}
+
+.navigation a:hover, .navigation li.current-menu-item a {
+	color: #003366;
+	text-decoration: none;
+}
+
+.main_top_menu li a, ul.right_top_lang_menu li a {
+	text-transform: uppercase;
+}
+
+.main_top_menu {
+	float: left;
+}
+
+.main_top_menu li {
+	width: auto;
+	float:left;
+}
+
+.main_top_menu > li > a {
+	padding-right:30px;
+}
+
+.right_top_menu li {
+	float:left;
+}
+
+.main_top_menu li a, .submenu li a {
+	display:block;
+}
+
+.main_top_menu li ul {
+	display:none;
+}
+
+.main_top_menu li ul li, .right_top_menu li ul li {
+	float:inherit;
+}
+
+.submenu {
+	display: none;
+	padding: 0;
+	line-height: 23px;
+	position:absolute;
+}
+
+.submenu li:first-child + li{
+	margin-top: 0;
+}
+
+.submenu li {display:block;}
+.submenu li a {
+	text-transform: none;
+	display: inline-block;
+}
+
+.submenu .separator  {
+	border-bottom:2px solid #003366;
+	margin: 10px 0;
+	width: 30px;
+}
+
+.submenu_wrapper {
+	display:none;
+}
+
+ul.right_top_menu li:first-child {
+	padding-right: 10px;
+}
+
+ul.right_top_lang_menu {
+	float: right;
+}
+
+ul.right_top_lang_menu li {
+	padding: 5px;
+}
+
+ul.right_top_lang_menu li a.active{
+	color: #003366;
+	border-top: 1px solid #003366;
+	padding-top: 2px;
+}
+
+/* Conteneur principal */
+.container {
+	position:relative;
+	width: 100%;
+	height: 100%;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.container section {  
+	min-height: 100%;  
+	margin: 0; 
+    width: 100%; 
+    position: absolute; 
+}
+
+.container section article {
+	min-height: 100%;
+	width: 1150px;
+	position: relative;
+	margin: 0 auto 20px auto;
+	margin-top: 80px;
+}
+
+/* Logo */
+.logo {
+	background: url('img/fondation-hardt_logo.jpg');
+	height: 60px;
+	width: 376px;
+	left: 0;
+	z-index: 30;
+	margin-top: 50px;
+}
+
+/* Bloc de conteu des pages */
+.page_content_wrap {
+	background-color: #ffffff;
+	padding: 0 20px 20px 20px;
+	-webkit-transition: width 2s;
+	transition: width 2s;
+	z-index: 40;
+	float: right;
+	-webkit-box-shadow: 5px 9px 20px rgba(0,0,0,.40);
+	-moz-box-shadow: 5px 9px 20px rgba(0,0,0,.40);
+	box-shadow: 5px 9px 20px rgba(0,0,0,.40);
+}
+
+.page_content_wrap.width_60 {
+	width: 60%;
+}
+	
+.page_content_wrap.width_30 {
+	width: 30%;
+}
+
+.page_content {
+	text-align: justify;
+	position: relative;
+	padding: 0 20px;
+}
+
+.page_content p:first-of-type {
+	margin: 0;
+}
+
+.right_col {
+	float:left;
+	width:50%;
+	margin-left:30px;
+}
+
+.left_col {
+	float:left;
+	width:45%;
+}
+
+.end_glyph {
+	text-align: center;
+	font-size: 27px;
+}
+
+.end_glyph:before {
+	content: "~";
+}
+
+/* Bloc actualites */
+.news {
+	background-color: #ffffff;
+	height: auto;
+	width: 290px;
+	max-width: 350px;
+	padding: 10px 43px;
+	position: absolute;
+	top: 199px;
+	left: 0;
+	z-index: 3;
+	display: none;
+}
+
+.news a {
+	/*display: block;*/
+}
+
+.news a:hover {
+	text-decoration: underline;
+}
+
+.news .separator:first-of-type,  .news .separator:first-of-type hr {
+	color:#fff !important;
+	border:0 !important;
+}
+
+.open_news {
+	left: 0px;
+	top: 199px;
+	background-color: #ffffff;
+	padding: 10px 35px 10px 43px;
+	z-index: 4;
+	position: absolute;
+}
+
+.wrapper {
+	margin-bottom: 50px;
+}
+
+/* Bloc des citations */
+.citation_original {
+	font-family: ACaslon-Semibold;
+	font-weight: normal;
+	font-style: normal;
+	color: #003366;
+	background-color: #ffffff;
+	padding: 10px 20px;
+	margin-top: 35px;
+	font-size: 20px;
+	position: absolute;
+	right: 0;
+	top: 70%;
+	z-index: 1;
+	-webkit-transition: opacity 1s ease-in-out;
+	-moz-transition: opacity 1s ease-in-out;
+	-ms-transition: opacity 1s ease-in-out;
+	-o-transition: opacity 1s ease-in-out;
+	transition: opacity 1s ease-in-out;
+}
+
+section:first-of-type .citation_original {
+	-webkit-transition: opacity 0s ease-in-out;
+	-moz-transition: opacity 0s ease-in-out;
+	-ms-transition: opacity 0s ease-in-out;
+	-o-transition: opacity 0s ease-in-out;
+	transition: opacity 0s ease-in-out;
+}
+
+.citation_traduction {
+	font-family: ACaslon-Italic;
+	background-color: #ffffff;
+	padding: 5px 10px;
+	margin-top: 0px;
+	font-size: 16px;
+	position: absolute;
+	right: 0;
+	top: 80%;
+	width: auto;
+}
+
+.citation_author {
+	font-family: ACaslon-Semibold;
+	font-size: 13px;
+}
+
+/* Pied de page */
+.footer {
+	margin: auto;
+	text-align: right;
+	line-height: 36px;
+}
+
+.footer_left {
+	float: left;
+	margin-left: 5px;
+}
+
+.small_footer {
+	font-size: 9px;
+	width: auto;
+	position: relative;
+	float: right;
+	margin-top: -10px;
+	margin-right: 5px;
+}
+
+/* Specifique page standard */
+section.page .footer_container 
+{
+	width: 100%;
+	background-color: #fff;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+section.page .legend {
+	bottom: 42px;
+}
+
+/* Specifique accueil */
+section.home {  
+	height: 100%;  
+	margin: 0; 
+	width: 100%; 
+	position: relative; 
+}
+
+section.home article {
+	height: 100%;
+	width: 1150px;
+	position: relative;
+	margin: 0 auto;
+}
+
+section.home .logo {
+	margin-top: 130px;
+}
+
+/* Texte de description du formulaire de recherche */
+.searchFormHelp {
+	font-size: 13px;
+}

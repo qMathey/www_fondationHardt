@@ -1,0 +1,503 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: rms_reservation\n"
+"POT-Creation-Date: 2014-05-08 14:02+0100\n"
+"PO-Revision-Date: 2014-05-08 14:40+0100\n"
+"Last-Translator: Damien Fayet <damien.fayet@think-webdesign.ch>\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-Basepath: C:\\Users\\developeur\\Desktop\\rooms-reservation\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/init.php:36
+msgid "Archiver"
+msgstr "Archive"
+
+#: admin/init.php:41
+msgid "Désarchiver"
+msgstr "Restore"
+
+#: admin/init.php:43
+msgid "Archivé"
+msgstr "Archived"
+
+#: admin/init.php:85
+msgid "Taxonomy"
+msgstr ""
+
+#: admin/init.php:86
+msgid "All Items"
+msgstr ""
+
+#: admin/init.php:87
+msgid "Parent Item"
+msgstr ""
+
+#: admin/init.php:88 admin/init.php:122 admin/init.php:332
+msgid "Parent Item:"
+msgstr ""
+
+#: admin/init.php:89
+msgid "New Item Name"
+msgstr ""
+
+#: admin/init.php:90
+msgid "Add New Item"
+msgstr ""
+
+#: admin/init.php:91
+msgid "Edit Item"
+msgstr ""
+
+#: admin/init.php:92 admin/init.php:128 admin/init.php:338
+msgid "Update Item"
+msgstr ""
+
+#: admin/init.php:93
+msgid "Separate items with commas"
+msgstr ""
+
+#: admin/init.php:94
+msgid "Search Items"
+msgstr ""
+
+#: admin/init.php:95
+msgid "Add or remove items"
+msgstr ""
+
+#: admin/init.php:96
+msgid "Choose from the most used items"
+msgstr ""
+
+#: admin/init.php:97
+msgid "Not Found"
+msgstr ""
+
+#: admin/init.php:119 admin/init.php:123 admin/init.php:333
+msgid "Chambres"
+msgstr "Rooms"
+
+#: admin/init.php:120 admin/init.php:150 admin/views/archives.php:120
+#: admin/views/reservation.php:142
+msgid "Chambre"
+msgstr "Room"
+
+#: admin/init.php:121 admin/init.php:331
+msgid "Post Type"
+msgstr ""
+
+#: admin/init.php:124
+msgid "Voir la chambre"
+msgstr "Show room"
+
+#: admin/init.php:125
+msgid "Ajouter une nouvelle chambre"
+msgstr "New room"
+
+#: admin/init.php:126
+msgid "Ajouter une chambre"
+msgstr "Add room"
+
+#: admin/init.php:127
+msgid "Editer la chambre"
+msgstr "Edit room"
+
+#: admin/init.php:129 admin/init.php:339 admin/views/archives.php:256
+#: admin/views/reservation.php:286
+msgid "Rechercher"
+msgstr "Search"
+
+#: admin/init.php:130 admin/init.php:340
+msgid "Not found"
+msgstr ""
+
+#: admin/init.php:131 admin/init.php:341
+msgid "Not found in Trash"
+msgstr ""
+
+#: admin/init.php:151
+msgid "Prix (CHF/nuit)"
+msgstr "Price (CHF/night)"
+
+#: admin/init.php:152
+msgid "Type"
+msgstr "Type"
+
+#: admin/init.php:177 admin/init.php:191
+msgid "Non défini"
+msgstr "Undefined"
+
+#: admin/init.php:219
+msgid "Informations obligatoires"
+msgstr "Required information"
+
+#: admin/init.php:234
+msgid "Numéro de chambre:"
+msgstr "Room number:"
+
+#: admin/init.php:239
+msgid "Coût de la nuit:"
+msgstr "Night's price:"
+
+#: admin/init.php:244
+msgid "Catégorie de la chambre:"
+msgstr "Room's category"
+
+#: admin/init.php:258
+msgid "Sélectionner une catégorie"
+msgstr "Choose a category"
+
+#: admin/init.php:329
+msgid "Réservations"
+msgstr "Reservations"
+
+#: admin/init.php:330
+msgid "Réservation"
+msgstr "Reservation"
+
+#: admin/init.php:334
+msgid "Voir la réservation"
+msgstr "Show details"
+
+#: admin/init.php:335
+msgid "Ajouter une nouvelle réservation"
+msgstr "New reservation"
+
+#: admin/init.php:336 admin/views/reservation.php:263
+msgid "Ajouter une réservation"
+msgstr "Add reservation"
+
+#: admin/init.php:337 admin/views/res-details.php:99
+#: admin/views/reservation.php:85
+msgid "Editer la réservation"
+msgstr "Edit reservation"
+
+#: admin/init.php:359
+msgid "Hardt Administrator"
+msgstr ""
+
+#: admin/init.php:382 admin/views/archives.php:118
+#: admin/views/reservation.php:140
+msgid "Hôte"
+msgstr "Host"
+
+#: admin/init.php:400
+msgid "Coût du séjour"
+msgstr "Stay's cost"
+
+#: admin/init.php:417
+msgid "Nombre de nuitées:"
+msgstr "Number of nights"
+
+#: admin/init.php:422
+msgid "Infos supplémentaires ( rabais,...):"
+msgstr "Additional information:"
+
+#: admin/init.php:427
+msgid "Coût total (CHF):"
+msgstr "Total (CHF):"
+
+#: admin/init.php:492
+msgid "Réservation des chambres"
+msgstr "Rooms's reservation"
+
+#: admin/init.php:493
+msgid "Calendrier"
+msgstr "Calendar"
+
+#: admin/init.php:494
+msgid "Archives"
+msgstr "Archives"
+
+#: admin/init.php:495
+msgid "Exporter"
+msgstr "Export"
+
+#: admin/init.php:532
+msgid "First name"
+msgstr ""
+
+#: admin/init.php:532 admin/init.php:533 admin/init.php:534 admin/init.php:535
+msgid "General"
+msgstr ""
+
+#: admin/init.php:533
+msgid "last name"
+msgstr ""
+
+#: admin/init.php:534
+msgid "Birthday"
+msgstr ""
+
+#: admin/init.php:535
+msgid "Sex"
+msgstr ""
+
+#: admin/init.php:537
+msgid "Nationality"
+msgstr ""
+
+#: admin/init.php:537 admin/init.php:539 admin/init.php:540 admin/init.php:541
+#: admin/init.php:542 admin/init.php:543 admin/init.php:544 admin/init.php:545
+msgid "Contact"
+msgstr ""
+
+#: admin/init.php:539
+msgid "Email Address"
+msgstr ""
+
+#: admin/init.php:540
+msgid "Address"
+msgstr ""
+
+#: admin/init.php:541
+msgid "Zip Code"
+msgstr ""
+
+#: admin/init.php:542
+msgid "City"
+msgstr ""
+
+#: admin/init.php:543
+msgid "ISO Code"
+msgstr ""
+
+#: admin/init.php:544
+msgid "Phone 1"
+msgstr ""
+
+#: admin/init.php:545
+msgid "Phone 2"
+msgstr ""
+
+#: admin/init.php:549
+msgid "University Degrees"
+msgstr ""
+
+#: admin/init.php:549 admin/init.php:550 admin/init.php:551 admin/init.php:552
+#: admin/init.php:553 admin/init.php:554
+msgid "Etudes"
+msgstr ""
+
+#: admin/init.php:550
+msgid "Institution Affiliation"
+msgstr ""
+
+#: admin/init.php:551
+msgid "Current position held"
+msgstr ""
+
+#: admin/init.php:552
+msgid "University References"
+msgstr ""
+
+#: admin/init.php:553
+msgid "Subject for research at Hardt Fundation"
+msgstr ""
+
+#: admin/init.php:554
+msgid "Previous Stays"
+msgstr ""
+
+#: admin/init.php:575
+msgid "Conditions"
+msgstr ""
+
+#: admin/init.php:575 admin/init.php:576 admin/init.php:577 admin/init.php:578
+#: admin/init.php:579 admin/init.php:580 admin/init.php:581 admin/init.php:582
+msgid "Documents"
+msgstr ""
+
+#: admin/init.php:576
+msgid "Cover Letter"
+msgstr ""
+
+#: admin/init.php:577
+msgid "Curriculum Vitae"
+msgstr ""
+
+#: admin/init.php:578
+msgid "Research Proposal"
+msgstr ""
+
+#: admin/init.php:579
+msgid "Recommandation Letter 1"
+msgstr ""
+
+#: admin/init.php:580
+msgid "Recommandation Letter 2"
+msgstr ""
+
+#: admin/init.php:581
+msgid "Copy of passport / ID Card"
+msgstr ""
+
+#: admin/init.php:582
+msgid "Carreer plans"
+msgstr ""
+
+#: admin/views/archives.php:81 admin/views/reservation.php:84
+msgid "Voir le détail"
+msgstr "Details"
+
+#: admin/views/archives.php:94
+msgid "Accepté"
+msgstr "Accepted"
+
+#: admin/views/archives.php:94
+msgid "Refusé"
+msgstr "Refused"
+
+#: admin/views/archives.php:98
+msgid " - Aucun email n'a été envoyé"
+msgstr " - No email has been sent"
+
+#: admin/views/archives.php:117 admin/views/reservation.php:139
+msgid "Séjour N°"
+msgstr "N° Stay"
+
+#: admin/views/archives.php:119 admin/views/reservation.php:141
+msgid "Dates"
+msgstr "Dates"
+
+#: admin/views/archives.php:121 admin/views/reservation.php:143
+msgid "Etat"
+msgstr "State"
+
+#: admin/views/archives.php:233
+msgid "Archives des réservations"
+msgstr "Archives of the reservations"
+
+#: admin/views/archives.php:237
+msgid "Consulter la liste des réservations archivées"
+msgstr "See the list of archived reservations"
+
+#: admin/views/archives.php:242 admin/views/archives.php:267
+#: admin/views/calendar.php:158 admin/views/calendar.php:172
+#: admin/views/reservation.php:272 admin/views/reservation.php:297
+msgid "Réservation refusée"
+msgstr "Refused reservation"
+
+#: admin/views/archives.php:243 admin/views/archives.php:269
+#: admin/views/calendar.php:160 admin/views/calendar.php:174
+#: admin/views/reservation.php:273 admin/views/reservation.php:298
+msgid "Réservation en attente"
+msgstr "Pending reservation"
+
+#: admin/views/archives.php:244 admin/views/archives.php:268
+#: admin/views/calendar.php:159 admin/views/calendar.php:173
+#: admin/views/reservation.php:274 admin/views/reservation.php:299
+msgid "Réservation acceptée"
+msgstr "Accepted reservation"
+
+#: admin/views/calendar.php:70 admin/views/calendar.php:91
+#: admin/views/calendar.php:109
+msgid "Chambre N°"
+msgstr "Room N°"
+
+#: admin/views/calendar.php:151
+msgid "Planning des réservations"
+msgstr "Reservations planning"
+
+#: admin/views/export.php:6
+msgid "Exporter des données"
+msgstr "Export data"
+
+#: admin/views/export.php:8
+msgid ""
+"Vous avez la possibilités de récupérer des données ( chambres, hôtes, "
+"réservations) au format Excel (.xlsx)"
+msgstr ""
+"You have opportunities to recover data (rooms, breakfast, reservations) in "
+"Excel format (. xlsx)"
+
+#: admin/views/export.php:10
+msgid "Choisissez ce que vous voulez exporter"
+msgstr "Choose what you want to export"
+
+#: admin/views/export.php:13
+msgid "Réservation par chambre avec informations hôte"
+msgstr "Reservation by room with host information"
+
+#: admin/views/export.php:16 admin/views/export.php:24
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+msgstr "Englishem ipsum dolor sit amet, consectetur adipiscing elit."
+
+#: admin/views/export.php:20
+msgid "Occupation des chambres par semaine"
+msgstr "Rooms occupation by week"
+
+#: admin/views/res-details.php:50 admin/views/res-details.php:144
+msgid "Voir le document"
+msgstr "Show document"
+
+#: admin/views/res-details.php:98
+msgid "Détail de la réservation N°"
+msgstr "Reservation N°"
+
+#: admin/views/res-details.php:104
+msgid "Informations concernant le séjour"
+msgstr "Stay informations"
+
+#: admin/views/res-details.php:165
+msgid "Information concernant l'hôte"
+msgstr "Host information"
+
+#: admin/views/reservation.php:119
+msgid "Aucun email n'a été envoyé"
+msgstr "No email has been sent"
+
+#: admin/views/reservation.php:262
+msgid "Liste des réservations"
+msgstr "Reservations list"
+
+#: admin/views/reservation.php:267
+msgid "Consulter la liste des récentes réservations"
+msgstr "View the list of recent reservations"
+
+#: frontend/frontend_ajax.php:117
+msgid "DESCRIPTIF"
+msgstr "DESCRIPTION"
+
+#: frontend/frontend_ajax.php:120
+msgid "CHOISIR"
+msgstr "CHOOSE"
+
+#: frontend/views/reg_preambule.php:5
+msgid "Nous vous remercions de votre intérêt pour la Fondation Hardt."
+msgstr "Thank you for your interest in the Hardt Foundation."
+
+#: frontend/views/reg_preambule.php:10
+msgid "Je suis un nouvel hôte"
+msgstr "I'm a new host"
+
+#: frontend/views/reg_preambule.php:16
+msgid "J'ai déjà séjourné à la Fondation"
+msgstr "I've already stayed at the Foundation"
+
+#: frontend/views/reg_preambule.php:29
+msgid "Veuillez entrer votre nom d'utilisateur et mot de passe"
+msgstr "Please enter your username and password"
+
+#: frontend/views/reg_preambule.php:31
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+#: frontend/views/reg_preambule.php:34
+msgid "Mot de passe"
+msgstr "Password"
+
+#: frontend/views/reg_preambule.php:37
+msgid "Se souvenir de moi"
+msgstr "Remember me"
+
+#: frontend/views/reg_preambule.php:48
+msgid "Mot de passe oublié?"
+msgstr "Forgot your password?"

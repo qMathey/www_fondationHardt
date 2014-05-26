@@ -1,0 +1,30 @@
+info labroyarde.ch
+
+Domaine: labroyarde.ch  IP : 213.221.153.26
+Ppanel user-id :  labroychadm  (Nom utilisateur Panel de controle)
+Ftp-User-id: labroych     (Nom utilisateur FTP)
+pass: v291005d      (Mot de passe Panel de contrôle et FTP)
+  https://www.labroyarde.ch:8443
+Votre webmail : http://webmail.labroyarde.ch
+Vos statistiques  : http://www.labroyarde.ch/webstat/
+ CONFIGURATION POUR COMPTE MAIL
+ 
+POP : www.labroyarde.ch
+SMTP : votre_fournisseur_acces
+(mail.bluewin.ch - mail.span.ch - mail.vtx.ch etc...)
+ 
+USER-ID : le_user_cree_dans_le_panel
+MOT DE PASSE : le_mot_de_masse_place_dans_le_ppanel
+ 
+utilisateurs:
+
+cdeblasio	mdp: zurble
+biniou123	enavantmarche
+
+pour les stat: labroych et pass: zurble
+pour le panel: labroychadm et pass: ZQ99Fxa8B
+
+pour le site de l'em: 
+
+utilisateurs: parents123
+pass: infoem
