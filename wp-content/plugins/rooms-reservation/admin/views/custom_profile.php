@@ -93,9 +93,9 @@
 		
 		jQuery('#url').parents('tr').remove();
 		
-		jQuery('#first_name').parents('tr').remove();
+		//jQuery('#first_name').parents('tr').remove();
 		
-		jQuery('#last_name').parents('tr').remove();
+		//jQuery('#last_name').parents('tr').remove();
 		
 		jQuery('#email').parents('tr').remove();
 		
