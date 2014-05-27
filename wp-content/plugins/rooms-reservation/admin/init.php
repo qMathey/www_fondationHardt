@@ -881,8 +881,15 @@ add_action( 'save_post', 'prfx_meta_save' );
 		global $post;
 		
 		$user_data = get_field('rms_reservation_client', $post -> ID);
+		 
+		// Correction Bug offset 'ID' undefined
+		$user_data_id = 0;
+		if(isset($user_data['ID']))
+			$user_data_id = $user_data['ID'];
+		else
+			$user_data_id = $user_data;
 						
-		$user_lang = get_user_meta( $user_data['ID'],'user_lang', true);
+		$user_lang = get_user_meta( $user_data_id,'user_lang', true);
 			
 		if( !get_post_meta( $post -> ID, 'has_bourse', true ) )
 						{
@@ -893,7 +900,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 						case "fr":
 	$field['default_value']  = "La Fondation Hardt pour l’étude de l’Antiquité classique a le plaisir de confirmer votre inscription à un séjour d’étude scientifique.
 	Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.
-	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : (lien vers page cachée du site).
+	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch
 	Si vous avez des questions concernant votre prochain séjour, n’hésitez pas à nous contacter.
 	Nous vous remercions de votre intérêt pour la Fondation Hardt et nous réjouissons de vous accueillir prochainement.
@@ -906,7 +913,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 							default:
 	$field['default_value']  = "We are pleased to confirm your registration for a research stay at the Hardt Foundation.
 	Please find here attached your letter of confirmation and invoice.
-	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: (lien vers page cachée du site).
+	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch
 	Do not hesitate to contact us if you have any inquiry concerning your future stay.
 	We thank you very much for your interest in the Hardt Foundation and look forward to welcoming you soon.
@@ -928,7 +935,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 						case "fr":
 	$field['default_value']  = "Nous avons le plaisir de vous annoncer qu’une bourse vous a été attribuée pour un séjour d’étude scientifique à la Fondation Hardt.
 	Vous trouverez en pièce jointe votre lettre d’invitation.
-	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : (lien vers page cachée du site).
+	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch
 	Si vous avez des questions concernant votre prochain séjour, n’hésitez pas à nous contacter.
 	Nous vous remercions de votre intérêt pour la Fondation Hardt et nous réjouissons de vous accueillir prochainement.
