@@ -709,24 +709,21 @@ add_action( 'save_post', 'prfx_meta_save' );
 			array(__("Nom", "rms_reservation"),  __("General"), "last_name","text"),
 			array(__("Date de naissance", "rms_reservation"), __("General"), "birthday","text"),
 			array(__("Sexe", "rms_reservation"),  __("General"), "sex","radio"),
-			array(__("Régimes/allergies", "rms_reservation"),__("General"), "regime","textarea"),
-			array(__("Remarques", "rms_reservation"),__("General"), "remarks","textarea"),
-			// User contact infos
 			array(__("Nationalité", "rms_reservation"), __("Contact"), "nationality","text"),
-			array(__("Addresse mail", "rms_reservation"), __("Contact"), "email","text"),
-			array(__("Addresse postale", "rms_reservation"),  __("Contact"), "street","text"),
+			array(__("Adresse mail", "rms_reservation"), __("Contact"), "email","text"),
+			array(__("Adresse postale", "rms_reservation"),  __("Contact"), "street","text"),
 			array(__("Numéro de rue", "rms_reservation"),  __("Contact"), "number","text"),
 			array(__("Code postal", "rms_reservation"),  __("Contact"), "postal","text"),
 			array(__("Ville", "rms_reservation"),  __("Contact"), "city","text"),
 			array(__("Code ISO", "rms_reservation"), __("Contact"), "iso","text"),
 			array(__("Téléphone 1", "rms_reservation"), __("Contact"), "phone_1","text"),
 			array(__("Téléphone 2", "rms_reservation"),  __("Contact"), "phone_2","text"),
-			// User etudes infos
-			array(__("Titre(s) universitaire(s)", "rms_reservation"), __("Etudes"), "university_title","text"),
-			array(__("Affiliation Institutionnelle", "rms_reservation"), __("Etudes"), "affiliation","text"),
-			array(__("Fonction actuelle", "rms_reservation"), __("Etudes"), "function","text"),
-			array(__("Références", "rms_reservation"), __("Etudes"), "references","text"),
-			array(__("Thème de la recherche durant le séjour", "rms_reservation"),__("Etudes"), "theme","textarea")
+			array(__("Titre(s) universitaire(s)", "rms_reservation"), __("Etudes"), "university_title", "text"),
+			array(__("Affiliation Institutionnelle", "rms_reservation"), __("Etudes"), "affiliation", "text"),
+			array(__("Fonction actuelle", "rms_reservation"), __("Etudes"), "function", "text"),
+			array(__("Références", "rms_reservation"), __("Etudes"), "references", "text"),
+			array(__("Thème de la recherche durant le séjour", "rms_reservation"),__("Etudes"), "theme", "textarea"),
+			array(__("Régimes/allergies", "rms_reservation"),__("General"), "regime","textarea")
 		);
 		
 		// Retourner le tableau
@@ -827,7 +824,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 
     function my_profile_update( $user_id, $old_user_data )
 	{
-	
+		
 		$userFieldArray = array(
 			"nationality",
 			"email",
@@ -844,8 +841,31 @@ add_action( 'save_post', 'prfx_meta_save' );
 			"references",
 			"theme",
 			"regime"
-		);		
+		);	
 		
+		/*
+		$userFieldArray = array(
+			"first_name",
+			"last_name",
+			"birthday",
+			"sex",
+			"nationality",
+			"email",
+			"street",
+			"number",
+			"postal",
+			"city",
+			"iso",
+			"phone_1",
+			"phone_2",
+			"university_title",
+			"affiliation",
+			"function",
+			"references",
+			"theme",
+			"regime"
+		);
+		*/
 		// Parcourir les champs à mettre à jour
 		foreach($userFieldArray as $field_name)
 		{
