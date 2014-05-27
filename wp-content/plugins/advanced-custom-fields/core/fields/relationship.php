@@ -328,9 +328,16 @@ class acf_field_relationship extends acf_field
 			$title = apply_filters('acf/fields/relationship/result/name=' . $field['_name'] , $title, $post, $field, $the_post);
 			$title = apply_filters('acf/fields/relationship/result/key=' . $field['key'], $title, $post, $field, $the_post);
 			
+			$roomNumber = '';
+			
+			$getRoomNumber = get_post_meta( get_the_ID(), 'rms_room_number', true );
+			if( $getRoomNumber != '' && $getRoomNumber != false) {
+				$roomNumber = $getRoomNumber;
+				$roomNumber = ' - No '. $roomNumber;
+			}
 			
 			// update html
-			$r['html'] .= '<li><a href="' . get_permalink() . '" data-post_id="' . get_the_ID() . '">' . $title .  '<span class="acf-button-add"></span></a></li>';
+			$r['html'] .= '<li><a href="' . get_permalink() . '" data-post_id="' . get_the_ID() . '">' . $title . ' '.$roomNumber . '<span class="acf-button-add"></span></a></li>';
 		}
 		
 		
