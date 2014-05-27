@@ -454,12 +454,12 @@
 			<label for="rms_reservation_nigths" class="prfx-row-title"><?php _e('Nombre de nuitées:', 'rms_reservation'); ?></label>
 			<input type="text" name="rms_reservation_nigths" id="rms_reservation_nigths" value="<?php echo $dataPrice_nbNight; ?> " disabled="true">
 		</p>
-		
+		<!-- Supprimé à la demande de Agencies 
 		<p id="post-status-display">
 			<label for="rms_reservation_end" class="prfx-row-title"><?php _e('Rabais (-50, /2 ,%50, +50):', 'rms_reservation'); ?></label>
 			<input type="text" name="rms_reservation_sale" id="rms_reservation_sale" class="datepicker" value="<?php echo $rms_reservation_sale; ?>">
 		</p>
-		
+		-->
 		<p id="post-status-display">
 			<label for="rms_room_price" class="prfx-row-title"><?php _e('Coût total (CHF):', 'rms_reservation'); ?></label>
 			<input type="text" name="rms_reservation_cost" id="rms_reservation_cost" value="<?php echo $cost; ?>" readonly="true"/>
