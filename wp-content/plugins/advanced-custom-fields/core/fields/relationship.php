@@ -333,11 +333,11 @@ class acf_field_relationship extends acf_field
 			$getRoomNumber = get_post_meta( get_the_ID(), 'rms_room_number', true );
 			if( $getRoomNumber != '' && $getRoomNumber != false) {
 				$roomNumber = $getRoomNumber;
-				$roomNumber = ' - No '. $roomNumber;
+				$roomNumber = $roomNumber. ' / ';
 			}
 			
 			// update html
-			$r['html'] .= '<li><a href="' . get_permalink() . '" data-post_id="' . get_the_ID() . '">' . $title . ' '.$roomNumber . '<span class="acf-button-add"></span></a></li>';
+			$r['html'] .= '<li><a href="' . get_permalink() . '" data-post_id="' . get_the_ID() . '">'. $roomNumber. ' ' . $title . '<span class="acf-button-add"></span></a></li>';
 		}
 		
 		
