@@ -495,6 +495,11 @@
 				
 						//  Meta de la chambre
 						$rms_room_stocked_meta = get_post_meta( $_POST['room_id'][0] );
+						// si la chambre n'est pas trouvée, on essaie une autre méthode sans découper le tableau
+						if($rms_room_stocked_meta == array()) {
+							$rms_room_stocked_meta = get_post_meta( $_POST['room_id'] );
+						}
+						
 						$room_type = $rms_room_stocked_meta['rms_room_type'][0];
 						$room_price = $rms_room_stocked_meta['rms_room_price'][0];
 						

@@ -88,8 +88,16 @@ var array_en = [
 			// Vérifier nombre nuit numérique
 			if ( $.isNumeric( $("#rms_reservation_nigths").val() ) )
 			{
+				
+				var selectedRoomId = rms_reservation_cost_data.room_id;
+				if(selectedRoomId == '' || selectedRoomId == undefined){
+					selectedRoomId = $("#acf-rms_reservation_room")
+						.find(".relationship_right").first()
+						.find("a").first()
+						.data("post_id");
+				}
 								
-				var data ={ action: "admin_get_single_room_data", room_id: rms_reservation_cost_data.room_id, user_id: $('#acf-field-rms_reservation_client').val(), nights:$("#rms_reservation_nigths").val(), sale: $('#rms_reservation_sale').val()};
+				var data ={ action: "admin_get_single_room_data", room_id: selectedRoomId, user_id: $('#acf-field-rms_reservation_client').val(), nights:$("#rms_reservation_nigths").val(), sale: $('#rms_reservation_sale').val()};
 				
 				jQuery.post(rms_reservation_data.ajax_url, data, function(data)
 				{
