@@ -4,7 +4,7 @@
 	add_action( 'show_user_profile', 'custom_user_fields', 10);
 	
 	// enqueue custom scripts/styles
-	add_action( 'wp_enqueue_scripts', 'rooms_reservations_scripts' );
+	add_action( 'admin_enqueue_scripts', 'rooms_reservations_scripts' );
 	
 	// enqueue scripts and styles
 	function rooms_reservations_scripts() {

@@ -13,7 +13,7 @@
 		<a href="<?php echo plugin_dir_url( __FILE__); ?>../export_liste1.php"><?php _e( 'Réservation par chambre avec informations hôte', 'rms_reservation' ); ?></a>
 	</p>
 	<p class="description">
-		<?php _e( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'rms_reservation' ); ?>
+		<?php _e( '', 'rms_reservation' ); ?>
 	</p>
 		
 	<p>
@@ -21,7 +21,7 @@
 	</p>
 	
 	<p class="description">
-		<?php _e( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'rms_reservation' ); ?>
+		<?php _e( '', 'rms_reservation' ); ?>
 	</p>
 	
 </div>
