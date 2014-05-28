@@ -775,6 +775,34 @@ add_action( 'save_post', 'prfx_meta_save' );
 	
 	add_action('wp_trash_post', 'pre_trash_hook');
 	
+	// Filtre de supression des utilisateurs
+	function pre_delete_user_hook( $user_id )
+	{
+	
+		// Vérifier utilisateur hôte
+		if( user_can($user_id, 'hardt_host') )
+		{
+
+			global $wpdb;
+				
+			$res_from_user_list = $wpdb -> get_results("SELECT post_id FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_client' AND meta_value = " . $user_id);
+
+			// Parcourir les réservations ayant des conflits
+			foreach( $res_from_user_list as $res_data )
+			{
+			
+				$delete_postmeta = $wpdb -> query( $wpdb->prepare( "DELETE FROM $wpdb->postmeta WHERE post_id = %d", $res_data -> post_id ) );
+				
+				wp_delete_post( $res_data -> post_id, true );
+			
+			}// Fin foreach( $res_from_user_list as $res_data )
+		
+		}// if( user_can($user_id, 'hardt_host') )
+		
+	}// pre_delete_user_hook()
+	
+	add_action( 'delete_user', 'pre_delete_user_hook' );
+
 	// rms_reservation_deactivation(),
 	function rms_reservation_deactivation()
 	{
