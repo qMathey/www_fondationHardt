@@ -17,7 +17,7 @@
 	</p>
 		
 	<p>
-		<a href="<?php echo plugin_dir_url( __FILE__); ?>../export_liste2.php"><?php _e( 'Occupation des chambres par semaine', 'rms_reservation' ); ?></a>
+		<a href="<?php echo plugin_dir_url( __FILE__); ?>../export_liste2.php"><?php _e( 'Occupation des chambres par semaines', 'rms_reservation' ); ?></a>
 	</p>
 	
 	<p class="description">
