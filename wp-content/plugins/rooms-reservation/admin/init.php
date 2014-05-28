@@ -753,6 +753,28 @@ add_action( 'save_post', 'prfx_meta_save' );
 
 	add_action('post_updated', 'pre_update_hook');
 	
+	// Filtre avant la mise à la corbeille d'un poste
+	function pre_trash_hook ($post_id)
+	{
+		$post_type = get_post_type( $post_id );
+		
+		// Vérifier post_type
+		if( $post_type == 'rms_reservation' )
+		{
+			
+			global $wpdb;
+			
+			$delete_postmeta = $wpdb->query( $wpdb->prepare( "DELETE FROM $wpdb->postmeta WHERE post_id = %d", $post_id ) );
+			
+			wp_delete_post( $post_id, true );
+			
+		
+		}// Fin if( $post_type == 'rms_reservation' )
+		
+	}// Fin pre_trash_hook()
+	
+	add_action('wp_trash_post', 'pre_trash_hook');
+	
 	// rms_reservation_deactivation(),
 	function rms_reservation_deactivation()
 	{

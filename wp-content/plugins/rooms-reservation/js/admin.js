@@ -148,6 +148,20 @@ var array_en = [
 		tinyMCE.activeEditor.setContent(eval(lang_index)[bourse_index]);
 	});
 	
+	// Changer texte lien suppression
+	if( $('.post-type-rms_reservation a.submitdelete').text() == "Move to Trash" )
+	{
+	
+		$('.post-type-rms_reservation a.submitdelete').text('Delete permanently');
+		
+	}
+	else
+	{
+	
+		$('.post-type-rms_reservation a.submitdelete').text('Supprimer le séjour');
+		
+	}
+	
 })(jQuery);	
 
 
