@@ -81,7 +81,10 @@
 			// Vérifier date suivante a une réservation
 			if( search_array(date('Ymd', strtotime('+1 day', $startDate)), $arrReservation) )
 			{
-				$status = get_post_meta( $arrReservation[$j-1][3], 'rms_reservation_status', true );
+				if( isset( $arrReservation[$j-1] ) )
+					$status = get_post_meta( $arrReservation[$j-1][3], 'rms_reservation_status', true );
+					
+				if( isset( $arrReservation[$j] ) )
 				$room_client = get_post_meta( $arrReservation[$j][3], 'rms_reservation_client', true );
 				// Obtenir état réservation (ouvert/fermé)
 				if(!$blnTest)
