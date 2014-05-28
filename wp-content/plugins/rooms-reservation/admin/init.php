@@ -583,8 +583,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 		{
 			$blnConflict = false;
 			$strApplyOnCurrentPost = "";
-			
-			if( $_POST['fields']['field_536c862253a43'] == 1 )
+			if( (isset($_POST['fields']['field_536c862253a43'])) && ($_POST['fields']['field_536c862253a43']) == 1 )
 				$strApplyOnCurrentPost = " AND post_id != ".$id;
 			
 			$startDate = $_POST['fields']['field_533d686591a5e'];// Date début
@@ -617,7 +616,6 @@ add_action( 'save_post', 'prfx_meta_save' );
 						) GROUP BY post_id
 						)
 					");
-					
 				// Parcourir les réservations ayant des conflits
 				foreach ( $reservations_list as $res_data )
 				{
@@ -627,19 +625,42 @@ add_action( 'save_post', 'prfx_meta_save' );
 						$blnConflict = true;
 						
 						update_post_meta($res_data->post_id, 'rms_reservation_status', 3);
-						
+						echo "yolo";
 						if( $res_data->post_id != $id )
 							update_post_meta($res_data->post_id, 'has_conflict', true);
+							
 					}// Finf()
 					
 				}// Fin foreach ( $reservations_list as $res_data )
+				
+				// Vérifier présence méta
+				if( !get_post_meta($id, 'rms_reservation_status', true))
+				{	
+					$wpdb->insert( 
+						'ht_postmeta', 
+						array( 
+							'post_id' => $id,
+							'meta_key' => 'got_conflict', 
+							'meta_value' => true 
+						) 
+					);
+
+					$wpdb->insert( 
+						'ht_postmeta', 
+						array( 
+							'post_id' => $id,
+							'meta_key' => 'rms_reservation_status', 
+							'meta_value' => 3 
+						) 
+					);
+				}// Fin if()
 				
 				// Si il y a eu un conflit
 				if( $blnConflict)
 					update_post_meta($id, 'got_conflict', true);
 					
-			update_user_meta($_POST['fields']['field_533d6b7fffca0'], 'user_lang', $_POST['lang']);
-			update_post_meta($id, 'has_bourse', $_POST['rms_reservation_has_bourse']);
+				update_user_meta($_POST['fields']['field_533d6b7fffca0'], 'user_lang', $_POST['lang']);
+				update_post_meta($id, 'has_bourse', $_POST['rms_reservation_has_bourse']);
 			
 			// Vérifier email déjà envoyé
 			if( !get_post_meta( $post -> ID, 'rms_reservation_email', true ) )
