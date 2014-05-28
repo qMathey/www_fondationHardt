@@ -24,9 +24,12 @@ if ( is_admin_bar_showing() )
 
 				$strNewsData .= '<div class="separator"><hr/></div>';
 
-				$strNewsData .= '<a>' . get_the_title() . '</a>';
-
-				$strNewsData .= '<p>' . get_the_content() . '</p>';
+				$strNewsData .= '<span class="title">' . get_the_title() . '</span>';
+				
+				$news_content = apply_filters( 'the_content', get_the_content() );
+				$news_content = str_replace( ']]>', ']]&gt;', $news_content );
+				
+				$strNewsData .= $news_content;
 
 			}
 		

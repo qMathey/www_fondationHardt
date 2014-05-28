@@ -356,8 +356,11 @@ ul.right_top_lang_menu li a.active{
 	display: none;
 }
 
-.news a {
+.news span.title {
 	/*display: block;*/
+	color: #003366;
+	font-family: HelveticaLT-Bold;
+	text-decoration: none;
 }
 
 .news a:hover {
