@@ -50,21 +50,24 @@
 		foreach ( $resOnRoom as $resData )
 		{
 		
-			array_push( $arrReservation, $i );
-			
-			$localPost = get_post( $resData -> post_id );
-			
-			$room_client = get_post_meta(  $resData -> post_id, 'rms_reservation_client', true );
-			
-			
-			$arrReservation[$i] = array(
-				get_field('rms_reservation_start', $resData -> post_id),
-				get_field('rms_reservation_end', $resData -> post_id),
-				get_user_meta( $room_client, 'first_name', true ) . ' ' . get_user_meta( $room_client, 'last_name', true ),
-				$resData -> post_id
-			);
-			
-			$i++;
+			if ( !get_post_meta(  $resData -> post_id, 'has_conflict', true ) )
+			{
+				array_push( $arrReservation, $i );
+				
+				$localPost = get_post( $resData -> post_id );
+				
+				$room_client = get_post_meta(  $resData -> post_id, 'rms_reservation_client', true );
+				
+				
+				$arrReservation[$i] = array(
+					get_field('rms_reservation_start', $resData -> post_id),
+					get_field('rms_reservation_end', $resData -> post_id),
+					get_user_meta( $room_client, 'first_name', true ) . ' ' . get_user_meta( $room_client, 'last_name', true ),
+					$resData -> post_id
+				);
+				
+				$i++;
+			}
 			
 		}// Fin foreach( $resOnRoom as $resData )
 		

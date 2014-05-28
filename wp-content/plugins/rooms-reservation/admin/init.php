@@ -545,20 +545,102 @@ add_action( 'save_post', 'prfx_meta_save' );
 <?php
 		
 	}// Fin rms_reservation_meta_opts_callback()
-	
 
+	function my_admin_notice()
+	{
+		//print the message
+		global $post;
+		
+		if( $post != null )
+		{
+		
+			$got_conflict = get_post_meta( $post -> ID, 'got_conflict', true );
+			
+			
+			if ( !$got_conflict )
+				return '';
+			else
+			{
+				echo '<div id="message" class="error"><p>' . __('Une ou plusieurs réservations sont entrées en conflit avec cette confirmation et elles ont été automatiquement refusées.', 'rms_reservation') . '</p></div>';
+					
+				delete_post_meta($post->id, 'got_conflict');
+				
+			}
+		}
+	}
+
+	add_action('admin_notices', 'my_admin_notice',0);
+	
 	// Fonction appelée lors de la màj d'une réservation
 	function pre_update_hook($id)
 	{
 		// Obtenir le post
+		global $wpdb;
 		$post = get_post($id);
 
 		// Vérifier si il s'agit d'une réservation
 		if( $post -> post_type == 'rms_reservation' )
 		{
+			$blnConflict = false;
+			
+			// Vérifier statut = confirmée
+			if( $_POST['fields']['field_536c862253a43'] == 1)
+			{
+			
+				$startDate = $_POST['fields']['field_533d686591a5e'];// Date début
+				$endDate = $_POST['fields']['field_533d68b31f200'];// Date fin
+				$reservations_list = $wpdb->get_results("
+				SELECT post_id FROM ht_postmeta WHERE meta_key =  'rms_reservation_room' AND meta_value LIKE '%a:1:{i:0;s:3:\"" . $_POST['fields']['field_533d6bd3d9cc4'][0] . "\";}%' AND post_id != ".$id." AND post_id IN (
+					SELECT post_id
+						FROM  ht_postmeta
+						WHERE (
+							(
+								meta_key =  'rms_reservation_start'
+								AND meta_value >= " . date( 'Ymd', strtotime($startDate) ) . "
+								AND meta_value <= " . date( 'Ymd', strtotime($endDate) ) . "
+							)
+							OR (
+								meta_key =  'rms_reservation_end'
+								AND meta_value >= " . date( 'Ymd', strtotime($startDate) ) . "
+								AND meta_value <= " . date( 'Ymd', strtotime($endDate) ) . "
+							)
+							OR (
+								(
+									meta_key =  'rms_reservation_start'
+									AND meta_value <= " . date( 'Ymd', strtotime($startDate) ) . "
+								)
+									AND (
+									meta_key =  'rms_reservation_end'
+									AND meta_value >= " . date( 'Ymd', strtotime($endDate) ) . "
+								)
+							)
+						) GROUP BY post_id
+						)
+					");
+					
+				// Parcourir les réservations ayant des conflits
+				foreach ( $reservations_list as $res_data )
+				{
+					// Vérifier que la réservation n'a pas été validée
+					if( get_post_meta($res_data->post_id, 'rms_reservation_status', true) == 0 )
+					{
+						$blnConflict = true;
+						
+						update_post_meta($res_data->post_id, 'rms_reservation_status', 2);
+						update_post_meta($res_data->post_id, 'has_conflict', true);
+					}// Finf()
+					
+				}// Fin foreach ( $reservations_list as $res_data )
+				
+				// Si il y a eu un conflit
+				if( $blnConflict)
+					update_post_meta($id, 'got_conflict', true);
+			
+			}// Fin if( $_POST['fields']['field_536c862253a43'] == 1)
+			
 			update_user_meta($_POST['fields']['field_533d6b7fffca0'], 'user_lang', $_POST['lang']);
 			update_post_meta($id, 'has_bourse', $_POST['rms_reservation_has_bourse']);
-					
+			
 			// Vérifier email déjà envoyé
 			if( !get_post_meta( $post -> ID, 'rms_reservation_email', true ) )
 			{
@@ -638,6 +720,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	}
 
 	add_action('post_updated', 'pre_update_hook');
+	
 	// rms_reservation_deactivation(),
 	function rms_reservation_deactivation()
 	{
