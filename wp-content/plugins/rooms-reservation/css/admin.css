@@ -31,6 +31,10 @@ tr.declined > td, .calendarLegend div.label > div.declined, .tableLegend div.lab
 	background-color: #FCBDB1;
 }
 
+tr.date_conflict > td, .calendarLegend div.label > div.date_conflict, .tableLegend div.label > div.date_conflict {
+	background-color: #F8FA92;
+}
+
 /* Styles pages d'edition */
 .js .postbox .hndle {
 	cursor: default !important;

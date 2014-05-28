@@ -9,7 +9,7 @@
 			global $post, $comment;
 			
 			// Ajouter classe statut réservation
-			$rowClass = ( $data['state'] == 0 ) ? 'pending' : ( ( $data['state'] == 1 ) ? 'allowed' : 'declined') ;
+			$rowClass = ( $data['state'] == 0 ) ? 'pending' : ( ( $data['state'] == 1 ) ? 'allowed' : (( $data['state'] == 2 ) ? 'declined' : 'date_conflict')) ;
 		
 			// si il y a un commentaire
 			if($comment != null) {
@@ -118,10 +118,12 @@
 			   1 = envoyé
 			*/
 			
-			$strOutput =  ( $data['state'] == 0 ) ? 'En attente' : ( ( $data['state'] == 1 ) ? 'Accepté' : 'Refusé');
+			$strOutput =  ( ($data['state'] == 0) || ($data['state'] == 3) ) ? 'En attente' : ( ( $data['state'] == 1 ) ? 'Accepté' : 'Refusé');
 			
 			// Verifier email de confirmation envoyé
-			if(!$data['email'])
+			if ($data['state'] == 3)
+				$strOutput .= ' - ' . __( "Dates en conflit", "rms_reservation");
+			elseif(!$data['email'])
 				$strOutput .= ' - ' . __( "Aucun email n'a été envoyé", "rms_reservation");
 				
 			return $strOutput;
@@ -294,6 +296,7 @@
 			<div class="declined"></div> = <?php _e('Réservation refusée', 'rms_reservation'); ?>
 			<div class="pending"></div> = <?php _e('Réservation en attente', 'rms_reservation'); ?>
 			<div class="allowed"></div> = <?php _e('Réservation acceptée', 'rms_reservation'); ?>
+			<div class="date_conflict"></div> = <?php _e('Conflit de dates', 'rms_reservation'); ?>
 			</div>
 	</div>
 	
@@ -319,6 +322,7 @@
 			<div class="declined"></div> = <?php _e('Réservation refusée', 'rms_reservation'); ?>
 			<div class="pending"></div> = <?php _e('Réservation en attente', 'rms_reservation'); ?>
 			<div class="allowed"></div> = <?php _e('Réservation acceptée', 'rms_reservation'); ?>
+			<div class="date_conflict"></div> = <?php _e('Conflit de dates', 'rms_reservation'); ?>
 		</div>
 	</div>
 </div>

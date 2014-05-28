@@ -108,7 +108,7 @@
 				{// Si réservation ouverte
 
 					// Définir couleur de la réservation
-					$color = ( $status == 0 ) ? '#D5EAF2' : ( ( $status == 1 ) ? '#D0F3C5' : '#FCBDB1');
+					$color = ( $status == 0 ) ? '#D5EAF2' : ( ( $status == 1 ) ? '#D0F3C5' : (( $status == 2 ) ? '#FCBDB1' : '#F8FA92'));
 					
 					$strOutput .= "end: new Date(" . strtotime('+1 day', $startDate)*1000 . "),url: './admin.php?page=rooms-reservation&view_res=" . $arrReservation[$j-1][3] . "',backgroundColor: '" . $color . "',borderColor: '#C2C2C2'},";
 					
@@ -200,6 +200,7 @@
 				<div class="declined"></div> = <?php _e('Réservation refusée', 'rms_reservation'); ?>
 				<div class="allowed"></div> = <?php _e('Réservation acceptée', 'rms_reservation'); ?>
 				<div class="pending"></div> = <?php _e('Réservation en attente', 'rms_reservation'); ?>
+			<div class="date_conflict"></div> = <?php _e('Conflit de dates', 'rms_reservation'); ?>
 				
 			</div>
 		</div>
@@ -213,6 +214,7 @@
 				<div class="declined"></div> = <?php _e('Réservation refusée', 'rms_reservation'); ?>
 				<div class="allowed"></div> = <?php _e('Réservation acceptée', 'rms_reservation'); ?>
 				<div class="pending"></div> = <?php _e('Réservation en attente', 'rms_reservation'); ?>
+			<div class="date_conflict"></div> = <?php _e('Conflit de dates', 'rms_reservation'); ?>
 				
 			</div>
 
