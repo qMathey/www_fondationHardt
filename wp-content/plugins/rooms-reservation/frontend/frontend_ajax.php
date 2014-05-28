@@ -5,7 +5,9 @@
 	if( isset( $_POST ) )
 	{
 		// Appeler core wordpress
-		define( 'SHORTINIT', true );
+		
+		if( !defined('SHORTINIT') )
+			define( 'SHORTINIT', true );
 		
 		require_once( '../../../../wp-load.php' );
 
@@ -110,7 +112,7 @@
 										<div class="rms_room_title">';
 										
 											if( $_POST['postData']['lang'] == 'fr' )
-												echo $rooms_data -> post_content;
+												echo $rooms_data -> post_title;
 											else
 												echo get_field('room_eng_title', $rooms_data -> ID);
 									echo '</div>
@@ -512,10 +514,7 @@
 									
 						$total_price =  $room_price * $_POST['nights'];
 						
-						// Retourner le cout total avec les rabais
-						$final_cost = calcSale($total_price . $_POST['sale']);
-						
-						echo $final_cost;
+						echo $total_price;
 					
 				break;
 			}// Fin switch()
@@ -539,39 +538,6 @@
 		
 	}// Fin if( isset( $_POST ) )
 	
-	function calcSale($str)
-	{
-	
-		$patten = '/[\*\%\/\+-]/';
-		preg_match($patten,$str, $operator);
-		$arr = preg_split($patten,$str);
-
-		switch($operator[0])
-		{
-			case '-':
-				return $arr[0] - $arr[1];
-				
-			case '+':
-				return $arr[0] + $arr[1];
-				
-			case '*':
-				return $arr[0] * $arr[1];
-			
-			case '/':
-				return $arr[0] / $arr[1];
-				
-			case '%':
-				return $arr[0] - ( $arr[0]/100*$arr[1] );
-				
-			break;
-			
-			default:
-			
-				return $arr[0];
-			break;
-		}
-	
-	}
 	// Créer le nouvel utilisateur
 	function createUser($scolarship=null)
 	{
