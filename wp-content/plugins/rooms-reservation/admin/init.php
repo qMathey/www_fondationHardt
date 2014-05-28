@@ -563,7 +563,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 			{
 				echo '<div id="message" class="error"><p>' . __('Une ou plusieurs réservations sont entrées en conflit avec cette confirmation et les réservations sont marquées en jaune.', 'rms_reservation') . '</p></div>';
 					
-				delete_post_meta($post->id, 'got_conflict');
+				delete_post_meta($post -> ID, 'got_conflict');
 				
 			}
 		}
@@ -586,12 +586,12 @@ add_action( 'save_post', 'prfx_meta_save' );
 			if( (isset($_POST['fields']['field_536c862253a43'])) && ($_POST['fields']['field_536c862253a43']) == 1 )
 				$strApplyOnCurrentPost = " AND post_id != ".$id;
 			
-			$startDate = $_POST['fields']['field_533d686591a5e'];// Date début
+				$startDate = $_POST['fields']['field_533d686591a5e'];// Date début
 				$endDate = $_POST['fields']['field_533d68b31f200'];// Date fin
 				$reservations_list = $wpdb->get_results("
-				SELECT post_id FROM ht_postmeta WHERE meta_key =  'rms_reservation_room' AND meta_value LIKE '%a:1:{i:0;s:3:\"" . $_POST['fields']['field_533d6bd3d9cc4'][0] . "\";}%'" . $strApplyOnCurrentPost . " AND post_id IN (
+				SELECT post_id FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_room' AND meta_value LIKE '%a:1:{i:0;s:3:\"" . $_POST['fields']['field_533d6bd3d9cc4'][0] . "\";}%'" . $strApplyOnCurrentPost . " AND post_id IN (
 					SELECT post_id
-						FROM  ht_postmeta
+						FROM  $wpdb->postmeta
 						WHERE (
 							(
 								meta_key =  'rms_reservation_start'
@@ -620,12 +620,13 @@ add_action( 'save_post', 'prfx_meta_save' );
 				foreach ( $reservations_list as $res_data )
 				{
 					// Vérifier que la réservation n'a pas été validée
-					if( get_post_meta($res_data->post_id, 'rms_reservation_status', true) == 0 )
+					$res_status =  get_post_meta($res_data->post_id, 'rms_reservation_status', true);
+					if( ( $res_status == 0 ) || ($res_status == 3) )
 					{
 						$blnConflict = true;
 						
 						update_post_meta($res_data->post_id, 'rms_reservation_status', 3);
-						echo "yolo";
+						
 						if( $res_data->post_id != $id )
 							update_post_meta($res_data->post_id, 'has_conflict', true);
 							
@@ -633,31 +634,34 @@ add_action( 'save_post', 'prfx_meta_save' );
 					
 				}// Fin foreach ( $reservations_list as $res_data )
 				
-				// Vérifier présence méta
-				if( !get_post_meta($id, 'rms_reservation_status', true))
-				{	
-					$wpdb->insert( 
-						'ht_postmeta', 
-						array( 
-							'post_id' => $id,
-							'meta_key' => 'got_conflict', 
-							'meta_value' => true 
-						) 
-					);
-
-					$wpdb->insert( 
-						'ht_postmeta', 
-						array( 
-							'post_id' => $id,
-							'meta_key' => 'rms_reservation_status', 
-							'meta_value' => 3 
-						) 
-					);
-				}// Fin if()
-				
 				// Si il y a eu un conflit
 				if( $blnConflict)
+				{
 					update_post_meta($id, 'got_conflict', true);
+					
+					// Vérifier présence méta
+					if( !get_post_meta($id, 'got_conflict', true))
+					{
+						$wpdb->insert( 
+							$wpdb->postmeta, 
+							array( 
+								'post_id' => $id,
+								'meta_key' => 'got_conflict', 
+								'meta_value' => true 
+							) 
+						);
+
+						$wpdb->insert( 
+							$wpdb->postmeta, 
+							array( 
+								'post_id' => $id,
+								'meta_key' => 'rms_reservation_status', 
+								'meta_value' => 3 
+							) 
+						);
+					}// Fin if()
+					
+				}// Fin if( $blnConflict)
 					
 				update_user_meta($_POST['fields']['field_533d6b7fffca0'], 'user_lang', $_POST['lang']);
 				update_post_meta($id, 'has_bourse', $_POST['rms_reservation_has_bourse']);
