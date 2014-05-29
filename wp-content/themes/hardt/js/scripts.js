@@ -1,3 +1,6 @@
+// variables globales
+var currentSubMenuOpen = '';
+
 jQuery(document).ready(function($){
 	
 	$.stellar.positionProperty.limit = {
@@ -65,114 +68,68 @@ jQuery(document).ready(function($){
 	backgroundOffsetY = 25;
 	
 	// Menu deroulant
-	$('ul.main_top_menu > li, ul.right_top_menu > li').hoverIntent( submenu_getin, submenu_getout_empty );
+	$(".main_top_menu").on("mouseenter", function(event) {
 	
-	function submenu_getout_empty(){}
+		if(  $(this).find(".menu-item-has-children").length > 0) {
 	
-	// Affichage des sous-menus
-	function submenu_getin()
-	{
-		// Masquer les sous-menus
-		$('.submenu').hide();
-		
-		// Assigner valeur background-position
-		if( !backgroundOffset )
-			backgroundOffset = $('.container section').first().css("background-position").split(" ");
-		
-		if( !backgroundOffsetY )
-			backgroundOffsetY = backgroundOffset[1];
-
-		// Si il y a un sous-menu
-		if( $(this).find('.submenu').length > 0 )
-		{
-			var height = $(this).children('ul.submenu').height();
+			console.log("mouse enter");
+			// stop propagation
+			event.isPropagationStopped();
+			
+				var menuHeight = 0;
+				var $subMenu = $(this).find("ul");
+				$subMenu.show();
 				
-			// Afficher le sous-menu et ajuster la marge
-			
-			$('.container').animate({marginTop: ( height + 50 )},500);
-			$('.menu_fixed').animate({height: ( height + 50 )},500);
-			$('.container section').first().animate({backgroundPositionY:( height + 50 )},500);	
-			
-			$(this).children('.submenu').slideDown(500);
-			
-			//$('.submenu_wrapper').css('height', height).slideDown();
-			
-			
-			// Reajuster les elements fixes
-			$('.fixed').each(function()
-			{
-				// Verifier position top declare
-				if($(this).css('top') != 'auto')
-				{
-					// Verifier presence attribute de backup
-					if(!($(this).attr('data-top')) )
-						$(this).attr('data-top', $(this).css('top'));
-						
-						$(this).animate({'top': (height + parseInt($(this).attr('data-top'), 10)+52) + 'px'},500);
-				}
-				else if($(this).css('bottom') != 'auto')
-				{// Verifier position top declare
-					// Verifier presence attribute de backup
-					if(!($(this).attr('data-bottom')) )
-						$(this).attr('data-bottom', $(this).css('bottom'));
-						
-					$(this).animate({'bottom': (parseInt($(this).attr('data-bottom'), 10) - height) + 'px'},500);
-				}// Fin if()
-			});
-		}
-		else
-		{
-			// Masquer le sous-menu et ajuster la marge
-			$('.container').animate({'marginTop': '0'},500);
-			
-			$('.menu_fixed').animate({'height': '16'},500);
-			$('.container section').first().animate({backgroundPositionY: backgroundOffsetY},500);	
-			
-			$('.submenu_wrapper').hide();
-			
-			// Reajuster les elements fixes
-			$('.fixed').each(function(){
-			
-				if($(this).attr('data-top'))
-					$(this).animate({'top':$(this).attr('data-top')});
-					
-				else if($(this).attr('data-bottom'))
-					$(this).animate({'bottom':$(this).attr('data-bottom')});
-			});
-		}// Fin if($(this).find('.submenu').length > 0)
-	
-	};// Fin $('.topnavigation li').mouseover()
-
-	// Masquer les sous-menus
-	function submenu_getout()
-	{
-		// Reajuster la marge
-		$('.container').animate({'marginTop': '0'},500);
-		$('.menu_fixed').animate({'height': '16'},500);
-		$('.navigation').css('margin-top', 'initial');
-	
-		$('.container section').first().animate({backgroundPositionY:backgroundOffsetY},500);	
-		
-		$('.submenu_wrapper').slideUp();
-			
-		// Reajuster les elements fixes
-		$('.fixed').each(function(){
-			
-			if($(this).attr('data-top'))
-				$(this).animate({'top':$(this).attr('data-top')},500);
-					
-			else if($(this).attr('data-bottom'))
-				$(this).animate({'bottom':$(this).attr('data-bottom')},500);
-		});
-		
-		// Masquer le sous-menu
-		$('.submenu').slideUp();
-	};
-	
-	$('.menu_fixed').mouseleave(function()
-	{
-		submenu_getout();
+				
+				var currentMenuOpen = $(this).find("a").html();
+				// masque les autres menu
+				$(".main_top_menu .menu-item-has-children").each(function() {
+					// si ce n'est pas le menu courant
+					if(currentMenuOpen != $(this).find("a").html()){
+						$(this).find("ul").hide();
+						/*
+						$(this).find("ul").first().animate({
+							height:"0px"
+						}, 500);
+						*/
+					}
+				});
+				
+				menuHeight = $(this).find("ul").height() + 50;
+				// animate menu
+				animateMenuHeight(menuHeight);
+			}
+			else {
+				// animate menu
+				animateMenuHeight(0);
+			}
 	});
+	
+	$(".right_top_lang_menu").on("mouse", function() {
+		animateMenuHeight(0); // reset menu height
+	});
+	
+	function animateMenuHeight( pixelHeight ) {
+		
+			// clearQueue
+			$(".container, .news fixed ").clearQueue();
+	
+			// déplace les containers
+			$(".container").animate({
+				marginTop:pixelHeight+"px"
+			}, 500);
+			// déplace le logo
+			/*
+			$(".logo fixed").animate({
+				marginTop:(pixelHeight+130)+"px"
+			}, 500);
+			*/
+			// déplace les news fixed 
+			$(".news fixed").animate({
+				top: (pixelHeight+199)+"px"
+			}, 500);
+			
+	}
 	
 	$('.close_all_text').toggle(function(e){
 		// Abandonner l'action par defaut

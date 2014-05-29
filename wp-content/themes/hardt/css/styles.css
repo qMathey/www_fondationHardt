@@ -218,6 +218,7 @@ p {
 	padding: 0;
 	line-height: 23px;
 	position:absolute;
+	z-index:1;
 }
 
 .submenu li:first-child + li{
@@ -265,6 +266,8 @@ ul.right_top_lang_menu li a.active{
 	height: 100%;
 	background-attachment: fixed;
 	background-size: cover;
+	z-index:10;
+	margin-top:52px;
 }
 
 .container section {  
