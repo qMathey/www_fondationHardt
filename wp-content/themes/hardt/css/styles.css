@@ -17,7 +17,7 @@ width: 100% !important;
     .container section{
 		position: relative !important;
 	/*	width: 1500px !important;*/
-		background-size: 1500px 1500px ! important;
+		/* background-size: 1500px 1500px ! important; */ 
     }
 }
 
