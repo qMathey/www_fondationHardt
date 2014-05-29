@@ -146,10 +146,11 @@ p {
 	font-size: 13px;
 	display: inline;
 	margin: 0 auto;
+	height:15px;
 	width: 100%;
 	padding: 18px 0;
 	background-color: #ffffff;
-	z-index: 4;
+	z-index: 11;
 	top: 0;
 }
 
@@ -354,7 +355,7 @@ ul.right_top_lang_menu li a.active{
 	max-width: 350px;
 	padding: 10px 43px;
 	position: absolute;
-	top: 199px;
+	top: 251px;
 	left: 0;
 	z-index: 3;
 	display: none;
@@ -378,7 +379,7 @@ ul.right_top_lang_menu li a.active{
 
 .open_news {
 	left: 0px;
-	top: 199px;
+	top: 251px;
 	background-color: #ffffff;
 	padding: 10px 35px 10px 43px;
 	z-index: 4;

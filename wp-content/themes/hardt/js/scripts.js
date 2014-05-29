@@ -68,67 +68,77 @@ jQuery(document).ready(function($){
 	backgroundOffsetY = 25;
 	
 	// Menu deroulant
-	$(".main_top_menu").on("mouseenter", function(event) {
+	$(".main_top_menu > li, #menu-menu-secondaire > li").on("mouseenter", function(event) {
 	
-		if(  $(this).find(".menu-item-has-children").length > 0) {
-	
-			console.log("mouse enter");
 			// stop propagation
-			event.isPropagationStopped();
+			event.stopPropagation();
 			
+			if( $(this).find("ul").length > 0 ) {
 				var menuHeight = 0;
 				var $subMenu = $(this).find("ul");
 				$subMenu.show();
 				
-				
-				var currentMenuOpen = $(this).find("a").html();
+				var currentMenuOpen = $(this).find("a").first().html();
+				console.log("current menu open : "+currentMenuOpen);
 				// masque les autres menu
-				$(".main_top_menu .menu-item-has-children").each(function() {
+				$(".main_top_menu > li, #menu-menu-secondaire > li").each(function() {
 					// si ce n'est pas le menu courant
-					if(currentMenuOpen != $(this).find("a").html()){
-						$(this).find("ul").hide();
-						/*
-						$(this).find("ul").first().animate({
-							height:"0px"
-						}, 500);
-						*/
+					if(currentMenuOpen != $(this).find("a").first().html()){
+						$(this).find(".submenu").hide();
 					}
 				});
 				
-				menuHeight = $(this).find("ul").height() + 50;
+				menuHeight = $(this).find(".submenu").height() + 50;
 				// animate menu
 				animateMenuHeight(menuHeight);
+				console.log("animate menu " + menuHeight);
 			}
-			else {
+			else  {
+			
+				console.log("no submenu found");
 				// animate menu
-				animateMenuHeight(0);
+				animateMenuHeight(52);
+				// hide all others menu
+				$(".submenu").hide();
 			}
 	});
 	
-	$(".right_top_lang_menu").on("mouse", function() {
-		animateMenuHeight(0); // reset menu height
+	$(".navigation.menu_fixed").on("mouseleave", function() {
+		console.log("mouse leave");
+		animateMenuHeight(52); // reset menu height
 	});
 	
 	function animateMenuHeight( pixelHeight ) {
 		
 			// clearQueue
-			$(".container, .news fixed ").clearQueue();
-	
+			$(".navigation.menu_fixed, .container, .open_news.fixed, .news.fixed").clearQueue();
+			
+			var heightMin = 15;
+			if(pixelHeight-40 > 15)
+				heightMin = pixelHeight-40;
+			
+			// aggrandis le container
+			$(".navigation.menu_fixed").animate({
+				height:heightMin+"px"
+			}, 500);
 			// déplace les containers
 			$(".container").animate({
 				marginTop:pixelHeight+"px"
 			}, 500);
-			// déplace le logo
-			/*
-			$(".logo fixed").animate({
-				marginTop:(pixelHeight+130)+"px"
-			}, 500);
-			*/
+			
 			// déplace les news fixed 
-			$(".news fixed").animate({
+			$(".open_news.fixed").animate({
+				top: (pixelHeight+199)+"px"
+			}, 500);
+			$(".news.fixed").animate({
 				top: (pixelHeight+199)+"px"
 			}, 500);
 			
+			// si plus petit que 52 alors on masque tous les sous menu
+			if(pixelHeight <= 52 ) {
+				$(".submenu").hide();
+				console.log("close menu...");
+			}
 	}
 	
 	$('.close_all_text').toggle(function(e){
