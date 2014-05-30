@@ -645,7 +645,10 @@ add_action( 'save_post', 'prfx_meta_save' );
 			// Si il y a eu un conflit
 			if($blnConflict)
 			{
-				update_post_meta($id, 'rms_reservation_status', 3);
+				$res_status =  get_post_meta($res_data->post_id, 'rms_reservation_status', true);
+				
+				if( ( $res_status == 0 ) || ($res_status == 3) )
+					update_post_meta($id, 'rms_reservation_status', 3);
 					
 				update_post_meta($id, 'got_conflict', true);
 				
@@ -660,15 +663,18 @@ add_action( 'save_post', 'prfx_meta_save' );
 							'meta_value' => true 
 						) 
 					);
-
-					$wpdb->insert( 
-						$wpdb->postmeta, 
-						array( 
-							'post_id' => $id,
-							'meta_key' => 'rms_reservation_status', 
-							'meta_value' => 3 
-						) 
-					);
+					
+					if( ( $res_status == 0 ) || ($res_status == 3) )
+					{
+						$wpdb->insert( 
+							$wpdb->postmeta, 
+							array( 
+								'post_id' => $id,
+								'meta_key' => 'rms_reservation_status', 
+								'meta_value' => 3 
+							) 
+						);
+					}
 				}// Fin if()
 				
 			}// Fin if( $blnConflict)
@@ -808,11 +814,12 @@ add_action( 'save_post', 'prfx_meta_save' );
 		foreach ( $reservations_list as $res_data )
 		{
 		
+			$blnConflict = true;
+			
 			// Vérifier que la réservation n'a pas été validée
 			$res_status =  get_post_meta($res_data->post_id, 'rms_reservation_status', true);
 			if( ( $res_status == 0 ) || ($res_status == 3) )
 			{
-				$blnConflict = true;
 				
 				update_post_meta($res_data->post_id, 'rms_reservation_status', 3);
 				
@@ -823,7 +830,10 @@ add_action( 'save_post', 'prfx_meta_save' );
 		// Si il y a eu un conflit
 		if( $blnConflict)
 		{
-			update_post_meta($post_id, 'rms_reservation_status', 3);
+			$res_status =  get_post_meta($post_id, 'rms_reservation_status', true);
+			
+			if( ( $res_status == 0 ) || ($res_status == 3) )
+				update_post_meta($post_id, 'rms_reservation_status', 3);
 				
 			update_post_meta($post_id, 'got_conflict', true);
 			
@@ -839,14 +849,17 @@ add_action( 'save_post', 'prfx_meta_save' );
 					) 
 				);
 
-				$wpdb->insert( 
-					$wpdb->postmeta, 
-					array( 
-						'post_id' => $post_id,
-						'meta_key' => 'rms_reservation_status', 
-						'meta_value' => 3 
-					) 
-				);
+				if( ( $res_status == 0 ) || ($res_status == 3) )
+				{
+					$wpdb->insert( 
+						$wpdb->postmeta, 
+						array( 
+							'post_id' => $post_id,
+							'meta_key' => 'rms_reservation_status', 
+							'meta_value' => 3 
+						) 
+					);
+				}
 			}// Fin if()
 			
 		}// Fin if( $blnConflict)
