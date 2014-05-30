@@ -104,6 +104,10 @@
 							$room_type = $rms_room_stocked_meta['rms_room_type'][0];
 							$get_room_price = $rms_room_stocked_meta['rms_room_price'][0];
 							
+							$roomContent = ( $_POST['postData']['lang'] == 'fr' ? $rooms_data -> post_content : get_field('room_eng_descr', $rooms_data -> ID) );
+							$news_content = apply_filters( 'the_content', get_the_content() );
+							$format_content = str_replace( ']]>', ']]&gt;', $roomContent );
+								
 							if( ($room_type == 'classic') && ($_POST['user_age'] <= 35) )
 								$get_room_price -= 20;
 							
@@ -122,10 +126,7 @@
 									<div class="rms_room_descriptif">
 										' . __( 'DESCRIPTIF', 'rms_reservation') . ': ';
 										
-										if( $_POST['postData']['lang'] == 'fr' )
-											echo $rooms_data -> post_content;
-										else
-											echo get_field('room_eng_descr', $rooms_data -> ID);
+										echo $format_content;
 								echo '			
 									</div>
 									
@@ -543,7 +544,7 @@
 				
 				// Nouvelle réservation avec demande de bourse
 				case "add_reservation_scolarship_new_user":	
-		
+				
 					$unique_user_id = 'uid_' . sha1(time());
 					
 					if( $unique_user_id )
@@ -552,7 +553,7 @@
 						$outputFileData = "";
 						foreach($_FILES as $file)
 						{
-							$upld_file = wp_upload_bits( $file['name'], null, @file_get_contents( $file['tmp_name'] ) );
+							$upld_file = wp_upload_bits( clean_string($file['name']), null, @file_get_contents( $file['tmp_name'] ) );
 							
 							if ( FALSE === $upld_file['error'] )
 							{	
@@ -774,4 +775,15 @@ Hardt Foundation";
 		{}// Fin if()
 		
 	}// Fin function createUser()
+	
+	function clean_string($string)
+	{
+		$string = htmlentities($string, ENT_QUOTES, 'UTF-8');
+		$string = preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', $string);
+		$string = html_entity_decode($string, ENT_QUOTES, 'UTF-8');
+		$string = preg_replace(array('~[^0-9a-z.]~i', '~[ -]+~'), '_', $string);
+
+		return trim($string, ' -');
+	}
+
 ?>
