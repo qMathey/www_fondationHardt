@@ -190,4 +190,40 @@ jQuery(document).ready(function($){
 			$('.close_news').addClass('open_square square_img');
 		});
 	});
+	
+	
+	// GESTION MOBILE
+	
+	/* GESTION MOBILE */
+	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ){
+		
+		console.log("mobile!!!");
+		
+		// Gestion menu pour mobile : Permet de dérouler sous menu au premier click
+		// si clique sur menu niveau 1
+		$(".menu-item-has-children").click(function(event){
+		
+			// retire l'événement
+			event.stopPropagation();
+			event.preventDefault();
+			
+			$linkMenu = $(this).find("a").first();
+			
+			if($linkMenu.data("alreadyCliqued") == "cliquedOnce") {
+				// move to link
+				 document.location.href = $linkMenu.attr("href");
+			}
+			else { // he never cliqued
+				// retire l'info aux autres liens
+				$(".menu-item-has-children").data("alreadyCliqued", "");
+				// ajoute l'info cliquedOnce
+				$linkMenu.data("alreadyCliqued", "cliquedOnce");
+			}
+		}); // click
+		
+		// Zoom sur la page 
+		var zoomToScale = parseInt ((($(window).width() * 1 ) / 1500 ) * 100 ) / 100;
+		$('head').append('<meta name="viewport" content="width=device-width; initial-scale='+zoomToScale+'; maximum-scale=1.0; user-scalable=1;">');
+		
+	}// if
 });
