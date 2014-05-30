@@ -494,3 +494,7 @@ section.home .logo {
 .searchFormHelp {
 	font-size: 13px;
 }
+
+#map {
+	height: 100%;
+}
