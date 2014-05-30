@@ -3,36 +3,7 @@ var currentSubMenuOpen = '';
 
 jQuery(document).ready(function($){
 	
-	$.stellar.positionProperty.limit = {
-
-	  setTop: function($element, newTop, originalTop) {
-		
-		if(newTop>300)
-		{
-			var limit = 0;
-			
-			// Controler si depassement limite
-			if(newTop - originalTop > limit)
-			{
-			
-				// Appeler position par defaut avec notre limite
-				$.stellar.positionProperty.position.setTop.call(null, $element, originalTop - limit, originalTop);
-			
-			}
-			else
-			{ 
-			
-				//$element.css("opacity","1");
-				$.stellar.positionProperty.position.setTop.apply(null, arguments);
-
-			}
-		}
-	  },
-
-	  // Constuire dans l'adaptateur:
-	  setLeft: $.stellar.positionProperty.position.setLeft
-
-	}// Fin $.stellar.positionProperty.limit
+	
 	/*
 	var isMobile = {
 		Android: function() {
@@ -229,9 +200,43 @@ jQuery(document).ready(function($){
 			//positionProperty: 'limit'
 		});
 		
+		$(".home").css("background-position", "100% 100%"); 
+		
 		// Zoom sur la page 
 		var zoomToScale = parseInt ((($(window).width() * 1 ) / 1500 ) * 100 ) / 100;
 		$('head').append('<meta name="viewport" content="width=device-width; initial-scale='+zoomToScale+'; maximum-scale=1.0; user-scalable=1;">');
 		
 	}// if
+	else { // SI PAS MOBILE ALORS STELLAR JS POUR EFFET PARALAX
+		$.stellar.positionProperty.limit = {
+
+			setTop: function($element, newTop, originalTop) {
+			
+			if(newTop>300)
+			{
+				var limit = 0;
+				
+				// Controler si depassement limite
+				if(newTop - originalTop > limit)
+				{
+				
+					// Appeler position par defaut avec notre limite
+					$.stellar.positionProperty.position.setTop.call(null, $element, originalTop - limit, originalTop);
+				
+				}
+				else
+				{ 
+				
+					//$element.css("opacity","1");
+					$.stellar.positionProperty.position.setTop.apply(null, arguments);
+
+				}
+			}
+		  },
+
+		  // Constuire dans l'adaptateur:
+		  setLeft: $.stellar.positionProperty.position.setLeft
+
+		}// Fin $.stellar.positionProperty.limit
+	}
 });
