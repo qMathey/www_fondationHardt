@@ -15,7 +15,7 @@
    <section class="page" id="map"></section>	
 			<article>
 			<a href="<?php echo home_url(); ?>" class="logo fixed"></a>
-				<div class="page_content_wrap <?php echo ($blnMultipleCols ? 'width_60' : 'width_30'); ?>" style="z-index:6000; position: relative; margin-top: 10%; background-color: #ffffff;">
+				<div class="page_content_wrap" style="z-index:6000; position: relative; width: 400px; margin: 10% 10% 0 0; background-color: #ffffff;">
 					<a href="#" class="close_cross close_all_text cross_img" title="Fermer les textes"></a>
 
 					<div class="page_content<?php echo (get_field('indenter_texte') ? ' auto_indent': ''); ?>">
