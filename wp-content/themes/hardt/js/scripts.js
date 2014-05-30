@@ -4,35 +4,6 @@ var currentSubMenuOpen = '';
 jQuery(document).ready(function($){
 	
 	
-	/*
-	var isMobile = {
-		Android: function() {
-			return navigator.userAgent.match(/Android/i);
-		},
-		BlackBerry: function() {
-			return navigator.userAgent.match(/BlackBerry/i);
-		},
-		iOS: function() {
-			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-		},
-		Opera: function() {
-			return navigator.userAgent.match(/Opera Mini/i);
-		},
-		Windows: function() {
-			return navigator.userAgent.match(/IEMobile/i);
-		},
-		any: function() {
-			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-		}
-	};
-	
-	// Effet parallax
-	if( !isMobile.any() )
-	$.stellar({
-		horizontalScrolling: false,
-		//positionProperty: 'limit'
-	});
-	*/
 	
 	// Position contenu principal
 	var backgroundOffset, backgroundOffsetY = null;
@@ -50,7 +21,6 @@ jQuery(document).ready(function($){
 				$subMenu.show();
 				
 				var currentMenuOpen = $(this).find("a").first().html();
-				console.log("current menu open : "+currentMenuOpen);
 				// masque les autres menu
 				$(".main_top_menu > li, #menu-menu-secondaire > li").each(function() {
 					// si ce n'est pas le menu courant
@@ -62,11 +32,8 @@ jQuery(document).ready(function($){
 				menuHeight = $(this).find(".submenu").height() + 50;
 				// animate menu
 				animateMenuHeight(menuHeight);
-				console.log("animate menu " + menuHeight);
 			}
 			else  {
-			
-				console.log("no submenu found");
 				// animate menu
 				animateMenuHeight(52);
 				// hide all others menu
@@ -75,7 +42,6 @@ jQuery(document).ready(function($){
 	});
 	
 	$(".navigation.menu_fixed").on("mouseleave", function() {
-		console.log("mouse leave");
 		animateMenuHeight(52); // reset menu height
 	});
 	
@@ -108,7 +74,6 @@ jQuery(document).ready(function($){
 			// si plus petit que 52 alors on masque tous les sous menu
 			if(pixelHeight <= 52 ) {
 				$(".submenu").hide();
-				console.log("close menu...");
 			}
 	}
 	
@@ -171,40 +136,60 @@ jQuery(document).ready(function($){
 		console.log("mobile!!!");
 		
 		/*
-		// Gestion menu pour mobile : Permet de dérouler sous menu au premier click
-		// si clique sur menu niveau 1
-		$(".menu-item-has-children").click(function(event){
 		
-			// retire l'événement
-			event.stopPropagation();
-			event.preventDefault();
-			
-			$linkMenu = $(this).find("a").first();
-			
-			if($linkMenu.data("alreadyCliqued") == "cliquedOnce") {
-				// move to link
-				 document.location.href = $linkMenu.attr("href");
-			}
-			else { // he never cliqued
-				// retire l'info aux autres liens
-				$(".menu-item-has-children").data("alreadyCliqued", "");
-				// ajoute l'info cliquedOnce
-				$linkMenu.data("alreadyCliqued", "cliquedOnce");
-			}
-		}); // click
 		*/
 		
-		// desactive Paralax
-		$.stellar({
-			horizontalScrolling: false,
-			//positionProperty: 'limit'
-		});
+		// retravaille les images de la homepage
+		$(".home, .page").css("background-position", "100% 100%"); 
+		$(".home, .page").css("background-attachment", "scroll"); 
+		$(".home").css("min-height", "850px"); 
+		$(".page").css("min-height", "850px"); 
 		
-		$(".home").css("background-position", "100% 100%"); 
+		// Spécificité Android : Les citations se placent trop haut! 
+		if(/Android/i.test(navigator.userAgent) ){
+			// replace les citations correctements
+			$(".home").each(function() {
+				$citation = $(this).find("article").first();
+				
+				$citation.css("top", "0px");
+				$citation.css("top", "450px");
+				$citation.find(".citation_traduction.shadow").first().css("margin-top", "70px");
+				
+			});
+			
+			// gestion du menu mobile : permet au premier clique d'un menu de l'ouvrir et non pas de changer de page
+			//gestionMenuMobile();
+			
+			// content des pages a baisser de 60px
+			$(".page_content_wrap").css("margin-top", "60px");
+			
+		}
+		
+		
+		// Spécificité iPad : Les citations se placent trop haut! 
+		if(/iPad/i.test(navigator.userAgent) ){
+			// replace les citations correctements
+			$(".home").each(function() {
+				$citation = $(this).find("article").first();
+				
+				$citation.find(".citation_traduction.shadow").first().css("margin-top", "-30px");
+				
+			});
+			$(".page").css("min-height", "100%"); 
+		}
 		
 		// Zoom sur la page 
 		var zoomToScale = parseInt ((($(window).width() * 1 ) / 1500 ) * 100 ) / 100;
 		$('head').append('<meta name="viewport" content="width=device-width; initial-scale='+zoomToScale+'; maximum-scale=1.0; user-scalable=1;">');
+		
+		
+		// place les menus correctement
+		animateMenuHeight(52); // reset menu height
+		
+		// spécificité mobile concernant les menus :
+		// show les sous menu
+		$(".current-menu-parent, .current-menu-item").find(".submenu").show();
+		animateMenuHeight($(".current-menu-parent, .current-menu-item").find(".submenu").first().height()+50); // reset menu height
 		
 	}// if
 	else { // SI PAS MOBILE ALORS STELLAR JS POUR EFFET PARALAX
@@ -240,3 +225,27 @@ jQuery(document).ready(function($){
 		}// Fin $.stellar.positionProperty.limit
 	}
 });
+
+function gestionMenuMobile() {
+	// Gestion menu pour mobile : Permet de dérouler sous menu au premier click
+	// si clique sur menu niveau 1
+	$(".menu-item-has-children").click(function(event){
+	
+		// retire l'événement
+		event.stopPropagation();
+		event.preventDefault();
+		
+		$linkMenu = $(this).find("a").first();
+		
+		if($linkMenu.data("alreadyCliqued") == "cliquedOnce") {
+			// move to link
+			 document.location.href = $linkMenu.attr("href");
+		}
+		else { // he never cliqued
+			// retire l'info aux autres liens
+			$(".menu-item-has-children").data("alreadyCliqued", "");
+			// ajoute l'info cliquedOnce
+			$linkMenu.data("alreadyCliqued", "cliquedOnce");
+		}
+	}); // click
+}
