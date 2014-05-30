@@ -768,8 +768,10 @@ add_action( 'save_post', 'prfx_meta_save' );
 		
 		delete_post_meta($post_id, 'has_conflict');
 		delete_post_meta($post_id, 'got_conflict');
-		update_post_meta($post_id, 'rms_reservation_status', 0);
 		
+		if($res_status = get_post_meta($post_id, 'rms_reservation_status', true) == 3)
+			update_post_meta($post_id, 'rms_reservation_status', 0);
+			
 		$blnConflict = false;
 		
 		$arrRoom = get_post_meta($post_id, 'rms_reservation_room', true);
@@ -813,7 +815,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 				$blnConflict = true;
 				
 				update_post_meta($res_data->post_id, 'rms_reservation_status', 3);
-					
+				
 			}// Finf()
 			
 		}// Fin foreach ( $reservations_list as $res_data )
