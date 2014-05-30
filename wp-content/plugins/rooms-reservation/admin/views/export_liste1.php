@@ -91,7 +91,7 @@
 	xlsWriteLabel( 0, $i+5, utf8_decode('Montant total') );
 	
 	// Inclure fichier wp requis
-	require_once('../../../../wp-load.php');
+	require_once('../../../../../wp-load.php');
 
 	global $post;
 	

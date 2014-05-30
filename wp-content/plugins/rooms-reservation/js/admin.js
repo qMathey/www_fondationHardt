@@ -162,6 +162,44 @@ var array_en = [
 		
 	}
 	
+	// Datepicker pour export
+	$( "#export_fromdate, #export_todate" ).datepicker({
+		changeMonth: true,
+		dateFormat: 'dd.mm.yy',
+		onSelect: function( selectedDate ) {
+		
+			if( this.id == 'export_fromdate' ){
+			
+				var dateMin = $('#export_fromdate').datepicker("getDate");
+				var rMin = new Date(dateMin.getFullYear(), dateMin.getMonth(),dateMin.getDate() + 1); 
+				$('#export_todate').datepicker("option","minDate",rMin);
+			
+			}
+		
+		}
+	});
+	
+	// Action au clic sur lien d'export de la liste 2
+	$('#export_list2_link').click(function(e){
+	
+		e.preventDefault();
+		
+		$('.export_list2_dateselector').slideToggle();
+		
+	});
+	
+	// Action au clic sur le bouton d'export de la liste 2
+	$('#list2_export_submit').click(function(e){
+	
+		e.preventDefault();
+		
+		var fromDate = $('#export_fromdate').val();
+		var toDate = $('#export_todate').val();
+		
+		window.location.href = $('#export_list2_link').attr('href') +'?from=' + fromDate + '&to=' + toDate;
+	
+	});
+	
 })(jQuery);	
 
 

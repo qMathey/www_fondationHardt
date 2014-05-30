@@ -15,7 +15,7 @@
 		
 		//wp_register_script( 'rms_admin_js',  plugins_url( '/../js/admin.js', __FILE__ ) );
 		wp_enqueue_script('rms_admin_js', plugins_url( '/../js/admin.js', __FILE__ ),'','',true);
-		
+		wp_enqueue_script('jquery-ui-datepicker');
 		// Propriétés Ajax
 		wp_localize_script( 'rms_admin_js', 'rms_reservation_data',
 			array( 'ajax_url' => plugins_url('/rooms-reservation/frontend/frontend_ajax.php'))

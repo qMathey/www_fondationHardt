@@ -55,21 +55,50 @@
 	xlsWriteLabel( 0, 6, utf8_decode('Numéro de chambre') );
 
 	// Inclure fichier wp requis
-	require_once('../../../../wp-load.php');
+	require_once('../../../../../wp-load.php');
 
-	global $post;
-
-	// Obtenir la liste des réservations
-	$args = array( 'post_type' => 'rms_reservation');
+	$start_date = date( 'Ymd', strtotime($_GET['from']) );
 	
-	$loop = new WP_Query( $args );
+	$end_date = date( 'Ymd', strtotime($_GET['to']) );
+	
+	global $post, $wpdb;
+	
+	$reservations_list = $wpdb->get_results("
+		SELECT * FROM $wpdb->posts WHERE ID IN (
+		SELECT post_id
+		FROM  $wpdb->postmeta
+			WHERE (
+			(
+				meta_key =  'rms_reservation_start'
+				AND meta_value >=" . $start_date . "
+				AND meta_value <=" . $end_date . "
+			)
+			OR (
+				meta_key =  'rms_reservation_end'
+				AND meta_value >=" . $start_date . "
+				AND meta_value <=" . $end_date . "
+			)
+			OR (
+				(
+					meta_key =  'rms_reservation_start'
+					AND meta_value <=" . $start_date . "
+				)
+					AND (
+					meta_key =  'rms_reservation_end'
+					AND meta_value >=" . $end_date . "
+				)
+			)
+		)
+		)"
+	);
 	$i = 0;
-	
-	while ( $loop->have_posts() )
+	// Parcourir les réservations
+	foreach ( $reservations_list as $post )
 	{
+		setup_postdata($post);
+	
+	
 		$i++;
-		
-		$loop->the_post();
 		
 		// Données de l'utilisateur (TODO)
 		$post_author_id = get_post_field( 'post_author', get_the_ID() );
@@ -97,7 +126,7 @@
 		xlsWriteLabel($i, 6, excel_encode( $roomNumber, 'Windows-1252') );
 
 		
-	}// Fin while() 
+	}// Fin foreach() 
 
 	// Terminer l'export
 	xlsEOF();
