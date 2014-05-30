@@ -222,6 +222,13 @@ jQuery(document).ready(function($){
 			}
 		}); // click
 		*/
+		
+		// desactive Paralax
+		$.stellar({
+			horizontalScrolling: false,
+			//positionProperty: 'limit'
+		});
+		
 		// Zoom sur la page 
 		var zoomToScale = parseInt ((($(window).width() * 1 ) / 1500 ) * 100 ) / 100;
 		$('head').append('<meta name="viewport" content="width=device-width; initial-scale='+zoomToScale+'; maximum-scale=1.0; user-scalable=1;">');
