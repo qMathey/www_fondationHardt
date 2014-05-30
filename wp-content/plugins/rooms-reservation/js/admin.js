@@ -3,7 +3,7 @@
 if( typeof local_text != 'undefined')
 {
 
-	var lang_index = local_text.lang;
+	var lang_index = "array_" + local_text.lang;
 	var bourse_index = local_text.bourse;
 	
 }
@@ -124,19 +124,19 @@ var array_en = [
 	// Action checkbox bourse edition reservations
 	$("#rms_reservation_has_bourse").click(function()
 	{
-		
+		console.log(bourse_index +'/'+lang_index);
 		bourse_index = ($(this).is(':checked') ? 1 : 0);
-		tinyMCE.activeEditor.setContent(lang_index[bourse_index]);
+		tinyMCE.activeEditor.setContent(eval(lang_index)[bourse_index]);
 		
 		if(bourse_index)
 		{
 		
-			$('input#title').val($('input#title').val()+'_b');
+			$('input#title').val('B_' + $('input#title').val());
 			
 		}
 		else
 		{
-			$('input#title').val($('input#title').val().slice(0,-2));
+			$('input#title').val($('input#title').val().slice(2));
 		}
 
 	});
