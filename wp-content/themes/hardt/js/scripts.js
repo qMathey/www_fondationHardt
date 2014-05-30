@@ -33,7 +33,7 @@ jQuery(document).ready(function($){
 	  setLeft: $.stellar.positionProperty.position.setLeft
 
 	}// Fin $.stellar.positionProperty.limit
-	
+	/*
 	var isMobile = {
 		Android: function() {
 			return navigator.userAgent.match(/Android/i);
@@ -61,7 +61,7 @@ jQuery(document).ready(function($){
 		horizontalScrolling: false,
 		//positionProperty: 'limit'
 	});
-	
+	*/
 	
 	// Position contenu principal
 	var backgroundOffset, backgroundOffsetY = null;
@@ -199,6 +199,7 @@ jQuery(document).ready(function($){
 		
 		console.log("mobile!!!");
 		
+		/*
 		// Gestion menu pour mobile : Permet de dérouler sous menu au premier click
 		// si clique sur menu niveau 1
 		$(".menu-item-has-children").click(function(event){
@@ -220,7 +221,7 @@ jQuery(document).ready(function($){
 				$linkMenu.data("alreadyCliqued", "cliquedOnce");
 			}
 		}); // click
-		
+		*/
 		// Zoom sur la page 
 		var zoomToScale = parseInt ((($(window).width() * 1 ) / 1500 ) * 100 ) / 100;
 		$('head').append('<meta name="viewport" content="width=device-width; initial-scale='+zoomToScale+'; maximum-scale=1.0; user-scalable=1;">');
