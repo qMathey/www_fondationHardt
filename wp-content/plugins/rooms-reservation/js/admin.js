@@ -200,6 +200,30 @@ var array_en = [
 	
 	});
 	
+	// Reformater date tableau liste réservations
+	$('td.date_res.column-date_res').each(function(){
+		var data_date = new Date($(this).text()*1000);
+		
+		var year = data_date.getFullYear();
+		var month = data_date.getMonth() + 1;
+		var day = data_date.getDate();
+		var hours = data_date.getHours();
+		var minutes = data_date.getMinutes();
+		
+		$(this).text(("0" + day).slice(-2) + "." + ("0" + month).slice(-2) + "." + year + " à " + ("0" + hours).slice(-2) + "h" + ("0" + minutes).slice(-2));
+	});
+	
+	$('span.timestamp_date_jq').each(function(){
+		var data_date = new Date($(this).text()*1000);
+		
+		var year = data_date.getFullYear();
+		var month = data_date.getMonth() + 1;
+		var day = data_date.getDate();
+		
+		$(this).text(("0" + day).slice(-2) + "." + ("0" + month).slice(-2) + "." + year);
+	});
+	
+	
 })(jQuery);	
 
 
