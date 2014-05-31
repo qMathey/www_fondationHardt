@@ -1,6 +1,7 @@
 <?php
 	// Fichier pour requête ajax
 	require_once( '../../../../wp-blog-header.php' );
+	
 	// Vérifier présence donnée POST
 	if( isset( $_POST ) )
 	{
@@ -346,88 +347,9 @@
 							add_post_meta( $post_id, 'rms_reservation_end', date( "Ymd", strtotime( $_POST['end_date'] ) ) ); 
 							add_post_meta( $post_id, 'rms_reservation_client', $user_id );
 							
-							$blnConflict = false;
 							
-							// Récupérer réservations selon dates
-							$reservations_list = $wpdb->get_results("
-							SELECT post_id FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_room' AND meta_value LIKE '%a:1:{i:0;s:3:\"" . $_POST['room_id'] . "\";}%' AND post_id IN (
-								SELECT post_id
-									FROM  $wpdb->postmeta
-									WHERE (
-										(
-											meta_key =  'rms_reservation_start'
-											AND meta_value >= " . date( 'Ymd', strtotime($_POST['start_date']) ) . "
-											AND meta_value <= " . date( 'Ymd', strtotime($_POST['end_date']) ) . "
-										)
-										OR (
-											meta_key =  'rms_reservation_end'
-											AND meta_value >= " . date( 'Ymd', strtotime($_POST['start_date']) ) . "
-											AND meta_value <= " . date( 'Ymd', strtotime($_POST['end_date']) ) . "
-										)
-										OR (
-											(
-												meta_key =  'rms_reservation_start'
-												AND meta_value <= " . date( 'Ymd', strtotime($_POST['start_date']) ) . "
-											)
-												AND (
-												meta_key =  'rms_reservation_end'
-												AND meta_value >= " . date( 'Ymd', strtotime($_POST['end_date']) ) . "
-											)
-										)
-									) GROUP BY post_id
-									)
-								");
-								// Parcourir les réservations ayant des conflits
-								foreach ( $reservations_list as $res_data )
-								{
-									// Vérifier que la réservation n'a pas été validée
-									$res_status =  get_post_meta($res_data->post_id, 'rms_reservation_status', true);
-									if( ( $res_status == 0 ) || ($res_status == 3) )
-									{
-										$blnConflict = true;
-										
-										update_post_meta($res_data->post_id, 'rms_reservation_status', 3);
-										
-										if( $res_data -> post_id != $post_id )
-											update_post_meta($res_data->post_id, 'has_conflict', true);
+							echo check_conflicts($post_id);
 											
-									}// Finf()
-									
-								}// Fin foreach ( $reservations_list as $res_data )
-									
-								// Si il y a eu un conflit
-								if( $blnConflict)
-								{
-									update_post_meta($post_id, 'got_conflict', true);
-									
-									// Vérifier présence méta
-									if( !get_post_meta($post_id, 'got_conflict', true))
-									{
-										$wpdb->insert( 
-											$wpdb->postmeta, 
-											array( 
-												'post_id' => $post_id,
-												'meta_key' => 'got_conflict', 
-												'meta_value' => true 
-											) 
-										);
-
-										$wpdb->insert( 
-											$wpdb->postmeta, 
-											array( 
-												'post_id' => $post_id,
-												'meta_key' => 'rms_reservation_status', 
-												'meta_value' => 3 
-											) 
-										);
-									}// Fin if()
-									
-								}// Fin if( $blnConflict)
-								else
-								{
-									add_post_meta( $post_id, 'rms_reservation_status', 0 );
-								}
-								
 							add_post_meta( $post_id, 'rms_reservation_cost', $_POST['cost'] );
 							
 						}
@@ -532,7 +454,7 @@
 							
 							$message_admin .= "Période 2 :     du " . $_POST['start_2'] . " au " . $_POST['end_2'] . "<br/>";
 						}
-						wp_mail( "info@the-agencies.ch", "Demande pour un séjour", $message_admin, $headers_admin);
+					//	wp_mail( "info@the-agencies.ch", "Demande pour un séjour", $message_admin, $headers_admin);
 		
 					}
 					else
