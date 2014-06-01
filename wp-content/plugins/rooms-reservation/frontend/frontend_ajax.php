@@ -83,10 +83,16 @@
 					// Enregistrer les données concernant la chambre de la réservation
 					foreach ( $reservations_list as $res_data )
 					{
-						$count = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->postmeta WHERE post_id = " . $res_data -> post_id . " AND meta_key = 'rms_reservation_status' AND meta_value != 1");
+					
+						$reservationStatus = get_post_meta( $res_data->post_id, 'rms_reservation_status', true );
 						
-						if( $count == 0)
-						{
+						// cas limite où le statut n'est pas définit, on le considère à 0 (en attente)
+						if($reservationStatus == "")
+							$reservationStatus = 0;
+							
+						// si la réservation est confirmée
+						if(intval($reservationStatus) == 1) {
+							// ajoute dans l'array de nettoyage des chambres
 							array_push( $clean_array, $res_data -> meta_value );
 						}
 					
