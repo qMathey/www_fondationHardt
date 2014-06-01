@@ -872,6 +872,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 				// Statuts de conflit
 				update_post_meta($res_data->post_id, 'rms_reservation_status', 3);
 				update_post_meta($res_data->post_id, 'has_conflict', true);
+				delete_post_meta($res_data->post_id, 'got_conflict');
 				
 			}// Fin if()
 			
