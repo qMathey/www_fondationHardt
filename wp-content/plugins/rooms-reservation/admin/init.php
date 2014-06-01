@@ -396,7 +396,12 @@
 		);
 		
 		// Ajouter role hôte
-		add_role('hardt_host', __('Hôte'));
+		add_role('hardt_host', __('Hôte'),
+		array(
+			'read'         => true,  
+			'edit_posts'   => false,
+			'delete_posts' => false
+		));
 		
 		// Role hardt_admin
 		$role = get_role( 'hardt_admin' );
@@ -679,6 +684,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 				
 			}// Fin if( $blnConflict)
 			*/
+			
 			update_user_meta($_POST['fields']['field_533d6b7fffca0'], 'user_lang', $_POST['lang']);
 			update_post_meta($id, 'has_bourse', $_POST['rms_reservation_has_bourse']);
 			update_post_meta($id, 'rms_reservation_start', $_POST['fields']['field_533d686591a5e']);
@@ -751,6 +757,9 @@ add_action( 'save_post', 'prfx_meta_save' );
 				$mail = get_the_author_meta( 'user_email', $_POST['fields']['field_533d6b7fffca0'] );
 				
 				$message = $_POST['fields']['field_536c86cc29766'];
+				
+				// parse message remove les slashes /
+				$message = stripslashes_deep ( $message );
 				
 				// Mettre à jour le meta d'envoi d'email
 				if( wp_mail( $mail, $mail_title, $message, $headers, $attachments) )
@@ -1276,7 +1285,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 						default:
 	$field['default_value']  = "We are pleased to inform you that you have been granted a bursary for a research stay at the Hardt Foundation.
 	Please find here attached your letter of confirmation.
-	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: (lien vers page cachée du site).
+	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch
 	Do not hesitate to contact us if you have any inquiry concerning your future stay.
 	We thank you very much for your interest in the Hardt Foundation and look forward to welcoming you soon.
