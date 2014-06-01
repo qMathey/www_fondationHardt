@@ -50,7 +50,15 @@
 		foreach ( $resOnRoom as $resData )
 		{
 		
-			if ( !get_post_meta(  $resData -> post_id, 'has_conflict', true ) )
+			$hasConflict = get_post_meta(  $resData -> post_id, 'has_conflict', true );
+			if($hasConflict == "")
+				$hasConflict = false;
+			
+			$gotConflict = get_post_meta(  $resData -> post_id, 'got_conflict', true );
+			if($gotConflict == "")
+				$gotConflict = false;
+		
+			if ( ! $hasConflict || $gotConflict  )
 			{
 				array_push( $arrReservation, $i );
 				
