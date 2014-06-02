@@ -206,9 +206,9 @@
 			<div class="label">
 			
 				<div class="declined"></div> = <?php _e('Réservation refusée', 'rms_reservation'); ?>
-				<div class="allowed"></div> = <?php _e('Réservation acceptée', 'rms_reservation'); ?>
 				<div class="pending"></div> = <?php _e('Réservation en attente', 'rms_reservation'); ?>
-			<div class="date_conflict"></div> = <?php _e('Conflit de dates', 'rms_reservation'); ?>
+			<div class="date_conflict"></div> = <?php _e('En attente, conflit de dates', 'rms_reservation'); ?>
+				<div class="allowed"></div> = <?php _e('Réservation acceptée', 'rms_reservation'); ?>
 				
 			</div>
 		</div>
@@ -220,9 +220,9 @@
 			<div class="label">
 			
 				<div class="declined"></div> = <?php _e('Réservation refusée', 'rms_reservation'); ?>
-				<div class="allowed"></div> = <?php _e('Réservation acceptée', 'rms_reservation'); ?>
 				<div class="pending"></div> = <?php _e('Réservation en attente', 'rms_reservation'); ?>
-			<div class="date_conflict"></div> = <?php _e('Conflit de dates', 'rms_reservation'); ?>
+			<div class="date_conflict"></div> = <?php _e('En attente, conflit de dates', 'rms_reservation'); ?>
+				<div class="allowed"></div> = <?php _e('Réservation acceptée', 'rms_reservation'); ?>
 				
 			</div>
 
