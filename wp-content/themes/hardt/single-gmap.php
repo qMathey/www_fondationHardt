@@ -56,7 +56,7 @@
 		var address = 'Chemin Vert 2, Vandoeuvres, CH';
 
 		var map = new google.maps.Map(document.getElementById('map'), { 
-			mapTypeId: google.maps.MapTypeId.TERRAIN,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			zoom: 15,
 			disableDefaultUI: true
 		});
