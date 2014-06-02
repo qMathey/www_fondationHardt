@@ -2,6 +2,8 @@
 	// Vue du détail des réservations
 	$userFieldsData = user_custom_fields();
 	
+	
+	
 	$reservationData = reservation_custom_fields();
 	
 	if( get_post_meta($_GET['view_res'], 'rms_reservation_client', true) )
@@ -53,8 +55,6 @@
 		get_user_meta( $post_author_id, 'last_name', true ),
 		get_user_meta( $post_author_id, 'birthday', true ),
 		get_user_meta( $post_author_id, 'sex', true ),
-		get_user_meta( $post_author_id, 'regime', true ),
-		get_user_meta( $post_author_id, 'remarks', true ),
 		get_user_meta( $post_author_id, 'nationality', true ),
 		$user_info -> user_email,
 		get_user_meta( $post_author_id, 'street', true ),
@@ -68,7 +68,9 @@
 		get_user_meta( $post_author_id, 'affiliation', true ),
 		get_user_meta( $post_author_id, 'function', true ),
 		get_user_meta( $post_author_id, 'references', true ),
-		get_user_meta( $post_author_id, 'theme', true )
+		get_user_meta( $post_author_id, 'theme', true ),
+		get_user_meta( $post_author_id, 'regime', true ),
+		get_user_meta( $post_author_id, 'remarks', true )
 	);
 	
 	$reservationData = reservation_custom_fields();
@@ -122,6 +124,7 @@
 			$fact_email = $user_info -> user_email;
 		}
 		
+		// Tableau des données
 		$arrResData = array(
 			get_the_title(),
 			date( "d.m.Y", strtotime( get_field('rms_reservation_start') ) ),
