@@ -566,7 +566,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 				return '';
 			else
 			{
-				echo '<div id="message" class="error"><p>' . __('Une ou plusieurs réservations sont entrées en conflit avec cette confirmation et les réservations sont marquées en jaune.', 'rms_reservation') . '</p></div>';
+				echo '<div id="message" class="error"><p><strong style="color:red">' . __('ATTENTION : conflit de dates !', 'rms_reservation') . '</strong></p></div>';
 					
 				delete_post_meta($post -> ID, 'got_conflict');
 				
