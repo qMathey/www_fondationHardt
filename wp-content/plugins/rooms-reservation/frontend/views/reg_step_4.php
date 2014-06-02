@@ -63,7 +63,7 @@
 		</div>	
 		
 		<div style="width: 100%; font-family: HelveticaLT-Bold; color: #003366; text-align: right;text-transform:uppercase">
-			<?php echo rms_translate("Nombre de nuits"); ?> : <span class="nb_nights"></soan>
+			<?php echo rms_translate("Nombre de nuits"); ?> : <span class="nb_nights"></span>
 		</div>	
 	</fieldset>
 	

@@ -36,7 +36,7 @@
 				<div>
 					<div style="width: 36%; margin-right: 59%; float: left;">	
 						<label for="birthday"><span title="Format: dd/-.mm/-.yyyy"><?php echo rms_translate("Date de naissance"); ?></span></label>
-						<input type="text" name="birthday" value="<?php echo get_user_meta( get_current_user_id(), 'birthday', true ); ?>" style="max-width:110px; min-width:110px;">
+						<input type="text" placeholder="ex: 15.08.1985" name="birthday" value="<?php echo get_user_meta( get_current_user_id(), 'birthday', true ); ?>" style="max-width:110px; min-width:110px;">
 					</div>
 					
 					<div style="width: 5%; float: right;">
@@ -713,14 +713,14 @@
 						<div>
 						
 							<div style="width: 35%; margin-right:10%; float: left;">	
-								<label for="start_1" style="font-size: 14px; display: inline-block;"><?php echo rms_translate("Date d'arrivée"); ?></label>
+								<label for="start_1" style="font-size: 14px; display: inline-block;"><?php echo rms_translate("Date d'arrivée (en principe le lundi)"); ?></label>
 								<input type="text" name="start_1" class="datepicker" style="display: inline-block; width: 77px; min-width: 77px;">
 							</div>
 						</div>
 						
 						<div>
 							<div style="width: 35%; float: right;">	
-								<label for="end_1" style="font-size: 14px; display: inline-block;"><?php echo rms_translate("Date de départ"); ?></label>
+								<label for="end_1" style="font-size: 14px; display: inline-block;"><?php echo rms_translate("Date de départ (en principe le samedi)"); ?></label>
 								<input type="text" name="end_1" class="datepicker" style="display: inline-block; width: 77px; min-width: 77px;">
 							</div>
 						</div>
@@ -730,14 +730,14 @@
 						<div style="width: 20%;float: left;"><?php echo rms_translate("Période 2"); ?></div>
 						<div>
 							<div style="width: 35%;margin-right:10%;float: left;">	
-								<label for="start_2" style="font-size: 14px; display: inline-block;"><?php echo rms_translate("Date d'arrivée"); ?></label>
+								<label for="start_2" style="font-size: 14px; display: inline-block;"><?php echo rms_translate("Date d'arrivée (en principe le lundi)"); ?></label>
 								<input type="text" name="start_2" class="datepicker" style="display: inline-block; width: 77px; min-width: 77px;">
 							</div>
 						</div>
 						
 						<div>
 							<div style="width: 35%;float: right;">	
-								<label for="end_2" style="font-size: 14px; display: inline-block;"><?php echo rms_translate("Date de départ"); ?></label>
+								<label for="end_2" style="font-size: 14px; display: inline-block;"><?php echo rms_translate("Date de départ (en principe le samedi)"); ?></label>
 								<input type="text" name="end_2" class="datepicker" style="display: inline-block; width: 77px; min-width: 77px;">
 							</div>
 						</div>

@@ -12,12 +12,12 @@
 			<div>
 
 				<div style="width: 45%; margin-right: 10%; float: left;">
-					<label for="start_date" style="display: inline-block;"><?php echo rms_translate("Date d'arrivée"); ?></label>
+					<label for="start_date" style="display: inline-block;"><?php echo rms_translate("Date d'arrivée (en principe le lundi)"); ?></label>
 					<input type="text" name="start_date" class="datepicker" id="start_date" style="display: inline-block; min-width: 84%; width: 84%;">
 				</div>
 				
 				<div style="width: 45%; float: right;">
-					<label for="end_date" style="display: inline-block;"><?php echo rms_translate("Date de départ"); ?></label>
+					<label for="end_date" style="display: inline-block;"><?php echo rms_translate("Date de départ (en principe le samedi)"); ?></label>
 					<input type="text" name="end_date" class="datepicker" id="end_date" style="display: inline-block; min-width: 84%; width: 84%;">
 				</div>
 				
