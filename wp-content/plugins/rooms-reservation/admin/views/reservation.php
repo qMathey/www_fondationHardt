@@ -125,7 +125,14 @@
 				$strOutput .= ' - ' . __( "Dates en conflit", "rms_reservation");
 			elseif(!$data['email'])
 				$strOutput .= ' - ' . __( "Aucun email n'a été envoyé", "rms_reservation");
-				
+			
+			$isConflict = get_post_meta( $data["id"], "has_conflict" , true );
+			if($isConflict == "")
+				$isConflict = false;
+			// si il y a un conflit	
+			if($isConflict)
+				$strOutput .= ' - ' . __( "<strong>! DATES EN CONFLITS !</strong>");
+			
 			return $strOutput;
 			
 		}// Fin column_state()
@@ -295,8 +302,8 @@
 			<div class="label">
 			<div class="declined"></div> = <?php _e('Réservation refusée', 'rms_reservation'); ?>
 			<div class="pending"></div> = <?php _e('Réservation en attente', 'rms_reservation'); ?>
+			<div class="date_conflict"></div> = <?php _e('En attente, conflit de dates', 'rms_reservation'); ?>
 			<div class="allowed"></div> = <?php _e('Réservation acceptée', 'rms_reservation'); ?>
-			<div class="date_conflict"></div> = <?php _e('Conflit de dates', 'rms_reservation'); ?>
 			</div>
 	</div>
 	
@@ -321,8 +328,8 @@
 		<div class="label">
 			<div class="declined"></div> = <?php _e('Réservation refusée', 'rms_reservation'); ?>
 			<div class="pending"></div> = <?php _e('Réservation en attente', 'rms_reservation'); ?>
+			<div class="date_conflict"></div> = <?php _e('En attente, conflit de dates', 'rms_reservation'); ?>
 			<div class="allowed"></div> = <?php _e('Réservation acceptée', 'rms_reservation'); ?>
-			<div class="date_conflict"></div> = <?php _e('Conflit de dates', 'rms_reservation'); ?>
 		</div>
 	</div>
 </div>
