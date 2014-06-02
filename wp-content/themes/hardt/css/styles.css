@@ -8,7 +8,9 @@
 
 @font-face {font-family: 'ACaslon-Italic';src: url('../fonts/2A3765_0_0.eot');src: url('../fonts/2A3765_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2A3765_0_0.woff') format('woff'),url('../fonts/2A3765_0_0.ttf') format('truetype');}
 
-@font-face {font-family: 'ACaslon-Semibold';src: url('../fonts/2A3765_3_0.eot');src: url('../fonts/2A3765_3_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2A3765_3_0.woff') format('woff'),url('../fonts/2A3765_3_0.ttf') format('truetype');}
+
+@font-face {font-family: 'ACaslon-Semibold2';src: url('../fonts/2A3765_3_0.eot');src: url('../fonts/2A3765_3_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2A3765_3_0.woff') format('woff'),url('../fonts/2A3765_3_0.ttf') format('truetype');}
+
 
 @media (max-width: 1500px) {
 html,body {
@@ -392,7 +394,7 @@ ul.right_top_lang_menu li a.active{
 
 /* Bloc des citations */
 .citation_original {
-	font-family: ACaslon-Semibold;
+	font-family: ACaslon-Semibold2;
 	font-weight: normal;
 	font-style: normal;
 	color: #003366;
@@ -432,7 +434,7 @@ section:first-of-type .citation_original {
 }
 
 .citation_author {
-	font-family: ACaslon-Semibold;
+	font-family: ACaslon-Semibold2;
 	font-size: 13px;
 }
 

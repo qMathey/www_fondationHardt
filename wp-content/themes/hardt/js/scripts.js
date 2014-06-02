@@ -9,6 +9,13 @@ jQuery(document).ready(function($){
 	var backgroundOffset, backgroundOffsetY = null;
 	backgroundOffsetY = 25;
 	
+	// Hack Safari : changer de police pour la Homepage
+	if ( $.browser.safari ) {
+		$(".citation_original, .citation_author").css("font-family", "ACaslon-Semibold");
+		//alert($(".citation_original").css("font-family"));
+	}
+	
+	
 	// Menu deroulant
 	$(".main_top_menu > li, #menu-menu-secondaire > li").on("mouseenter", function(event) {
 	
