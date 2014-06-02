@@ -121,16 +121,19 @@
 			$strOutput =  ( ($data['state'] == 0) || ($data['state'] == 3) ) ? 'En attente' : ( ( $data['state'] == 1 ) ? 'Accepté' : 'Refusé');
 			
 			// Verifier email de confirmation envoyé
+			
 			if ($data['state'] == 3)
 				$strOutput .= ' - ' . __( "Dates en conflit", "rms_reservation");
-			elseif(!$data['email'])
+			else {
+				if(!$data['email'])
 				$strOutput .= ' - ' . __( "Aucun email n'a été envoyé", "rms_reservation");
+			}
 			
 			$isConflict = get_post_meta( $data["id"], "has_conflict" , true );
 			if($isConflict == "")
 				$isConflict = false;
-			// si il y a un conflit	
-			if($isConflict)
+			// si il y a un conflit	et qu'elle déjà indiqué en jaune
+			if($isConflict && $data['state'] != 3)
 				$strOutput .= ' - ' . __( "<strong>! DATES EN CONFLITS !</strong>");
 			
 			return $strOutput;
