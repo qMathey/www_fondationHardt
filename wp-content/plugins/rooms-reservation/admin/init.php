@@ -795,7 +795,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 		}
 		elseif( ( isset($_POST) ) && ( $_POST['ID'] == $post_id) )
 		{
-		// Vérifier si données post sont pour la réservation courrate
+		// Vérifier si données post sont pour la réservation courante
 			
 			// Utiliser données $_POST
 			
@@ -878,25 +878,74 @@ add_action( 'save_post', 'prfx_meta_save' );
 			
 		}// Fin foreach ( $reservations_list as $res_data )
 		
-		// Si il n'y a pas eu un conflit
-		if( (!$blnConflict) && ( get_post_meta($post_id, 'rms_reservation_status', true) == 3 ) )
-		{
+		$currentReservationStatus = get_post_meta($post_id, 'rms_reservation_status', true);
 		
-			update_post_meta($post_id, 'rms_reservation_status', 0);
+		// si il n'y a pas eu de conflit
+		if ( (!$blnConflict) ) {
+			switch( intval($currentReservationStatus) ) {
+				case 0 : // statut "en attente"
+					// rien
+					break;
+				
+				case 1 : // statut "refusé"
+					// rien
+					break;
+				
+				case 2 : // statut "accepté"
+					// rien
+					break;
+				
+				case 3 : // statut en "en attente conflit"
+					// remise à "en attente"
+					update_post_meta($post_id, 'rms_reservation_status', 0); 
+					break;
+				
+				default : // par défaut, c'est une réservation en attente
+					update_post_meta($post_id, 'rms_reservation_status', 0);
+					break;
+			}
+			
+			// supprime les infos de conflits si existant
 			delete_post_meta($post_id, 'got_conflict');
 			delete_post_meta($post_id, 'has_conflict');
+		
+		}// if
+		else { // sinon il y a eu un conflit
 			
-		}
-		elseif( ($blnConflict) && ( get_post_meta($post_id, 'rms_reservation_status', true) == 0 ) )
-		{// Cas post courant
-		
-			// Statuts de conflit
-			update_post_meta($post_id, 'has_conflict', true);
-			update_post_meta($post_id, 'rms_reservation_status', 3);
-			add_post_meta($post_id, 'got_conflict', true);
+			switch( intval($currentReservationStatus) ) {
+				case 0 : // statut "en attente"
+					// Statuts de conflit
+					update_post_meta($post_id, 'rms_reservation_status', 3);
+					break;
 				
-		}// Fin if()
+				case 1 : // statut "refusé"
+					// rien
+					break;
+					
+				case 2 : // statut "accepté"
+					// rien
+					break;
+				
+				case 3 : // statut en "en attente conflit"
+					// rien
+					break;
+				
+				default : // par défaut, c'est une réservation "en attente conflit"
+					update_post_meta($post_id, 'rms_reservation_status', 3);
+					break;
+			}
+			
+			// indique l'état de conflit
+			update_post_meta($post_id, 'has_conflict', true);
+			update_post_meta($post_id, 'got_conflict', true);
 		
+		
+			if( ($blnConflict) && ( get_post_meta($post_id, 'rms_reservation_status', true) == 0 ) )
+			{// Cas post courant
+			
+					
+			}// Fin if()
+		} // else
 	}// Fin check_conflicts()
 	
 	// Fonction appelée lors de la màj d'une réservation

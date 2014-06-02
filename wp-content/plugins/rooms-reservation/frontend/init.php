@@ -87,6 +87,8 @@
 			"Période 2" => "Period 2",
 			"Date d'arrivée (en principe le lundi)" => "Arrival Day (in principle on a Monday)",
 			"Date de départ (en principe le samedi)" => "Departure Day (in principle on a Saturday)",
+			"Date d'arrivée" => "Arrival Day",
+			"Date de départ" => "Departure Day",
 			"Joindre les documents demandés" => "Attach the requested documents",
 			"Continuer" => "Continue",
 			"Veuillez entrer les dates souhaitées" => "Please enter your desired dates",
