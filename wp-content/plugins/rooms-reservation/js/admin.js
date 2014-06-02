@@ -3,7 +3,7 @@
 if( typeof local_text != 'undefined')
 {
 
-	var lang_index = local_text.lang;
+	var lang_index = "array_" + local_text.lang;
 	var bourse_index = local_text.bourse;
 	
 }
@@ -124,19 +124,19 @@ var array_en = [
 	// Action checkbox bourse edition reservations
 	$("#rms_reservation_has_bourse").click(function()
 	{
-		
+		console.log(bourse_index +'/'+lang_index);
 		bourse_index = ($(this).is(':checked') ? 1 : 0);
-		tinyMCE.activeEditor.setContent(lang_index[bourse_index]);
+		tinyMCE.activeEditor.setContent(eval(lang_index)[bourse_index]);
 		
 		if(bourse_index)
 		{
 		
-			$('input#title').val($('input#title').val()+'_b');
+			$('input#title').val('B_' + $('input#title').val());
 			
 		}
 		else
 		{
-			$('input#title').val($('input#title').val().slice(0,-2));
+			$('input#title').val($('input#title').val().slice(2));
 		}
 
 	});
@@ -199,6 +199,30 @@ var array_en = [
 		window.location.href = $('#export_list2_link').attr('href') +'?from=' + fromDate + '&to=' + toDate;
 	
 	});
+	
+	// Reformater date tableau liste réservations
+	$('td.date_res.column-date_res').each(function(){
+		var data_date = new Date($(this).text()*1000);
+		
+		var year = data_date.getFullYear();
+		var month = data_date.getMonth() + 1;
+		var day = data_date.getDate();
+		var hours = data_date.getHours();
+		var minutes = data_date.getMinutes();
+		
+		$(this).text(("0" + day).slice(-2) + "." + ("0" + month).slice(-2) + "." + year + " à " + ("0" + hours).slice(-2) + "h" + ("0" + minutes).slice(-2));
+	});
+	
+	$('span.timestamp_date_jq').each(function(){
+		var data_date = new Date($(this).text()*1000);
+		
+		var year = data_date.getFullYear();
+		var month = data_date.getMonth() + 1;
+		var day = data_date.getDate();
+		
+		$(this).text(("0" + day).slice(-2) + "." + ("0" + month).slice(-2) + "." + year);
+	});
+	
 	
 })(jQuery);	
 

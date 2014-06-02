@@ -396,7 +396,12 @@
 		);
 		
 		// Ajouter role hôte
-		add_role('hardt_host', __('Hôte'));
+		add_role('hardt_host', __('Hôte'),
+		array(
+			'read'         => true,  
+			'edit_posts'   => false,
+			'delete_posts' => false
+		));
 		
 		// Role hardt_admin
 		$role = get_role( 'hardt_admin' );
@@ -582,7 +587,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 		if( $post -> post_type == 'rms_reservation' )
 		{
 			//if( empty($_POST['fields']['field_536c862253a43']) )
-			//	update_post_meta($id, 'rms_reservation_status', 0);
+		/*	//	update_post_meta($id, 'rms_reservation_status', 0);
 					
 			$startDate = $_POST['fields']['field_533d686591a5e'];// Date début
 			$endDate = $_POST['fields']['field_533d68b31f200'];// Date fin
@@ -645,7 +650,10 @@ add_action( 'save_post', 'prfx_meta_save' );
 			// Si il y a eu un conflit
 			if($blnConflict)
 			{
-				update_post_meta($id, 'rms_reservation_status', 3);
+				$res_status =  get_post_meta($res_data->post_id, 'rms_reservation_status', true);
+				
+				if( ( $res_status == 0 ) || ($res_status == 3) )
+					update_post_meta($id, 'rms_reservation_status', 3);
 					
 				update_post_meta($id, 'got_conflict', true);
 				
@@ -660,18 +668,22 @@ add_action( 'save_post', 'prfx_meta_save' );
 							'meta_value' => true 
 						) 
 					);
-
-					$wpdb->insert( 
-						$wpdb->postmeta, 
-						array( 
-							'post_id' => $id,
-							'meta_key' => 'rms_reservation_status', 
-							'meta_value' => 3 
-						) 
-					);
+					
+					if( ( $res_status == 0 ) || ($res_status == 3) )
+					{
+						$wpdb->insert( 
+							$wpdb->postmeta, 
+							array( 
+								'post_id' => $id,
+								'meta_key' => 'rms_reservation_status', 
+								'meta_value' => 3 
+							) 
+						);
+					}
 				}// Fin if()
 				
 			}// Fin if( $blnConflict)
+			*/
 			
 			update_user_meta($_POST['fields']['field_533d6b7fffca0'], 'user_lang', $_POST['lang']);
 			update_post_meta($id, 'has_bourse', $_POST['rms_reservation_has_bourse']);
@@ -746,6 +758,9 @@ add_action( 'save_post', 'prfx_meta_save' );
 				
 				$message = $_POST['fields']['field_536c86cc29766'];
 				
+				// parse message remove les slashes /
+				$message = stripslashes_deep ( $message );
+				
 				// Mettre à jour le meta d'envoi d'email
 				if( wp_mail( $mail, $mail_title, $message, $headers, $attachments) )
 					update_post_meta( $post -> ID, 'rms_reservation_email', 1 );
@@ -763,91 +778,124 @@ add_action( 'save_post', 'prfx_meta_save' );
 	{
 		global $wpdb;
 		
-		$start_date = $wpdb->get_row("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_start' AND post_id = " . $post_id);
-		$end_date = $wpdb->get_row("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_end' AND post_id = " . $post_id);
+		$start_date  = "";
+		$end_date  = "";
+		$room_id  = "";
 		
-		delete_post_meta($post_id, 'has_conflict');
-		delete_post_meta($post_id, 'got_conflict');
-		update_post_meta($post_id, 'rms_reservation_status', 0);
+		
+		if( (isset($_POST['action'])) && ($_POST['action'] == 'add_reservation_new_user') )
+		{// Accès depuis frontend
+			$start_date = $wpdb->get_row("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_start' AND post_id = " . $post_id);
+			$start_date = $start_date -> meta_value;
+			
+			$end_date = $wpdb->get_row("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_end' AND post_id = " . $post_id);
+			$end_date = $end_date -> meta_value;
+			
+			$room_id = $_POST['room_id'];
+		}
+		elseif( ( isset($_POST) ) && ( $_POST['ID'] == $post_id) )
+		{
+		// Vérifier si données post sont pour la réservation courrate
+			
+			// Utiliser données $_POST
+			
+			$start_date = $_POST['fields']['field_533d686591a5e'];
+			
+			$end_date = $_POST['fields']['field_533d68b31f200'];
+			
+			$arrRoom = $_POST['fields']['field_533d6bd3d9cc4'];
+			
+			$room_id = $arrRoom[0];
+			
+			update_post_meta($post_id, 'rms_reservation_start', $_POST['fields']['field_533d686591a5e']);
+			update_post_meta($post_id, 'rms_reservation_end',  $_POST['fields']['field_533d68b31f200']);
+			update_post_meta($post_id, 'rms_reservation_room', "a:1:{i:0;s:3:\"" . $_POST['fields']['field_533d6bd3d9cc4'][0] . "\";}");
+		}
+		else
+		{
+		
+			$start_date = $wpdb->get_row("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_start' AND post_id = " . $post_id);
+			$start_date = $start_date -> meta_value;
+			
+			$end_date = $wpdb->get_row("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_end' AND post_id = " . $post_id);
+			$end_date = $end_date -> meta_value;
+			
+			$arrRoom = get_post_meta($post_id, 'rms_reservation_room', true);
+			
+			$room_id = $arrRoom[0];
+			
+		}
 		
 		$blnConflict = false;
+		// Utiliser data post
 		
-		$arrRoom = get_post_meta($post_id, 'rms_reservation_room', true);
-		
+		// Récupérer  toutes réservations aux mêmes données, sauf la courante pour éviter conflit sur elle-même
 		$reservations_list = $wpdb->get_results("
-		SELECT post_id FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_room' AND meta_value LIKE '%a:1:{i:0;s:3:\"" . $arrRoom[0] . "\";}%' AND post_id != " . $post_id . " AND post_id IN (
+		SELECT post_id FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_room' AND meta_value LIKE '%a:1:{i:0;s:3:\"" . $room_id . "\";}%' AND post_id != " . $post_id . " AND post_id IN (
 			SELECT post_id
 				FROM  $wpdb->postmeta
 				WHERE (
 					(
 						meta_key =  'rms_reservation_start'
-						AND meta_value >= " . $start_date -> meta_value . "
-						AND meta_value <= " . $end_date -> meta_value . "
+						AND meta_value >= " . $start_date . "
+						AND meta_value <= " . $end_date . "
 					)
 					OR (
 						meta_key =  'rms_reservation_end'
-						AND meta_value >= " . $start_date -> meta_value . "
-						AND meta_value <= " . $end_date -> meta_value . "
+						AND meta_value >= " . $start_date . "
+						AND meta_value <= " . $end_date . "
 					)
 					OR (
 						(
 							meta_key =  'rms_reservation_start'
-							AND meta_value <= " . $start_date -> meta_value . "
+							AND meta_value <= " . $start_date . "
 						)
 							AND (
 							meta_key =  'rms_reservation_end'
-							AND meta_value >= " . $end_date -> meta_value . "
+							AND meta_value >= " . $end_date . "
 						)
 					)
 				) GROUP BY post_id
 				)
 		");
+		
 		// Parcourir les réservations ayant des conflits
 		foreach ( $reservations_list as $res_data )
 		{
-		
+			$blnConflict = true;
+			
+			update_post_meta($res_data->post_id, 'got_conflict', true);
+			
 			// Vérifier que la réservation n'a pas été validée
-			$res_status =  get_post_meta($res_data->post_id, 'rms_reservation_status', true);
-			if( ( $res_status == 0 ) || ($res_status == 3) )
+			if( get_post_meta($res_data->post_id, 'rms_reservation_status', true) == 0 )
 			{
-				$blnConflict = true;
-				
+				// Statuts de conflit
 				update_post_meta($res_data->post_id, 'rms_reservation_status', 3);
-					
-			}// Finf()
+				update_post_meta($res_data->post_id, 'has_conflict', true);
+				delete_post_meta($res_data->post_id, 'got_conflict');
+				
+			}// Fin if()
 			
 		}// Fin foreach ( $reservations_list as $res_data )
 		
-		// Si il y a eu un conflit
-		if( $blnConflict)
+		// Si il n'y a pas eu un conflit
+		if( (!$blnConflict) && ( get_post_meta($post_id, 'rms_reservation_status', true) == 3 ) )
 		{
+		
+			update_post_meta($post_id, 'rms_reservation_status', 0);
+			delete_post_meta($post_id, 'got_conflict');
+			delete_post_meta($post_id, 'has_conflict');
+			
+		}
+		elseif( ($blnConflict) && ( get_post_meta($post_id, 'rms_reservation_status', true) == 0 ) )
+		{// Cas post courant
+		
+			// Statuts de conflit
+			update_post_meta($post_id, 'has_conflict', true);
 			update_post_meta($post_id, 'rms_reservation_status', 3);
+			add_post_meta($post_id, 'got_conflict', true);
 				
-			update_post_meta($post_id, 'got_conflict', true);
-			
-			// Vérifier présence méta
-			if( !get_post_meta($post_id, 'got_conflict', true))
-			{
-				$wpdb->insert( 
-					$wpdb->postmeta, 
-					array( 
-						'post_id' => $post_id,
-						'meta_key' => 'got_conflict', 
-						'meta_value' => true 
-					) 
-				);
-
-				$wpdb->insert( 
-					$wpdb->postmeta, 
-					array( 
-						'post_id' => $post_id,
-						'meta_key' => 'rms_reservation_status', 
-						'meta_value' => 3 
-					) 
-				);
-			}// Fin if()
-			
-		}// Fin if( $blnConflict)
+		}// Fin if()
 		
 	}// Fin check_conflicts()
 	
@@ -865,6 +913,13 @@ add_action( 'save_post', 'prfx_meta_save' );
 			{
 				
 				check_conflicts($check_post -> ID);
+			}
+			
+			$myposts2 = get_posts('post_type=rms_reservation&posts_per_page=-1');
+			foreach ( $myposts2 as $check_post1 )
+			{
+				
+				check_conflicts($check_post1 -> ID);
 			}
 		//	die();
 		}
@@ -1231,7 +1286,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 						default:
 	$field['default_value']  = "We are pleased to inform you that you have been granted a bursary for a research stay at the Hardt Foundation.
 	Please find here attached your letter of confirmation.
-	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: (lien vers page cachée du site).
+	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch
 	Do not hesitate to contact us if you have any inquiry concerning your future stay.
 	We thank you very much for your interest in the Hardt Foundation and look forward to welcoming you soon.

@@ -1,6 +1,7 @@
 <?php
 	// Fichier pour requête ajax
 	require_once( '../../../../wp-blog-header.php' );
+	
 	// Vérifier présence donnée POST
 	if( isset( $_POST ) )
 	{
@@ -82,10 +83,16 @@
 					// Enregistrer les données concernant la chambre de la réservation
 					foreach ( $reservations_list as $res_data )
 					{
-						$count = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->postmeta WHERE post_id = " . $res_data -> post_id . " AND meta_key = 'rms_reservation_status' AND meta_value != 1");
+					
+						$reservationStatus = get_post_meta( $res_data->post_id, 'rms_reservation_status', true );
 						
-						if( $count == 0)
-						{
+						// cas limite où le statut n'est pas définit, on le considère à 0 (en attente)
+						if($reservationStatus == "")
+							$reservationStatus = 0;
+							
+						// si la réservation est confirmée
+						if(intval($reservationStatus) == 1) {
+							// ajoute dans l'array de nettoyage des chambres
 							array_push( $clean_array, $res_data -> meta_value );
 						}
 					
@@ -104,6 +111,10 @@
 							$room_type = $rms_room_stocked_meta['rms_room_type'][0];
 							$get_room_price = $rms_room_stocked_meta['rms_room_price'][0];
 							
+							$roomContent = ( $_POST['postData']['lang'] == 'fr' ? $rooms_data -> post_content : get_field('room_eng_descr', $rooms_data -> ID) );
+							$news_content = apply_filters( 'the_content', get_the_content() );
+							$format_content = str_replace( ']]>', ']]&gt;', $roomContent );
+								
 							if( ($room_type == 'classic') && ($_POST['user_age'] <= 35) )
 								$get_room_price -= 20;
 							
@@ -122,10 +133,7 @@
 									<div class="rms_room_descriptif">
 										' . __( 'DESCRIPTIF', 'rms_reservation') . ': ';
 										
-										if( $_POST['postData']['lang'] == 'fr' )
-											echo $rooms_data -> post_content;
-										else
-											echo get_field('room_eng_descr', $rooms_data -> ID);
+										echo $format_content;
 								echo '			
 									</div>
 									
@@ -345,88 +353,9 @@
 							add_post_meta( $post_id, 'rms_reservation_end', date( "Ymd", strtotime( $_POST['end_date'] ) ) ); 
 							add_post_meta( $post_id, 'rms_reservation_client', $user_id );
 							
-							$blnConflict = false;
 							
-							// Récupérer réservations selon dates
-							$reservations_list = $wpdb->get_results("
-							SELECT post_id FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_room' AND meta_value LIKE '%a:1:{i:0;s:3:\"" . $_POST['room_id'] . "\";}%' AND post_id IN (
-								SELECT post_id
-									FROM  $wpdb->postmeta
-									WHERE (
-										(
-											meta_key =  'rms_reservation_start'
-											AND meta_value >= " . date( 'Ymd', strtotime($_POST['start_date']) ) . "
-											AND meta_value <= " . date( 'Ymd', strtotime($_POST['end_date']) ) . "
-										)
-										OR (
-											meta_key =  'rms_reservation_end'
-											AND meta_value >= " . date( 'Ymd', strtotime($_POST['start_date']) ) . "
-											AND meta_value <= " . date( 'Ymd', strtotime($_POST['end_date']) ) . "
-										)
-										OR (
-											(
-												meta_key =  'rms_reservation_start'
-												AND meta_value <= " . date( 'Ymd', strtotime($_POST['start_date']) ) . "
-											)
-												AND (
-												meta_key =  'rms_reservation_end'
-												AND meta_value >= " . date( 'Ymd', strtotime($_POST['end_date']) ) . "
-											)
-										)
-									) GROUP BY post_id
-									)
-								");
-								// Parcourir les réservations ayant des conflits
-								foreach ( $reservations_list as $res_data )
-								{
-									// Vérifier que la réservation n'a pas été validée
-									$res_status =  get_post_meta($res_data->post_id, 'rms_reservation_status', true);
-									if( ( $res_status == 0 ) || ($res_status == 3) )
-									{
-										$blnConflict = true;
-										
-										update_post_meta($res_data->post_id, 'rms_reservation_status', 3);
-										
-										if( $res_data -> post_id != $post_id )
-											update_post_meta($res_data->post_id, 'has_conflict', true);
+							echo check_conflicts($post_id);
 											
-									}// Finf()
-									
-								}// Fin foreach ( $reservations_list as $res_data )
-									
-								// Si il y a eu un conflit
-								if( $blnConflict)
-								{
-									update_post_meta($post_id, 'got_conflict', true);
-									
-									// Vérifier présence méta
-									if( !get_post_meta($post_id, 'got_conflict', true))
-									{
-										$wpdb->insert( 
-											$wpdb->postmeta, 
-											array( 
-												'post_id' => $post_id,
-												'meta_key' => 'got_conflict', 
-												'meta_value' => true 
-											) 
-										);
-
-										$wpdb->insert( 
-											$wpdb->postmeta, 
-											array( 
-												'post_id' => $post_id,
-												'meta_key' => 'rms_reservation_status', 
-												'meta_value' => 3 
-											) 
-										);
-									}// Fin if()
-									
-								}// Fin if( $blnConflict)
-								else
-								{
-									add_post_meta( $post_id, 'rms_reservation_status', 0 );
-								}
-								
 							add_post_meta( $post_id, 'rms_reservation_cost', $_POST['cost'] );
 							
 						}
@@ -531,7 +460,7 @@
 							
 							$message_admin .= "Période 2 :     du " . $_POST['start_2'] . " au " . $_POST['end_2'] . "<br/>";
 						}
-						wp_mail( "info@the-agencies.ch", "Demande pour un séjour", $message_admin, $headers_admin);
+					//	wp_mail( "info@the-agencies.ch", "Demande pour un séjour", $message_admin, $headers_admin);
 		
 					}
 					else
@@ -543,7 +472,7 @@
 				
 				// Nouvelle réservation avec demande de bourse
 				case "add_reservation_scolarship_new_user":	
-		
+				
 					$unique_user_id = 'uid_' . sha1(time());
 					
 					if( $unique_user_id )
@@ -552,7 +481,7 @@
 						$outputFileData = "";
 						foreach($_FILES as $file)
 						{
-							$upld_file = wp_upload_bits( $file['name'], null, @file_get_contents( $file['tmp_name'] ) );
+							$upld_file = wp_upload_bits( clean_string($file['name']), null, @file_get_contents( $file['tmp_name'] ) );
 							
 							if ( FALSE === $upld_file['error'] )
 							{	
@@ -774,4 +703,15 @@ Hardt Foundation";
 		{}// Fin if()
 		
 	}// Fin function createUser()
+	
+	function clean_string($string)
+	{
+		$string = htmlentities($string, ENT_QUOTES, 'UTF-8');
+		$string = preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', $string);
+		$string = html_entity_decode($string, ENT_QUOTES, 'UTF-8');
+		$string = preg_replace(array('~[^0-9a-z.]~i', '~[ -]+~'), '_', $string);
+
+		return trim($string, ' -');
+	}
+
 ?>

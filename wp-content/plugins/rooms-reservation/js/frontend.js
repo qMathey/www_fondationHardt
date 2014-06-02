@@ -141,7 +141,6 @@ jQuery(document).ready(function($){
 							contentType: false,
 							success: function(data, textStatus, jqXHR)
 							{
-								
 								if( !data)
 									formdata.push({name: 'unique_user_id', value:'uid_' + Math.round(new Date().getTime() + (Math.random() * 100))});
 								else

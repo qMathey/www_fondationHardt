@@ -218,7 +218,7 @@
 					$post_author_id = get_post_field( 'post_author', get_the_ID() );
 				}
 				
-				$dates = date( "d.m.Y", strtotime( get_field('rms_reservation_start') ) ) . ' - ' . date( "d.m.Y", strtotime( get_field('rms_reservation_end') ) );
+				$dates = '<span class="timestamp_date_jq">' . strtotime( get_field('rms_reservation_start') ) . '</span> - ' . date( "d.m.Y", strtotime( get_field('rms_reservation_end') ) );
 				
 				$status = get_post_meta( get_the_ID(), 'rms_reservation_status', true );
 				
@@ -240,7 +240,7 @@
 				$dataPrice .= 'CHF (' . $dataPrice_nbNight . ' nuits)';
 				$roomLink = '<a href="' . get_edit_post_link($roomData -> ID) . '">' . $roomNumber . ' / ' . $roomData -> post_title . '</a>';
 				
-				$data[] = array('id' => get_the_ID(), 'title' => get_the_title(), 'hote' =>  $post_author_id, 'dates' => $dates, 'room' => $roomLink , 'price' => $dataPrice, 'state'=> $status, 'email' => $email, 'date_res' => get_the_date('d.m.Y \à H\hi'));
+				$data[] = array('id' => get_the_ID(), 'title' => get_the_title(), 'hote' =>  $post_author_id, 'dates' => $dates, 'room' => $roomLink , 'price' => $dataPrice, 'state'=> $status, 'email' => $email, 'date_res' => get_post_time('U', true));
 
 			}
 		

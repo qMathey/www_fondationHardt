@@ -40,16 +40,16 @@ if ( !function_exists( 'add_action' ) ) {
 	add_action( 'init' , 'rms_reservation_init');
 	
 	// Verifier si on est dans l'admin panel
-	if( is_admin() )
-	{
+	/*if( is_admin() )
+	{*/
 		// Appeler fichier d'init de l'admin
 		require_once(dirname(__FILE__) . '/admin/init.php');
 		
-	}
+/*	}
 	else
-	{
+	{*/
 		
 		// Appeler fichier frontend
 		require_once(dirname(__FILE__) . '/frontend/init.php');
 		
-	}// Fin if( is_admin() )
+	//}// Fin if( is_admin() )
