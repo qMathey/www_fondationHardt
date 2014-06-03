@@ -361,7 +361,7 @@
 						}
 						
 						// Envoyer mail à l'administrateur
-						$headers_admin = 'From: Fondation Hardt <admin@extranet.ch>' . "\r\n";
+						$headers_admin = 'From: Fondation Hardt <admin@fondationhardt.ch>' . "\r\n";
 						$message_admin = "
 				Bonjour,<br/>
 				<br/>
@@ -589,7 +589,7 @@
 			// Ajouter rôle d'hôte
 			$user->add_role( 'hardt_host' );
 	
-		$headers = 'From: Fondation Hardt <admin@extranet.ch>' . "\r\n";
+		$headers = 'From: Fondation Hardt <admin@fondationhardt.ch>' . "\r\n";
 		$message = "";
 		$mail_title = "";
 		update_user_meta( $user_id, 'user_lang', $_POST['lang'] );
@@ -607,7 +607,7 @@
 				$mail_title = "Fondation Hardt / Accusé de réception";
 $message = "Nous vous remercions de votre intérêt pour la Fondation Hardt.<br/>
 <br/>
-Votre demande de bourse pour un séjour scientifique à la Fondation a bien été enregistrée. Votre dossier sera examiné dès la fin du délai de candidature (30 novembre/30 avril). Nous vous contacterons dès que le processus d’attribution des bourses sera terminé.
+Votre demande de bourse pour un séjour scientifique à la Fondation a bien été enregistrée. Votre dossier sera examiné dès la fin du délai de candidature (30 novembre / 30 avril). Nous vous contacterons dès que le processus d’attribution des bourses sera terminé.
 <br/>
 Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
 Nom d'utilisateur : " . $user_name . "<br/>
@@ -624,7 +624,7 @@ Fondation Hardt";
 				$mail_title = "Hardt Foundation / Return receipt";
 $message = "Thank you very much for your interest in The Hardt Foundation. We have received your application for a grant for a scientific stay at the Hardt Foundation.<br/>
 <br/>
-All applications will be examined after the submission deadline (30th November/30th April). We will contact you as soon as the selection process is over.<br/>
+All applications will be examined after the submission deadline (30th November / 30th April). We will contact you as soon as the selection process is over.<br/>
 <br/>
 Please find below your login details for your account on our website :<br/>
 <br/>
