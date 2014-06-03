@@ -109,6 +109,20 @@
 		
 		jQuery('#role').parents('tr').remove();
 		
+		jQuery('.form-table tbody tr').each(function() {
+			var forAttr = $(this).find('th').find('label').first().attr('for');
+			if( forAttr == 'googleplus' )
+				$(this).remove();
+			if( forAttr == 'twitter' )
+				$(this).remove();
+			if( forAttr == 'facebook' )
+				$(this).remove();
+			if( forAttr == 'wpseo_author_title' )
+				$(this).remove();
+			if( forAttr == 'wpseo_author_metadesc' )
+				$(this).remove();
+		});
+		
 		});
 	</script>";
 ?>
