@@ -3,7 +3,7 @@
 	global $profileuser;
 	$user_id = $profileuser -> ID;
 	
-	$user_info = get_userdata( $post_author_id );
+	//$user_info = get_userdata( $post_author_id );
 	// Afficher les customs fields
 	$arrUserFields = user_custom_fields();
 	
@@ -39,9 +39,18 @@
 			foreach ($arrUserFields as $data)
 			{
 				$actualGroup = $data[1];
-					
-				if( ($actualGroup == "General" ) || ($actualGroup == "Contact" )  || ($actualGroup == "Etudes" ) )
+				$arrayGroup = array(
+						"general",
+						"général",
+						"contact",
+						"etudes",
+						"études"
+				);
+				/* Abondonné !
+				// s'il s'agit d'un nouveau titre
+				if( in_array( strtolower( $actualGroup ) , $arrayGroup) )
 				{
+				
 					// Afficher titre si groupe different
 					if($tmpGroup != $actualGroup)
 					{
@@ -52,36 +61,38 @@
 									<td></td>
 								</tr>';
 					}// Fin if()
-						
+					*/	
 					echo '<tr>';
 						echo '<th scope="row">' . $data[0] . '</th>';
 					
 						echo '<td>';
-						
-							//echo $data[1];
-							// Verifier si fichier
-							if($data[3] == "textarea")
-							{
-								// Afficher lien
-								echo '<textarea name="' . $data[2] . '" cols=5 rows=6>' . $arrDemoUserData[$i] . '</textarea>';
+							// test le type de champ
+							switch($data[3]) {
+								case "textarea" :
+									// Afficher lien
+									echo '<textarea name="' . $data[2] . '" cols=5 rows=6>' . $arrDemoUserData[$i] . '</textarea>';
+									break;
+								case "radio" :
+									echo '<label><input type="radio" name="test" value="0" checked>Male</label> <label><input type="radio" name="test" value="1">Female</label>';
+									break;
+								default :
+									// Sinon afficher donnees
+									echo '<input id="' . $data[2] . '" name="' . $data[2] . '" type="' . $data[3] . '" value="' . $arrDemoUserData[$i] . '" class="regular-text"/>';
+									break;
 							}
-							elseif($data[3] == "radio")
-							{
-								echo '<label><input type="radio" name="test" value="0" checked>Male</label> <label><input type="radio" name="test" value="1">Female</label>';
-							}
-							else
-							{
-								// Sinon afficher donnees
-								echo '<input id="' . $data[2] . '" name="' . $data[2] . '" type="' . $data[3] . '" value="' . $arrDemoUserData[$i] . '" class="regular-text"/>';
-							}// Fin if($data[2] == "file")
+							
 							
 						echo '</td>';
 					echo '</tr>';
+				/* Abondonné avec précédent
+				}else {
+					var_dump($data);
 				}
-				
+				*/
 				$tmpGroup = $data[1];
 				$i++;
 			}
+			
 		?>
 		</tbody>
 	</table>
