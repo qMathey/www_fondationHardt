@@ -534,9 +534,16 @@ class acf_field_relationship extends acf_field
 				$title = apply_filters('acf/fields/relationship/result/name=' . $field['_name'] , $title, $p, $field, $post);
 				$title = apply_filters('acf/fields/relationship/result/key=' . $field['key'], $title, $p, $field, $post);
 				
+				$roomNumber = '';
+			
+				$getRoomNumber = get_post_meta( $p->ID, 'rms_room_number', true );
+				if( $getRoomNumber != '' && $getRoomNumber != false) {
+					$roomNumber = $getRoomNumber;
+					$roomNumber = $roomNumber. ' / ';
+				}
 				
 				echo '<li>
-					<a href="' . get_permalink($p->ID) . '" class="" data-post_id="' . $p->ID . '">' . $title . '<span class="acf-button-remove"></span></a>
+					<a href="' . get_permalink($p->ID) . '" class="" data-post_id="' . $p->ID . '">' . $roomNumber. ' ' . $title . '<span class="acf-button-remove"></span></a>
 					<input type="hidden" name="' . $field['name'] . '[]" value="' . $p->ID . '" />
 				</li>';
 				
