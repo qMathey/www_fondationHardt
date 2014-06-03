@@ -87,8 +87,11 @@
 			if( $data )
 			{
 			
+				$documentName = explode('/', $data);
+				$documentName = $documentName[count($documentName)-1];
+				
 				$i++;
-				$strDocsListOutput .= '<li><a href="' . $data . '" target="blank">' . __( 'Voir le document', 'rms_reservation') . ' N°' . $i . '</a></li>';
+				$strDocsListOutput .= '<li><a href="' . $data . '" target="blank">' . __( 'Voir le document', 'rms_reservation') . ' N°' . $i .' - '.$documentName .'</a></li>';
 			
 			}
 			

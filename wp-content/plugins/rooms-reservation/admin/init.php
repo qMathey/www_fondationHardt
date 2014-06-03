@@ -1,4 +1,5 @@
 <?php
+		
 	// Fichier de fonction de l'administration du plugin
 	add_action( 'edit_user_profile', 'custom_user_fields', 10);
 	add_action( 'show_user_profile', 'custom_user_fields', 10);
@@ -1213,6 +1214,9 @@ add_action( 'save_post', 'prfx_meta_save' );
 	{
 		
 		$userFieldArray = array(
+			"first_name",
+			"last_name",
+			"birthday",
 			"nationality",
 			"email",
 			"street",
@@ -1253,13 +1257,46 @@ add_action( 'save_post', 'prfx_meta_save' );
 			"regime"
 		);
 		*/
+		
+		
 		// Parcourir les champs à mettre à jour
 		foreach($userFieldArray as $field_name)
 		{
 			// Mettre à jour les metas de l'utilisateur
 			update_user_meta( $user_id, $field_name, $_POST[$field_name] );
+		}
+		
+		// cas particulier pour sex
+		
+		// Si il y a des documents à uploader
+		$user_uid = get_user_meta ( $user_id, 'user_uid',true);
+		// si le $user_uid est vide, on en crée un
+		if($user_uid == '') {
+			$user_uid = 'uid_' . sha1(time());
+			// update user uid
+			update_user_meta( $user_id, "user_uid", $user_uid );
+		}
+			
+			
+		$outputFileData = get_option($user_uid);
+		
+		
+		if($outputFileData == false)
+			$outputFileData = '';
+		foreach($_FILES["upload"]["name"] as $key => $filename)
+		{
+			//var_dump($file);
+			$upld_file = wp_upload_bits( clean_string2($filename), null, @file_get_contents( $_FILES["upload"]['tmp_name'][$key] ) );
+			
+			if ( FALSE === $upld_file['error'] )
+			{	
+				// Ajouter meta du document à l'utilisateur
+				$outputFileData .= $upld_file['url'] . "|";
+			}
 			
 		}
+		// met à jour l'option avec les files
+		update_option($user_uid , $outputFileData);
 		
     }
 	
@@ -1370,4 +1407,79 @@ add_action( 'save_post', 'prfx_meta_save' );
 	}
 
 	add_filter('default_title', 'my_default_title_filter');
+	
+	// requête Ajax pour supprimer un document depuis le backend
+	add_action( 'wp_ajax_deleteDocument', 'rms_deleteDocument' );
+	function rms_deleteDocument() {
+		$deletedDocumentUrl = $_POST["url"];
+		$user_id = $_POST["user_id"];
+		
+		// Delte from bibliotheque
+		$documentID = pn_get_attachment_id_from_url( $deletedDocumentUrl );
+		if($documentID != null)
+			wp_delete_attachment( $attachmentid, true );
+			
+			
+		// delete from user attachement
+		$user_uid = get_user_meta ( $user_id, 'user_uid',true);
+		$outputFileData = get_option($user_uid);
+		$documents = explode("|", $outputFileData);
+		$savedFiles = '';
+		
+		foreach($documents as $document) {
+			// si le document n'est pas vide
+			if($document != '') {
+				// on ne sauve que les documents qui ne correspondent pas à l'url transmises
+				if( $document != $deletedDocumentUrl) {
+					$savedFiles .= $document.'|';
+				}// if
+			}// if
+			
+		}// foreach
+		// met à jour l'option avec les files
+		update_option($user_uid , $savedFiles);
+		
+		die();
+	}// function
+	
+	// Permet de récupérer l'id de l'attachement par son url
+	function pn_get_attachment_id_from_url( $attachment_url = '' ) {
+ 
+		global $wpdb;
+		$attachment_id = false;
+	 
+		// If there is no url, return.
+		if ( '' == $attachment_url )
+			return;
+	 
+		// Get the upload directory paths
+		$upload_dir_paths = wp_upload_dir();
+	 
+		// Make sure the upload path base directory exists in the attachment URL, to verify that we're working with a media library image
+		if ( false !== strpos( $attachment_url, $upload_dir_paths['baseurl'] ) ) {
+	 
+			// If this is the URL of an auto-generated thumbnail, get the URL of the original image
+			$attachment_url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $attachment_url );
+	 
+			// Remove the upload path base directory from the attachment URL
+			$attachment_url = str_replace( $upload_dir_paths['baseurl'] . '/', '', $attachment_url );
+	 
+			// Finally, run a custom database query to get the attachment ID from the modified attachment URL
+			$attachment_id = $wpdb->get_var( $wpdb->prepare( "SELECT wposts.ID FROM $wpdb->posts wposts, $wpdb->postmeta wpostmeta WHERE wposts.ID = wpostmeta.post_id AND wpostmeta.meta_key = '_wp_attached_file' AND wpostmeta.meta_value = '%s' AND wposts.post_type = 'attachment'", $attachment_url ) );
+	 
+		}
+	 
+		return $attachment_id;
+	}
+	
+	// supprime les caractères spéciaux
+	function clean_string2($string)
+	{
+		$string = htmlentities($string, ENT_QUOTES, 'UTF-8');
+		$string = preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', $string);
+		$string = html_entity_decode($string, ENT_QUOTES, 'UTF-8');
+		$string = preg_replace(array('~[^0-9a-z.]~i', '~[ -]+~'), '_', $string);
+
+		return trim($string, ' -');
+	}
 ?>
