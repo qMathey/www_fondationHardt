@@ -172,7 +172,7 @@
 			<br/>
 			Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
 			<br/>
-			Pour toute information complémentaire, veuillez vous adresser à admin@fondationhardt.ch<br/>
+			Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 			Avec nos remerciements et nos salutations les meilleures,<br/>
 			<br/>
 			Fondation Hardt";
@@ -187,7 +187,7 @@
 			<br/>
 			Please find below your login details for your account on our website :<br/>
 			<br/>
-			For further information, please contact us at admin@fondationhardt.ch<br/>
+			For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 			<br/>
 			Best wishes,<br/>
 			<br/>
@@ -212,7 +212,7 @@
 			 <br/>
 			Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
 			<br/>
-			Pour toute information complémentaire, veuillez vous adresser à admin@fondationhardt.ch<br/>
+			Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 			Avec nos remerciements et nos salutations les meilleures,<br/>
 			<br/>
 			Fondation Hardt";
@@ -230,7 +230,7 @@
 			<br/>
 			Please find below your login details for your account on our website :<br/>
 			<br/>
-			For further information, please contact us at admin@fondationhardt.ch<br/>
+			For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 			<br/>
 			Best wishes,<br/>
 			<br/>
@@ -613,7 +613,7 @@ Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre si
 Nom d'utilisateur : " . $user_name . "<br/>
 Mot de Passe : " . $random_password . "<br/>
 <br/>
-Pour toute information complémentaire, veuillez vous adresser à admin@fondationhardt.ch<br/>
+Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 Avec nos remerciements et nos salutations les meilleures,<br/>
 <br/>
 Fondation Hardt";
@@ -631,7 +631,7 @@ Please find below your login details for your account on our website :<br/>
 Username : " . $user_name . "<br/>
 Password : " . $random_password . "<br/>
 <br/>
-For further information, please contact us at admin@fondationhardt.ch<br/>
+For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 <br/>
 Best wishes,<br/>
 <br/>
@@ -659,7 +659,7 @@ Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre si
 Nom d'utilisateur : " . $user_name . "<br/>
 Mot de Passe : " . $random_password . "<br/>
 <br/>
-Pour toute information complémentaire, veuillez vous adresser à admin@fondationhardt.ch<br/>
+Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 Avec nos remerciements et nos salutations les meilleures,<br/>
 <br/>
 Fondation Hardt";
@@ -681,7 +681,7 @@ Username : " . $user_name . "<br/>
 <br/>
 Password : " . $random_password . "<br/>
 <br/>
-For further information, please contact us at admin@fondationhardt.ch<br/>
+For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 <br/>
 Best wishes,<br/>
 <br/>
