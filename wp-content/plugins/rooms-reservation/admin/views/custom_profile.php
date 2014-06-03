@@ -124,7 +124,7 @@
 											<a href="' . $data . '" target="blank">' . __( 'Voir le document', 'rms_reservation') . ' N&#176;' . $i . '</a>
 										</div>';
 									echo '<div style="display:inline-block">
-										<a href="' . $data . '" target="blank">'.$documentName.'</a>
+										'.$documentName.'
 									</div>';
 									echo '</li>';
 								

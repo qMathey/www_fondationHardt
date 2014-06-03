@@ -54,7 +54,7 @@ var array_en = [
 "<br/>"+
 	"Hardt Foundation"];
 	// Fonction d'affichage du nombre de nuitées
-	$('#acf-rms_reservation_start input[type=text], #acf-rms_reservation_end input[type=text]').change(function(){
+	jQuery('#acf-rms_reservation_start input[type=text], #acf-rms_reservation_end input[type=text]').change(function(){
 
 		// Afficher le nombre de nuitées
 		getnights();
@@ -65,53 +65,53 @@ var array_en = [
 	function getnights()
 	{
 		// Vérifier présence 2 valeurs
-		if( ($("#acf-rms_reservation_start input").val() != "") && ( $("#acf-rms_reservation_end input").val() != "") )
+		if( (jQuery("#acf-rms_reservation_start input").val() != "") && ( jQuery("#acf-rms_reservation_end input").val() != "") )
 		{
 			
-			var arrStartDate = $("#acf-rms_reservation_end input[type=text]").val().split('/');
-			var arrEndDate = $("#acf-rms_reservation_start input[type=text]").val().split('/');
+			var arrStartDate = jQuery("#acf-rms_reservation_end input[type=text]").val().split('/');
+			var arrEndDate = jQuery("#acf-rms_reservation_start input[type=text]").val().split('/');
 		
 			// Afficher la valeur dans le champs prévu
-			$("#rms_reservation_nigths").val( ( new Date(arrStartDate[2], arrStartDate[1]-1, arrStartDate[0] ) - new Date( arrEndDate[2], arrEndDate[1]-1, arrEndDate[0]) ) / 1000 / (60 * 60 * 24) );
+			jQuery("#rms_reservation_nigths").val( ( new Date(arrStartDate[2], arrStartDate[1]-1, arrStartDate[0] ) - new Date( arrEndDate[2], arrEndDate[1]-1, arrEndDate[0]) ) / 1000 / (60 * 60 * 24) );
 			
 		}// Fin if()
 			
 	}// Fin getnights()
 
 	// Fonction de calcul du coût total du séjour
-	$('.get_res_price').click(function(e){
+	jQuery('.get_res_price').click(function(e){
 		e.preventDefault();
 		
 		// Vérifier id chambre
-		if ( $.isNumeric( $('.relationship_right li a').attr('data-post_id') ) )
+		if ( jQuery.isNumeric( jQuery('.relationship_right li a').attr('data-post_id') ) )
 		{
 			// Vérifier nombre nuit numérique
-			if ( $.isNumeric( $("#rms_reservation_nigths").val() ) )
+			if ( jQuery.isNumeric( jQuery("#rms_reservation_nigths").val() ) )
 			{
 				
 				var selectedRoomId = rms_reservation_cost_data.room_id;
-				if(selectedRoomId == '' || selectedRoomId == undefined){
-					selectedRoomId = $("#acf-rms_reservation_room")
+				if(selectedRoomId == '' || selectedRoomId == undefined || isNaN(selectedRoomId)){
+					selectedRoomId = jQuery("#acf-rms_reservation_room")
 						.find(".relationship_right").first()
 						.find("a").first()
 						.data("post_id");
 				}
 								
-				var data ={ action: "admin_get_single_room_data", room_id: selectedRoomId, user_id: $('#acf-field-rms_reservation_client').val(), nights:$("#rms_reservation_nigths").val(), sale: $('#rms_reservation_sale').val()};
+				var data ={ action: "admin_get_single_room_data", room_id: selectedRoomId, user_id: jQuery('#acf-field-rms_reservation_client').val(), nights:jQuery("#rms_reservation_nigths").val(), sale: jQuery('#rms_reservation_sale').val()};
 				
 				jQuery.post(rms_reservation_data.ajax_url, data, function(data)
 				{
 					
-					$('#rms_reservation_cost').val(data);
+					jQuery('#rms_reservation_cost').val(data);
 					
-					$('input#publish').show();
+					jQuery('input#publish').show();
 				});
 			}
 			else
 			{	
 			
 				// Afficher prix 0
-				$("#rms_reservation_cost").val("0");
+				jQuery("#rms_reservation_cost").val("0");
 				
 			}// Fin if()
 			
@@ -122,57 +122,57 @@ var array_en = [
 	});// Fin function()
 	
 	// Action checkbox bourse edition reservations
-	$("#rms_reservation_has_bourse").click(function()
+	jQuery("#rms_reservation_has_bourse").click(function()
 	{
 		console.log(bourse_index +'/'+lang_index);
-		bourse_index = ($(this).is(':checked') ? 1 : 0);
+		bourse_index = (jQuery(this).is(':checked') ? 1 : 0);
 		tinyMCE.activeEditor.setContent(eval(lang_index)[bourse_index]);
 		
 		if(bourse_index)
 		{
 		
-			$('input#title').val('B_' + $('input#title').val());
+			jQuery('input#title').val('B_' + jQuery('input#title').val());
 			
 		}
 		else
 		{
-			$('input#title').val($('input#title').val().slice(2));
+			jQuery('input#title').val(jQuery('input#title').val().slice(2));
 		}
 
 	});
 	
 	// Action liste déroulante langue utilisateur edition reservation
-	$("#rms_user_lang").change(function(){
-		lang_index = "array_" + $(this).val();
+	jQuery("#rms_user_lang").change(function(){
+		lang_index = "array_" + jQuery(this).val();
 		
 		tinyMCE.activeEditor.setContent(eval(lang_index)[bourse_index]);
 	});
 	
 	// Changer texte lien suppression
-	if( $('.post-type-rms_reservation a.submitdelete').text() == "Move to Trash" )
+	if( jQuery('.post-type-rms_reservation a.submitdelete').text() == "Move to Trash" )
 	{
 	
-		$('.post-type-rms_reservation a.submitdelete').text('Delete permanently');
+		jQuery('.post-type-rms_reservation a.submitdelete').text('Delete permanently');
 		
 	}
 	else
 	{
 	
-		$('.post-type-rms_reservation a.submitdelete').text('Supprimer le séjour');
+		jQuery('.post-type-rms_reservation a.submitdelete').text('Supprimer le séjour');
 		
 	}
 	
 	// Datepicker pour export
-	$( "#export_fromdate, #export_todate" ).datepicker({
+	jQuery( "#export_fromdate, #export_todate" ).datepicker({
 		changeMonth: true,
 		dateFormat: 'dd.mm.yy',
 		onSelect: function( selectedDate ) {
 		
 			if( this.id == 'export_fromdate' ){
 			
-				var dateMin = $('#export_fromdate').datepicker("getDate");
+				var dateMin = jQuery('#export_fromdate').datepicker("getDate");
 				var rMin = new Date(dateMin.getFullYear(), dateMin.getMonth(),dateMin.getDate() + 1); 
-				$('#export_todate').datepicker("option","minDate",rMin);
+				jQuery('#export_todate').datepicker("option","minDate",rMin);
 			
 			}
 		
@@ -180,29 +180,29 @@ var array_en = [
 	});
 	
 	// Action au clic sur lien d'export de la liste 2
-	$('#export_list2_link').click(function(e){
+	jQuery('#export_list2_link').click(function(e){
 	
 		e.preventDefault();
 		
-		$('.export_list2_dateselector').slideToggle();
+		jQuery('.export_list2_dateselector').slideToggle();
 		
 	});
 	
 	// Action au clic sur le bouton d'export de la liste 2
-	$('#list2_export_submit').click(function(e){
+	jQuery('#list2_export_submit').click(function(e){
 	
 		e.preventDefault();
 		
-		var fromDate = $('#export_fromdate').val();
-		var toDate = $('#export_todate').val();
+		var fromDate = jQuery('#export_fromdate').val();
+		var toDate = jQuery('#export_todate').val();
 		
-		window.location.href = $('#export_list2_link').attr('href') +'?from=' + fromDate + '&to=' + toDate;
+		window.location.href = jQuery('#export_list2_link').attr('href') +'?from=' + fromDate + '&to=' + toDate;
 	
 	});
 	
 	// Reformater date tableau liste réservations
-	$('td.date_res.column-date_res').each(function(){
-		var data_date = new Date($(this).text()*1000);
+	jQuery('td.date_res.column-date_res').each(function(){
+		var data_date = new Date(jQuery(this).text()*1000);
 		
 		var year = data_date.getFullYear();
 		var month = data_date.getMonth() + 1;
@@ -210,17 +210,17 @@ var array_en = [
 		var hours = data_date.getHours();
 		var minutes = data_date.getMinutes();
 		
-		$(this).text(("0" + day).slice(-2) + "." + ("0" + month).slice(-2) + "." + year + " à " + ("0" + hours).slice(-2) + "h" + ("0" + minutes).slice(-2));
+		jQuery(this).text(("0" + day).slice(-2) + "." + ("0" + month).slice(-2) + "." + year + " à " + ("0" + hours).slice(-2) + "h" + ("0" + minutes).slice(-2));
 	});
 	
-	$('span.timestamp_date_jq').each(function(){
-		var data_date = new Date($(this).text()*1000);
+	jQuery('span.timestamp_date_jq').each(function(){
+		var data_date = new Date(jQuery(this).text()*1000);
 		
 		var year = data_date.getFullYear();
 		var month = data_date.getMonth() + 1;
 		var day = data_date.getDate();
 		
-		$(this).text(("0" + day).slice(-2) + "." + ("0" + month).slice(-2) + "." + year);
+		jQuery(this).text(("0" + day).slice(-2) + "." + ("0" + month).slice(-2) + "." + year);
 	});
 	
 	
