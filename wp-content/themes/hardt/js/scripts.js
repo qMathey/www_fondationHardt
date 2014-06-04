@@ -159,8 +159,7 @@ jQuery(document).ready(function($){
 		});
 	});
 	
-	
-	// GESTION MOBILE
+
 	
 	/* GESTION MOBILE */
 	if( isMobile ){
@@ -201,31 +200,6 @@ jQuery(document).ready(function($){
 			$("div.page_content_wrap").css("margin-top", "100px");
 			$("a.close_cross.close_all_text.cross_img").css("display", "none");
 		}
-		/*
-			(de)Fixe le menu et le logo (sauf si ipad)
-		
-		if ( !(/iPad/i.test(navigator.userAgent) ) ) {
-			$(".fixed, .menu_fixed").css("position", "inherit !important");
-			//$(".fix_width_menu").css("margin", "0px 0px 0px 15px");
-			
-			// supprime l'onglet actualité car ingérable mobile
-			$(".home .news, .home .open_news").css("display", "none");
-			
-			// -80 pixel sur le menu
-			$(".navigation").css("height", ($(".navigation").height()-80)+"px");
-			$logo = $(".logo").first();
-			$logo.remove();
-			$logo.appendTo("#mobileLogoContainer");
-			$logo.css("top", "80px").css("position", "relative").css("display","block").css("z-index", "40000").removeClass("fixed");
-		}
-		
-		
-		
-		
-		
-		
-		
-		*/
 		// Spécificité iPad : Les citations se placent trop haut! 
 		if(/iPad/i.test(navigator.userAgent) ){
 			// replace les citations correctements
@@ -256,9 +230,6 @@ jQuery(document).ready(function($){
 				
 			});
 			
-			// gestion du menu mobile : permet au premier clique d'un menu de l'ouvrir et non pas de changer de page
-			//gestionMenuMobile();
-			
 			// content des pages a baisser de 60px
 			$(".page_content_wrap").css("margin-top", "60px");
 			
@@ -274,19 +245,6 @@ jQuery(document).ready(function($){
 		// Zoom sur la page 
 		var zoomToScale = parseInt ((($(window).width() * 1 ) / 1500 ) * 100 ) / 100;
 		$('head').append('<meta name="viewport" content="width=device-width; initial-scale='+zoomToScale+'; maximum-scale=1.0; user-scalable=1;">');
-		
-		/*
-		// place les menus correctement
-		//animateMenuHeight(0); // reset menu height
-		
-		// spécificité mobile concernant les menus :
-		// Si nous sommes sur une page qui possède un item menu parent, alors on affiche le sous-menu
-		if($(".current-menu-parent, .current-menu-item").length > 0) {
-			// show les sous menu
-			$(".current-menu-parent, .current-menu-item").find(".submenu").show();
-		}
-		animateMenuHeight($(".current-menu-parent, .current-menu-item").find(".submenu").first().height()+33); // reset menu height
-		*/
 	}// if
 	else { // SI PAS MOBILE ALORS STELLAR JS POUR EFFET PARALAX
 		$.stellar.positionProperty.limit = {
@@ -307,7 +265,6 @@ jQuery(document).ready(function($){
 				}
 				else
 				{ 
-				
 					//$element.css("opacity","1");
 					$.stellar.positionProperty.position.setTop.apply(null, arguments);
 
