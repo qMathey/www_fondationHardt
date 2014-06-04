@@ -54,8 +54,9 @@
 	<script type="text/javascript"> 
 	
 		jQuery(document).ready(function() {
-		
-			jQuery("body").delay(500).queue(function(next) {
+			// laisse le temps au script principal de s'éxécuter (500ms)
+			// ainsi la variable "isMobile" est disponible avec la bonne indication
+			jQuery("body").delay(500).queue(function(next) { 
 
 				var address = 'Chemin Vert 2, Vandoeuvres, CH';
 
@@ -63,14 +64,16 @@
 					mapTypeId: google.maps.MapTypeId.ROADMAP,
 					zoom: 15,
 					disableDefaultUI: true,
-					panControl: (!isMobile), // desactiver si mobile
-					zoomControl: (!isMobile), 
-					mapTypeControl: (!isMobile), 
-					scaleControl: (!isMobile), 
-					streetViewControl: (!isMobile), 
+					panControl: false, // desactiver si mobile
+					zoomControl: false, 
+					mapTypeControl: false, 
+					scaleControl: false, 
+					streetViewControl: false, 
 					overviewMapControl: (!isMobile),
 					draggable:  (!isMobile),
-					scrollwheel:  (!isMobile)
+					scrollwheel:  (!isMobile),
+					
+
 				});
 
 				var geocoder = new google.maps.Geocoder();

@@ -19,7 +19,7 @@ jQuery(document).ready(function($){
 	}
 	
 	// correction sur les autres pages que la HP
-
+	
 	
 	// Menu deroulant
 	$(".main_top_menu > li, #menu-menu-secondaire > li").on("mouseenter", function(event) {
@@ -163,8 +163,6 @@ jQuery(document).ready(function($){
 	
 	/* GESTION MOBILE */
 	if( isMobile ){
-		
-		console.log("mobile!!!");
 		
 		// On défixe les éléments fixed
 		// navigation
