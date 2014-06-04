@@ -48,5 +48,5 @@
 			
 			<div class="submenu_wrapper"></div>
 		</div><!-- # .navigation -->
-
 		<div class="container">
+			<div id="mobileLogoContainer"></div>

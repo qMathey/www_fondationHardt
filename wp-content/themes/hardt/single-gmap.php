@@ -52,33 +52,56 @@
 	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> 
   
 	<script type="text/javascript"> 
+	
+		jQuery(document).ready(function() {
+		
+			jQuery("body").delay(500).queue(function(next) {
 
-		var address = 'Chemin Vert 2, Vandoeuvres, CH';
+				var address = 'Chemin Vert 2, Vandoeuvres, CH';
 
-		var map = new google.maps.Map(document.getElementById('map'), { 
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			zoom: 15,
-			disableDefaultUI: true
-		});
-
-		var geocoder = new google.maps.Geocoder();
-
-		geocoder.geocode({
-			'address': address
-		}, 
-		function(results, status) {
-			if(status == google.maps.GeocoderStatus.OK) {
-				new google.maps.Marker({
-				position: results[0].geometry.location,
-				map: map
+				var map = new google.maps.Map(document.getElementById('map'), { 
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					zoom: 15,
+					disableDefaultUI: true,
+					panControl: (!isMobile), // desactiver si mobile
+					zoomControl: (!isMobile), 
+					mapTypeControl: (!isMobile), 
+					scaleControl: (!isMobile), 
+					streetViewControl: (!isMobile), 
+					overviewMapControl: (!isMobile),
+					draggable:  (!isMobile),
+					scrollwheel:  (!isMobile)
 				});
-				map.setCenter(results[0].geometry.location);
-			}
-			else {
-			// Google couldn't geocode this request. Handle appropriately.
-			}
-		});
 
+				var geocoder = new google.maps.Geocoder();
+
+				geocoder.geocode({
+					'address': address
+				}, 
+				function(results, status) {
+					if(status == google.maps.GeocoderStatus.OK) {
+						new google.maps.Marker({
+						position: results[0].geometry.location,
+						map: map
+						});
+						map.setCenter(results[0].geometry.location);
+					}
+					else {
+					// Google couldn't geocode this request. Handle appropriately.
+					}
+				});
+				
+				// si il s'agit d'un mobile on met le container contenant l'adresse -775px plus haut
+				if(isMobile) {
+					jQuery("div.page_content_wrap").css("margin-top", "-755px");
+					// on descend la map plus bas pour laisser afficher le menu
+					jQuery("#map").css("margin-top", "75px");
+				}
+				
+			});
+		
+		
+	}); // doc ready
 	</script>
 	
 	<style>

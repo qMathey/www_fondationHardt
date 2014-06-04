@@ -1,9 +1,12 @@
 // variables globales
 var currentSubMenuOpen = '';
+var isMobile = false;
+var isAndroid = false;
 
 jQuery(document).ready(function($){
-	
-	
+
+	isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+	isAndroid = /Android|webOS|BlackBerry/i.test(navigator.userAgent);
 	
 	// Position contenu principal
 	var backgroundOffset, backgroundOffsetY = null;
@@ -15,6 +18,8 @@ jQuery(document).ready(function($){
 		//alert($(".citation_original").css("font-family"));
 	}
 	
+	// correction sur les autres pages que la HP
+
 	
 	// Menu deroulant
 	$(".main_top_menu > li, #menu-menu-secondaire > li").on("mouseenter", function(event) {
@@ -48,40 +53,60 @@ jQuery(document).ready(function($){
 			}
 	});
 	
+	// quand la souris quitte le menu 
 	$(".navigation.menu_fixed").on("mouseleave", function() {
 		animateMenuHeight(52); // reset menu height
 	});
 	
 	function animateMenuHeight( pixelHeight ) {
+	
+		// si version desktop
+		if( ! isMobile ) {
 		
-			// clearQueue
-			$(".navigation.menu_fixed, .container, .open_news.fixed, .news.fixed").clearQueue();
-			
-			var heightMin = 15;
-			if(pixelHeight-40 > 15)
-				heightMin = pixelHeight-40;
-			
-			// aggrandis le container
-			$(".navigation.menu_fixed").animate({
-				height:heightMin+"px"
-			}, 500);
-			// déplace les containers
+		// clearQueue
+		$(".navigation.menu_fixed, .container, .open_news.fixed, .news.fixed").clearQueue();
+		var heightMin = 15;
+	
+		if(pixelHeight-40 > 15)
+			heightMin = pixelHeight-40;
+		
+		// aggrandis le container
+		$(".navigation.menu_fixed").animate({
+			height:heightMin+"px"
+		}, 500);
+		
+		// déplace les containers
+		
 			$(".container").animate({
 				marginTop:pixelHeight+"px"
 			}, 500);
+
+		// déplace les news fixed 
+		$(".open_news.fixed").animate({
+			top: (pixelHeight+199)+"px"
+		}, 500);
+		$(".news.fixed").animate({
+			top: (pixelHeight+199)+"px"
+		}, 500);
+		
+		// si plus petit que 52 alors on masque tous les sous menu
+		if(pixelHeight <= 52 ) {
+			$(".submenu").hide();
+		}
+		} // if
+		
+		// si version mobile
+		if ( isMobile ) {
+			// correction pour mobile 
+			pixelHeight -=  40;
 			
-			// déplace les news fixed 
-			$(".open_news.fixed").animate({
-				top: (pixelHeight+199)+"px"
-			}, 500);
-			$(".news.fixed").animate({
-				top: (pixelHeight+199)+"px"
+			// aggrandis le container
+			$(".navigation").animate({
+				height:pixelHeight+"px"
 			}, 500);
 			
-			// si plus petit que 52 alors on masque tous les sous menu
-			if(pixelHeight <= 52 ) {
-				$(".submenu").hide();
-			}
+			
+		}
 	}
 	
 	$('.close_all_text').toggle(function(e){
@@ -138,22 +163,89 @@ jQuery(document).ready(function($){
 	// GESTION MOBILE
 	
 	/* GESTION MOBILE */
-	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ){
+	if( isMobile ){
 		
 		console.log("mobile!!!");
 		
+		// On défixe les éléments fixed
+		// navigation
+		$("div.navigation.menu_fixed").removeClass("menu_fixed")
+			.css("position", "inherit !important")
+			.css("display", "block");
+			
+			
+		// place le container (contenu) sans margin top
+		$("div.container").css("margin-top", "0px");
+		
+		// si ce n'est pas la home page et qu'on est sur android, il faut corrigé le marginTop de -81px
+		if( ! isHomepage($) && isAndroid ){	
+			$(".container").css("margin-top", "-81px");
+		}
+		
+		// masque les actualités
+		$("div.open_news.fixed").css("display", "none");
+		$("div.news.fixed").css("display", "none");
+		
+		// place le logo dans un autre div et le defixed
+		$logo = $("a.logo.fixed");
+		$logo.removeClass("fixed");
+		$logo.remove();
+		$logo.appendTo("#mobileLogoContainer");
+		$logo.css("display", "block");
+		
+		// n'affiche que le premier visuel
+		$("section.home:not(:first)").hide();
+		
+		// place les contenus avec une marge supplémentaires pour Android uniquement
+		if( isAndroid ) {
+			$("div.page_content_wrap").css("margin-top", "100px");
+			$("a.close_cross.close_all_text.cross_img").css("display", "none");
+		}
 		/*
+			(de)Fixe le menu et le logo (sauf si ipad)
+		
+		if ( !(/iPad/i.test(navigator.userAgent) ) ) {
+			$(".fixed, .menu_fixed").css("position", "inherit !important");
+			//$(".fix_width_menu").css("margin", "0px 0px 0px 15px");
+			
+			// supprime l'onglet actualité car ingérable mobile
+			$(".home .news, .home .open_news").css("display", "none");
+			
+			// -80 pixel sur le menu
+			$(".navigation").css("height", ($(".navigation").height()-80)+"px");
+			$logo = $(".logo").first();
+			$logo.remove();
+			$logo.appendTo("#mobileLogoContainer");
+			$logo.css("top", "80px").css("position", "relative").css("display","block").css("z-index", "40000").removeClass("fixed");
+		}
+		
+		
+		
+		
+		
+		
 		
 		*/
+		// Spécificité iPad : Les citations se placent trop haut! 
+		if(/iPad/i.test(navigator.userAgent) ){
+			// replace les citations correctements
+			$(".home").each(function() {
+				$citation = $(this).find("article").first();
+				
+				$citation.find(".citation_traduction.shadow").first().css("margin-top", "-30px");
+				
+			});
+			$(".page").css("min-height", "100%"); 
+		}
 		
-		// retravaille les images de la homepage
-		$(".home, .page").css("background-position", "100% 100%"); 
-		$(".home, .page").css("background-attachment", "scroll"); 
-		$(".home").css("min-height", "850px"); 
-		$(".page").css("min-height", "850px"); 
 		
-		// Spécificité Android : Les citations se placent trop haut! 
-		if(/Android/i.test(navigator.userAgent) ){
+		// spécificité Android : menu cliquable + aggrandissement du sous-menu
+		if ( isAndroid ) {
+			gestionMenuMobile($);
+			
+			$(".main_top_menu li ul, menu-menu-secondaire li ul").css("width", "400px");
+			
+			// Spécificité Android : Les citations se placent trop haut! 
 			// replace les citations correctements
 			$(".home").each(function() {
 				$citation = $(this).find("article").first();
@@ -173,31 +265,28 @@ jQuery(document).ready(function($){
 		}
 		
 		
-		// Spécificité iPad : Les citations se placent trop haut! 
-		if(/iPad/i.test(navigator.userAgent) ){
-			// replace les citations correctements
-			$(".home").each(function() {
-				$citation = $(this).find("article").first();
-				
-				$citation.find(".citation_traduction.shadow").first().css("margin-top", "-30px");
-				
-			});
-			$(".page").css("min-height", "100%"); 
-		}
+		// retravaille les images de la homepage
+		$(".home, .page").css("background-position", "100% 100%"); 
+		$(".home, .page").css("background-attachment", "scroll"); 
+		$(".home").css("min-height", "850px"); 
+		$(".page").css("min-height", "850px"); 
 		
 		// Zoom sur la page 
 		var zoomToScale = parseInt ((($(window).width() * 1 ) / 1500 ) * 100 ) / 100;
 		$('head').append('<meta name="viewport" content="width=device-width; initial-scale='+zoomToScale+'; maximum-scale=1.0; user-scalable=1;">');
 		
-		
+		/*
 		// place les menus correctement
-		animateMenuHeight(52); // reset menu height
+		//animateMenuHeight(0); // reset menu height
 		
 		// spécificité mobile concernant les menus :
-		// show les sous menu
-		$(".current-menu-parent, .current-menu-item").find(".submenu").show();
-		animateMenuHeight($(".current-menu-parent, .current-menu-item").find(".submenu").first().height()+50); // reset menu height
-		
+		// Si nous sommes sur une page qui possède un item menu parent, alors on affiche le sous-menu
+		if($(".current-menu-parent, .current-menu-item").length > 0) {
+			// show les sous menu
+			$(".current-menu-parent, .current-menu-item").find(".submenu").show();
+		}
+		animateMenuHeight($(".current-menu-parent, .current-menu-item").find(".submenu").first().height()+33); // reset menu height
+		*/
 	}// if
 	else { // SI PAS MOBILE ALORS STELLAR JS POUR EFFET PARALAX
 		$.stellar.positionProperty.limit = {
@@ -233,16 +322,16 @@ jQuery(document).ready(function($){
 	}
 });
 
-function gestionMenuMobile() {
+function gestionMenuMobile($) {
 	// Gestion menu pour mobile : Permet de dérouler sous menu au premier click
 	// si clique sur menu niveau 1
-	$(".menu-item-has-children").click(function(event){
+	$(".menu-item-has-children").find("a:first").on("click", function(event){
 	
 		// retire l'événement
 		event.stopPropagation();
 		event.preventDefault();
 		
-		$linkMenu = $(this).find("a").first();
+		$linkMenu = $(this);
 		
 		if($linkMenu.data("alreadyCliqued") == "cliquedOnce") {
 			// move to link
@@ -250,9 +339,20 @@ function gestionMenuMobile() {
 		}
 		else { // he never cliqued
 			// retire l'info aux autres liens
-			$(".menu-item-has-children").data("alreadyCliqued", "");
+			$(".menu-item-has-children a").data("alreadyCliqued", "");
 			// ajoute l'info cliquedOnce
 			$linkMenu.data("alreadyCliqued", "cliquedOnce");
 		}
 	}); // click
+}
+
+// Permet de déterminer s'il s'agit de la homepage
+function isHomepage($) {
+	
+	var htmlCurrentMenuItem = $(".current-menu-item").first().find("a").first().html();
+	
+	if( htmlCurrentMenuItem == 'Home' || htmlCurrentMenuItem == 'Accueil')
+		return true;
+	else
+		return false;
 }
