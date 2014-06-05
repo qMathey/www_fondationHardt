@@ -19,14 +19,14 @@
 	
 	global $wpdb;
 	
-	$reservations_list = $wpdb->get_results("SELECT * FROM $wpdb->posts WHERE ID != " . $_GET['view_res'] . " AND ID IN ( 
+	$reservations_list = $wpdb->get_results("SELECT * FROM $wpdb->posts WHERE ID IN ( 
 			SELECT post_id FROM $wpdb->postmeta WHERE post_id IN (
 				SELECT post_id FROM $wpdb->postmeta WHERE (
 					meta_key = 'rms_reservation_client' AND meta_value=" . $post_author_id . "
 				)
 			)
 			AND (
-				meta_key = 'rms_reservation_end' AND meta_value < " . get_post_meta( $_GET['view_res'], 'rms_reservation_start', true ) . "
+				meta_key = 'rms_reservation_end' AND meta_value < " . date("Ymd") . "
 			)
 		)
 		AND ID IN (
@@ -119,7 +119,10 @@
 
 		$roomData = get_post($roomArrayId[0]);
 		
-		$scolarship = get_field('has_bourse');
+		$scolarship = null;
+		
+		if( get_field('has_bourse') )
+			$scolarship = $scolarship[0];
 		
 		// Obetnir l'adresse mail de facturation
 		if( get_user_meta( $post_author_id, 'fact_email', true ) )
@@ -137,7 +140,7 @@
 			date( "d.m.Y", strtotime( get_field('rms_reservation_start') ) ),
 			date( "d.m.Y", strtotime( get_field('rms_reservation_end') ) ),
 			$roomData -> post_title,
-			$scolarship[0],
+			$scolarship,
 			get_user_meta( $post_author_id, 'fact_email', true ),
 			get_user_meta( $post_author_id, 'fact_street', true ),
 			get_user_meta( $post_author_id, 'fact_number', true ),
@@ -187,7 +190,7 @@
 												
 									}// Fin if()
 									
-									if( ( $arrResData[$i] == "") && ($data[1] == "Facturation") )
+									if( ( ( isset($arrResData[$i])) && ( $arrResData[$i] == "")) && ($data[1] == "Facturation") )
 									{
 									
 										echo "<tr class=\"fact_empty_data\"><th>" . $data[0] . ":</th><td></td></tr>";
