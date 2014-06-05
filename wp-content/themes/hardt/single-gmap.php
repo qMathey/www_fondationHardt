@@ -11,9 +11,7 @@
 
 
   
-
-   <section class="page" id="map"></section>	
-			<article>
+<article>
 			<a href="<?php echo home_url(); ?>" class="logo fixed"></a>
 				<div class="page_content_wrap" style="z-index:6000; position: relative; width: 400px; margin: 10% 10% 0 0; background-color: #ffffff;">
 					<a href="#" class="close_cross close_all_text cross_img" title="Fermer les textes"></a>
@@ -49,6 +47,8 @@
 				</div>
 
 			</article>
+   <section class="page" id="map"></section>	
+			
 	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> 
   
 	<script type="text/javascript"> 
@@ -70,8 +70,8 @@
 					scaleControl: false, 
 					streetViewControl: false, 
 					overviewMapControl: (!isMobile),
-					draggable:  (!isMobile),
-					scrollwheel:  (!isMobile),
+					draggable:  (!isMobile || isIpad),
+					scrollwheel:  (!isMobile || isIpad),
 					
 
 				});
@@ -96,11 +96,23 @@
 				
 				// si il s'agit d'un mobile on met le container contenant l'adresse -775px plus haut
 				if(isMobile) {
-					jQuery("div.page_content_wrap").css("margin-top", "-755px");
+					jQuery("#mobileLogoContainer").css("margin-top", "75px");
 					// on descend la map plus bas pour laisser afficher le menu
-					jQuery("#map").css("margin-top", "75px");
+					jQuery("#map").css("margin-top", "0px");
+					
+					// correction mobile pour le placement
+					jQuery("div.page_content_wrap").css("margin-top", "165px");
+					jQuery("div.container").css("margin-top", "0px");
 				}
+				else { // desktop
 				
+					// correction placement info google map
+					jQuery("div.page_content_wrap").css("right","115px")
+						.css("position","absolute");
+						// placement logo et contenu page à 10%
+					jQuery(".logo").css("margin-top", "7%");
+					jQuery("div.page_content_wrap").css("margin-top", "5%");
+				}
 			});
 		
 		

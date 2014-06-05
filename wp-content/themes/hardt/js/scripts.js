@@ -3,12 +3,14 @@ var currentSubMenuOpen = '';
 var isMobile = false;
 var isAndroid = false;
 var isIpad = false;
+var isIphone = false;
 
 jQuery(document).ready(function($){
 
 	isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 	isAndroid = /Android|webOS|BlackBerry/i.test(navigator.userAgent);
 	isIpad = /iPad/i.test(navigator.userAgent);
+	isIphone = /iPhone/i.test(navigator.userAgent);
 	
 	// Position contenu principal
 	var backgroundOffset, backgroundOffsetY = null;
@@ -249,11 +251,15 @@ jQuery(document).ready(function($){
 		$('head').append('<meta name="viewport" content="width=device-width; initial-scale='+zoomToScale+'; maximum-scale=1.0; user-scalable=1;">');
 		
 		// cas spécifique pour iPad, l'image de fond est trop petite
-		if ( isIpad ) {
-			$("section.page").css("height", (window.screen.height+180) + "px");
+		if ( isIpad) {
+			$("section.page, #map").css("height", (window.screen.height+180) + "px");
 			$("section.page .footer_container").css("bottom", "-5px");
 		}// if
-		
+		// cas spécifique pour iPhone, l'image de fond est trop petite
+		if ( isIphone ) {
+			$("section.page, #map").css("height", ((window.screen.height / zoomToScale) - 1350) + "px");
+			$("section.page .footer_container").css("bottom", "-5px");
+		}// if
 	}// if
 	else { // SI PAS MOBILE ALORS STELLAR JS POUR EFFET PARALAX
 		$.stellar.positionProperty.limit = {
