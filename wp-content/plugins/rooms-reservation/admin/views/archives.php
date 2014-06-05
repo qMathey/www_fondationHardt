@@ -7,18 +7,30 @@
 		function single_row($data)
 		{
 			global $post, $comment;
-
-			$comment = $data;
-			$the_comment_class = join( ' ', get_comment_class( wp_get_comment_status( $comment->comment_ID ) ) );
-
-			$post = get_post($comment->comment_post_ID);
 			
 			// Ajouter classe statut réservation
-			$rowClass = ( $data['state'] == 0 ) ? 'pending' : ( ( $data['state'] == 1 ) ? 'allowed' : 'declined') ;
+			$rowClass = ( $data['state'] == 0 ) ? 'pending' : ( ( $data['state'] == 1 ) ? 'allowed' : (( $data['state'] == 2 ) ? 'declined' : 'date_conflict')) ;
+		
+			// si il y a un commentaire
+			if($comment != null) {
+				$comment = $data;
+				$the_comment_class = join( ' ', get_comment_class( wp_get_comment_status( $comment->comment_ID ) ) );
 
-			echo "<tr id='comment1-$comment->comment_ID' class='$rowClass'>";
-			echo $this->single_row_columns( $comment );
+				$post = get_post($comment->comment_post_ID);
+				
+				// affiche la ligne avec comment ID
+				echo "<tr id='comment1-".$comment->comment_ID."' class='$rowClass'>";
+			}
+			else {
+				$comment = '';
+				
+				// affiche la ligne sans comment D
+				echo "<tr class='$rowClass'>";
+			}
+				
+			echo $this->single_row_columns( $data );
 			echo "</tr>\n";
+		
 		}
 		
 		// Init
@@ -66,7 +78,7 @@
 		function column_default($item, $column_name)
 		{
 			switch($column_name){
-				case 'hote': case 'dates': case 'room': case 'state':
+				case 'hote': case 'dates': case 'room': case 'price': case 'state': case 'date_res':
 					return $item[$column_name];
 				default:
 					return print_r($item,true);// debug
@@ -91,12 +103,34 @@
 		// Afficher colonne statut
 		function column_state($data)
 		{
-			$strOutput =  ( $data['state'] == 0 ) ? 'En attente' : ( ( $data['state'] == 1 ) ? __('Accepté', 'rms_reservation') : __('Refusé', 'rms_reservation'));
+			/* Statut:
+				0 = En attente
+				1 = Accepté
+				2 = refusé
+				
+			   Email:
+			   0 = pas envoyé
+			   1 = envoyé
+			*/
+			
+			$strOutput =  ( ($data['state'] == 0) || ($data['state'] == 3) ) ? 'En attente' : ( ( $data['state'] == 1 ) ? 'Accepté' : 'Refusé');
 			
 			// Verifier email de confirmation envoyé
-			if(!$data['email'])
-				$strOutput .= __(' - Aucun email n\'a été envoyé', 'rms_reservation');
-				
+			
+			if ($data['state'] == 3)
+				$strOutput .= ' - ' . __( "Dates en conflit", "rms_reservation");
+			else {
+				if(!$data['email'])
+				$strOutput .= ' - ' . __( "Aucun email n'a été envoyé", "rms_reservation");
+			}
+			
+			$isConflict = get_post_meta( $data["id"], "has_conflict" , true );
+			if($isConflict == "")
+				$isConflict = false;
+			// si il y a un conflit	et qu'elle déjà indiqué en jaune
+			if($isConflict && $data['state'] != 3)
+				$strOutput .= ' - ' . __( "<strong>! DATES EN CONFLITS !</strong>");
+			
 			return $strOutput;
 			
 		}// Fin column_state()
