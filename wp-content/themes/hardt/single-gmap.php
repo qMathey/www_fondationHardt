@@ -70,8 +70,8 @@
 					scaleControl: false, 
 					streetViewControl: false, 
 					overviewMapControl: (!isMobile),
-					draggable:  (!isMobile || isIpad),
-					scrollwheel:  (!isMobile || isIpad),
+					draggable:  (!isMobile),
+					scrollwheel:  (!isMobile),
 					
 
 				});

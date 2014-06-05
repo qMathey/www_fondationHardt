@@ -185,12 +185,18 @@
 
 					// Définir couleur de la réservation
 					$color = ( $status == 0 ) ? '#D5EAF2' : ( ( $status == 1 ) ? '#D0F3C5' : (( $status == 2 ) ? '#FCBDB1' : '#F8FA92'));
+					// lien par défaut : édition de la réservation
+					$urlReservation = "./admin.php?page=rooms-reservation&view_res=" . $arrReservation[$j-1][3];
 					
 					// si conflit spécifié, alors on le met en jaune
-					if($arrReservation[$j-1][2] == "CONFLITS DE DATES") 
+					if($arrReservation[$j-1][2] == "CONFLITS DE DATES") {
 						$color = '#F8FA92';
+						
+						// on pointe sur la liste des reservations
+						$urlReservation = "./admin.php?page=rooms-reservation";
+					}
 					
-					$strOutput .= "end: new Date(" . strtotime('+1 day', $startDate)*1000 . "),url: './admin.php?page=rooms-reservation&view_res=" . $arrReservation[$j-1][3] . "',backgroundColor: '" . $color . "',borderColor: '#C2C2C2'},";
+					$strOutput .= "end: new Date(" . strtotime('+1 day', $startDate)*1000 . "),url: '".$urlReservation."',backgroundColor: '" . $color . "',borderColor: '#C2C2C2'},";
 					
 					if( search_array(date('Ymd', strtotime('+2 day', $startDate)), $arrReservation) )
 					{
