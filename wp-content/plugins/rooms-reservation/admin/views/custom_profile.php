@@ -28,7 +28,16 @@
 		get_user_meta( $user_id, 'references', true ),
 		get_user_meta( $user_id, 'theme', true ),
 		get_user_meta( $user_id, 'regime', true ),
-		get_user_meta( $user_id, 'remarks', true )
+		get_user_meta( $user_id, 'remarks', true ),
+		get_user_meta( $user_id, 'fact_street', true ),
+		get_user_meta( $user_id, 'fact_number', true ),
+		get_user_meta( $user_id, 'fact_city', true ),
+		get_user_meta( $user_id, 'fact_postal', true ),
+		get_user_meta( $user_id, 'fact_country', true ),
+		get_user_meta( $user_id, 'fact_iso', true ),
+		get_user_meta( $user_id, 'fact_phone_1', true ),
+		get_user_meta( $user_id, 'fact_phone_2', true ),
+		get_user_meta( $user_id, 'fact_email', true )
 	);
 	?>
 	<table class="form-table">
@@ -68,6 +77,15 @@
 						echo '<th scope="row">' . $data[0] . '</th>';
 					
 						echo '<td>';
+							if($data[2] == 'fact_street')
+							{
+								
+								echo '<label><input type="checkbox" name="is_same_fact" class="show_fact" checked>L\'adresse de facturation est identique à celle de contact</label></td></th></tr>';
+								echo '<tr>';
+						echo '<th scope="row">' . $data[0] . '</th>';
+					
+						echo '<td>';
+							}
 							// test le type de champ
 							switch($data[3]) {
 								case "textarea" :
@@ -76,7 +94,7 @@
 									break;
 								case "country_select" :
 									echo '
-									<select name="country">
+									<select name="' . $data[2] . '">
 										<option data-iso-value="ch">Switzerland</option>
 										<option data-iso-value="gb">United Kingdom</option>
 										<option data-iso-value="af">Afghanistan</option>
@@ -470,6 +488,38 @@
 		
 			jQuery('input[name=iso]').val(jQuery(this).find(":selected").attr('data-iso-value').toUpperCase());
 		});
+		
+		// Sélectionner pays de facturation actif
+		jQuery('select[name=fact_country] option[data-iso-value="' + jQuery('input[name=fact_iso]').val().toLowerCase() + '"]').attr("selected","selected");
+		
+		// Liste déroulante des pays
+		jQuery('select[name=fact_country]').change(function()
+		{
+			jQuery('input[name=fact_iso]').val(jQuery(this).find(":selected").attr('data-iso-value').toUpperCase());
+		});
+		
+		jQuery('.show_fact').parent().parent().parent().find('th').text('Adresse de facturation');
+		
+		// Masquer champs de facturation, par défaut
+		<?php
+		
+			if( get_user_meta( $user_id, 'fact_street', true ) != "")
+				echo 'jQuery(".show_fact").removeAttr("checked");';
+			else
+				echo
+				'jQuery( "*[name^=\'fact_\']" ).parent().parent().hide();';
+		?>
+		
+		// Action lors du changement de checkbox show_fact
+		jQuery('.show_fact').on('click', function(){
+		
+			jQuery( "*[name^='fact_']" ).parent().parent().toggle();
+			
+		});
+		
+		// Remplir par défaut les 2 champs iso
+		jQuery("#iso").val(jQuery('select[name=country]').find(":selected").attr('data-iso-value').toUpperCase());
+		jQuery("#fact_iso").val(jQuery('select[name=fact_country]').find(":selected").attr('data-iso-value').toUpperCase());
 		
 	});
 	</script>

@@ -1018,7 +1018,16 @@ add_action( 'save_post', 'prfx_meta_save' );
 			array(__("Références", "rms_reservation"), __("Etudes"), "references", "text"),
 			array(__("Thème de la recherche durant le séjour", "rms_reservation"),__("Etudes"), "theme", "textarea"),
 			array(__("Régimes/allergies", "rms_reservation"),__("General"), "regime","textarea"),
-			array(__("Remarques", "rms_reservation"),__("General"), "remarks","textarea")
+			array(__("Remarques", "rms_reservation"),__("General"), "remarks","textarea"),
+			array(__("Adresse", "rms_reservation"),__("General"), "fact_street","text"),
+			array(__("N°", "rms_reservation"),__("General"), "fact_number","text"),
+			array(__("Ville de facturation", "rms_reservation"),__("General"), "fact_city","text"),
+			array(__("Code postal", "rms_reservation"),__("General"), "fact_postal","text"),
+			array(__("Pays", "rms_reservation"),__("General"), "fact_country","country_select"),
+			array(__("ISO", "rms_reservation"),__("General"), "fact_iso","text"),
+			array(__("Téléphone 1", "rms_reservation"),__("General"), "fact_phone_1","text"),
+			array(__("Téléphone 2", "rms_reservation"),__("General"), "fact_phone_2","text"),
+			array(__("Email de facturation", "rms_reservation"),__("General"), "fact_email","text")
 		);
 		
 		// Retourner le tableau
@@ -1041,6 +1050,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 			array("Numéro de rue",  "Facturation", "text"),
 			array("Ville",  "Facturation", "text"),
 			array("Code postal",  "Facturation", "text"),
+			array("Pays",  "Facturation", "text"),
 			array("Code ISO",  "Facturation", "text"),
 			array("Téléphone 1",  "Facturation", "text"),
 			array("Téléphone 2",  "Facturation", "text"),
@@ -1143,13 +1153,26 @@ add_action( 'save_post', 'prfx_meta_save' );
 			"remarks"
 		);	
 		
-		
 		// Parcourir les champs à mettre à jour
 		foreach($userFieldArray as $field_name)
 		{
 			// Mettre à jour les metas de l'utilisateur
 			update_user_meta( $user_id, $field_name, $_POST[$field_name] );
 		}
+		
+		// Données de facturation différentes
+		if( empty( $_POST['is_same_fact'] ) )
+		{
+			update_user_meta( $user_id, "fact_street", $_POST["fact_street"] );
+			update_user_meta( $user_id, "fact_number", $_POST["fact_number"] );
+			update_user_meta( $user_id, "fact_city", $_POST["fact_city"] );
+			update_user_meta( $user_id, "fact_postal", $_POST["fact_postal"] );
+			update_user_meta( $user_id, "fact_country", $_POST["fact_country"] );
+			update_user_meta( $user_id, "fact_iso", $_POST["fact_iso"] );
+			update_user_meta( $user_id, "fact_email", $_POST["fact_email"] );
+			update_user_meta( $user_id, "fact_phone_1", $_POST["fact_phone_1"] );
+			update_user_meta( $user_id, "fact_phone_2", $_POST["fact_phone_2"] );			
+		}// Fin if()
 		
 		// cas particulier pour sex
 		

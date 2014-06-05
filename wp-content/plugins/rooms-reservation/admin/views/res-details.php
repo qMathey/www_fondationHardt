@@ -147,6 +147,7 @@
 			get_user_meta( $post_author_id, 'fact_number', true ),
 			get_user_meta( $post_author_id, 'fact_city', true ),
 			get_user_meta( $post_author_id, 'fact_postal', true ),
+			get_user_meta( $post_author_id, 'fact_country', true ),
 			get_user_meta( $post_author_id, 'fact_iso', true ),
 			get_user_meta( $post_author_id, 'fact_phone_1', true ),
 			get_user_meta( $post_author_id, 'fact_phone_2', true )

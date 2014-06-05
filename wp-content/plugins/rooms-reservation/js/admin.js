@@ -89,7 +89,19 @@ else
 		
 		// Mettre à jour le texte de l'email
 		get_mailText();
-	
+		
+		// Modifier le titre si boursier
+		if(bourse_index)
+		{
+		
+			jQuery('input#title').val('B_' + jQuery('input#title').val());
+			
+		}
+		else
+		{
+			jQuery('input#title').val(jQuery('input#title').val().slice(2));
+		}
+
 	});
 	
 	// Action liste déroulante langue utilisateur edition reservation
