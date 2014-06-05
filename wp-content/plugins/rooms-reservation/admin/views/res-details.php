@@ -17,27 +17,31 @@
 	
 	$user_info = get_userdata( $post_author_id );
 	
-	// Récupérer les séjours du même hôte
-	$args = array(
-		'post__not_in'  =>  array($_GET['view_res']),
-		'author'        =>  $post_author_id,
-		'post_type'     =>  'rms_reservation',
-		'orderby'       =>  'post_date',
-		'order'         =>  'ASC'
-    );
+	global $wpdb;
 	
-	$the_query = new WP_Query( $args );
+	$reservations_list = $wpdb->get_results("SELECT * FROM $wpdb->posts WHERE ID != " . $_GET['view_res'] . " AND ID IN ( 
+			SELECT post_id FROM $wpdb->postmeta WHERE post_id IN (
+				SELECT post_id FROM $wpdb->postmeta WHERE (
+					meta_key = 'rms_reservation_client' AND meta_value=" . $post_author_id . "
+				)
+			)
+			AND (
+				meta_key = 'rms_reservation_end' AND meta_value < " . get_post_meta( $_GET['view_res'], 'rms_reservation_start', true ) . "
+			)
+		)
+		AND ID IN (
+			SELECT post_id FROM $wpdb->postmeta WHERE meta_key = 'rms_reservation_status' AND meta_value = 1
+		)"
+	);
 	
-	if ( $the_query->have_posts() )
+	if ( $reservations_list )
 	{
 	
 		$prev_stay_output = '';
 		
-		while ( $the_query->have_posts() )
+		foreach ( $reservations_list as $post_res )
 		{
-		
-			$the_query->the_post();
-			$prev_stay_output .= '<a href="./admin.php?page=rooms-reservation&view_res=' . get_the_ID() . '" target="_blank" title="Voir le détail">Séjour N°' . get_the_title() . '</a><br/>';
+			$prev_stay_output .= '<a href="./admin.php?page=rooms-reservation&view_res=' . $post_res -> ID . '" target="_blank" title="Voir le détail">Séjour N°' . $post_res -> post_title . '</a><br/>';
 		
 		}
 
