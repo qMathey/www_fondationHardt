@@ -3,7 +3,7 @@
 if( typeof local_text != 'undefined')
 {
 
-	var lang_index = "array_" + local_text.lang;
+	var lang_index = local_text.lang;
 	var bourse_index = local_text.bourse;
 	
 }
@@ -14,45 +14,6 @@ else
 	
 }
 
-var array_fr = ["La Fondation Hardt pour l’étude de l’Antiquité classique a le plaisir de confirmer votre inscription à un séjour d’étude scientifique.<br/>"+
-	"Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.<br/>"+
-	"Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : http://www.fondationhardt.ch/?page_id=1166 .<br/>"+
-	"Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch<br/>"+
-	"Si vous avez des questions concernant votre prochain séjour, n’hésitez pas à nous contacter.<br/>"+
-	"Nous vous remercions de votre intérêt pour la Fondation Hardt et nous réjouissons de vous accueillir prochainement.<br/>"+
-"<br/>"+
-	"Avec nos remerciements et nos salutations les meilleures,<br/>"+
-	"Fondation Hardt",
-	"Nous avons le plaisir de vous annoncer qu’une bourse vous a été attribuée pour un séjour d’étude scientifique à la Fondation Hardt.<br/>"+
-	"Vous trouverez en pièce jointe votre lettre d’invitation.<br/>"+
-	"Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : http://www.fondationhardt.ch/?page_id=1166 .<br/>"+
-	"Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch<br/>"+
-	"Si vous avez des questions concernant votre prochain séjour, n’hésitez pas à nous contacter.<br/>"+
-	"Nous vous remercions de votre intérêt pour la Fondation Hardt et nous réjouissons de vous accueillir prochainement.<br/>"+
-"<br/>"+
-	"Avec nos remerciements et nos salutations les meilleures,<br/>"+
-	"Fondation Hardt"];
-var array_en = [	
-	"We are pleased to confirm your registration for a research stay at the Hardt Foundation.<br/>"+
-	"Please find here attached your letter of confirmation and invoice.<br/>"+
-	"Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: http://www.fondationhardt.ch/?page_id=1166 .<br/>"+
-	"In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch<br/>"+
-	"Do not hesitate to contact us if you have any inquiry concerning your future stay.<br/>"+
-	"We thank you very much for your interest in the Hardt Foundation and look forward to welcoming you soon.<br/>"+
-"<br/>"+
-	"Best wishes,<br/>"+
-
-	"Hardt Foundation",
-	"We are pleased to inform you that you have been granted a bursary for a research stay at the Hardt Foundation.<br/>"+
-	"Please find here attached your letter of confirmation.<br/>"+
-	"Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: http://www.fondationhardt.ch/?page_id=1166 .<br/>"+
-	"In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch<br/>"+
-	"Do not hesitate to contact us if you have any inquiry concerning your future stay.<br/>"+
-	"We thank you very much for your interest in the Hardt Foundation and look forward to welcoming you soon.<br/>"+
-"<br/>"+
-	"Best wishes,<br/>"+
-"<br/>"+
-	"Hardt Foundation"];
 	// Fonction d'affichage du nombre de nuitées
 	jQuery('#acf-rms_reservation_start input[type=text], #acf-rms_reservation_end input[type=text]').change(function(){
 
@@ -124,29 +85,47 @@ var array_en = [
 	// Action checkbox bourse edition reservations
 	jQuery("#rms_reservation_has_bourse").click(function()
 	{
-		console.log(bourse_index +'/'+lang_index);
 		bourse_index = (jQuery(this).is(':checked') ? 1 : 0);
-		tinyMCE.activeEditor.setContent(eval(lang_index)[bourse_index]);
 		
-		if(bourse_index)
-		{
-		
-			jQuery('input#title').val('B_' + jQuery('input#title').val());
-			
-		}
-		else
-		{
-			jQuery('input#title').val(jQuery('input#title').val().slice(2));
-		}
-
+		// Mettre à jour le texte de l'email
+		get_mailText();
+	
 	});
 	
 	// Action liste déroulante langue utilisateur edition reservation
 	jQuery("#rms_user_lang").change(function(){
-		lang_index = "array_" + jQuery(this).val();
+	
+		lang_index = jQuery(this).val();
 		
-		tinyMCE.activeEditor.setContent(eval(lang_index)[bourse_index]);
+		// Mettre à jour le texte de l'email
+		get_mailText();
+		
 	});
+	
+	// Changement de l'hôte
+	$("#acf-field-rms_reservation_client").change(function(){
+		
+		// Mettre à jour le texte de l'email
+		get_mailText();
+		
+	});
+	
+	// Mettre à jour le texte de l'email de confirmation
+	function get_mailText()
+	{
+	
+		jQuery.post(ajaxurl, {
+			action: "user_get_mail",
+			"has_bourse": bourse_index,
+			"mail_lang": lang_index,
+			"user_id": $("#acf-field-rms_reservation_client").val()
+		}, function( data ) {
+			// Mettre à jour le message
+			
+			tinyMCE.activeEditor.setContent( data );
+		});
+		
+	}// Fin get_mailText()
 	
 	// Changer texte lien suppression
 	if( jQuery('.post-type-rms_reservation a.submitdelete').text() == "Move to Trash" )

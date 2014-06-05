@@ -587,105 +587,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 		// Vérifier si il s'agit d'une réservation
 		if( $post -> post_type == 'rms_reservation' )
 		{
-			//if( empty($_POST['fields']['field_536c862253a43']) )
-		/*	//	update_post_meta($id, 'rms_reservation_status', 0);
-					
-			$startDate = $_POST['fields']['field_533d686591a5e'];// Date début
-			$endDate = $_POST['fields']['field_533d68b31f200'];// Date fin
-			
-			// Vérifier conflit
-			delete_post_meta($id, 'has_conflict');
-			delete_post_meta($id, 'got_conflict');
-		
-			$blnConflict = false;
-		
-			$reservations_list = $wpdb->get_results("
-				SELECT post_id FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_room' AND meta_value LIKE '%a:1:{i:0;s:3:\"" . $_POST['fields']['field_533d6bd3d9cc4'][0] . "\";}%' AND post_id != " . $id . " AND post_id IN (
-				SELECT post_id
-					FROM  $wpdb->postmeta
-					WHERE (
-						(
-							meta_key =  'rms_reservation_start'
-							AND meta_value >= " . $_POST['fields']['field_533d686591a5e'] . "
-							AND meta_value <= " . $_POST['fields']['field_533d68b31f200'] . "
-						)
-						OR (
-							meta_key =  'rms_reservation_end'
-							AND meta_value >= " . $_POST['fields']['field_533d686591a5e'] . "
-							AND meta_value <= " . $_POST['fields']['field_533d68b31f200'] . "
-						)
-						OR (
-							(
-								meta_key =  'rms_reservation_start'
-								AND meta_value <= " . $_POST['fields']['field_533d686591a5e'] . "
-							)
-								AND (
-								meta_key =  'rms_reservation_end'
-								AND meta_value >= " . $_POST['fields']['field_533d68b31f200'] . "
-							)
-						)
-					) GROUP BY post_id
-					)
-			");
-				
-			// Parcourir les réservations ayant des conflits
-			foreach ( $reservations_list as $res_data )
-			{
-				// Vérifier que la réservation n'a pas été validée
-				$res_status =  get_post_meta($res_data->post_id, 'rms_reservation_status', true);
-				if( ( $res_status == 0 ) || ($res_status == 3) )
-				{
-					$blnConflict = true;
-					
-					update_post_meta($res_data->post_id, 'rms_reservation_status', 3);
-					
-					if( $res_data->post_id != $id )
-						update_post_meta($res_data->post_id, 'has_conflict', true);
-						
-						//check_conflicts($res_data->post_id, $id);
-						
-				}// Finf()
-				
-			}// Fin foreach ( $reservations_list as $res_data )
-			
-			// Si il y a eu un conflit
-			if($blnConflict)
-			{
-				$res_status =  get_post_meta($res_data->post_id, 'rms_reservation_status', true);
-				
-				if( ( $res_status == 0 ) || ($res_status == 3) )
-					update_post_meta($id, 'rms_reservation_status', 3);
-					
-				update_post_meta($id, 'got_conflict', true);
-				
-				// Vérifier présence méta
-				if( !get_post_meta($id, 'got_conflict', true))
-				{
-					$wpdb->insert( 
-						$wpdb->postmeta, 
-						array( 
-							'post_id' => $id,
-							'meta_key' => 'got_conflict', 
-							'meta_value' => true 
-						) 
-					);
-					
-					if( ( $res_status == 0 ) || ($res_status == 3) )
-					{
-						$wpdb->insert( 
-							$wpdb->postmeta, 
-							array( 
-								'post_id' => $id,
-								'meta_key' => 'rms_reservation_status', 
-								'meta_value' => 3 
-							) 
-						);
-					}
-				}// Fin if()
-				
-			}// Fin if( $blnConflict)
-			*/
-			
+			// Forcer la mise à jour des meta avant les contrôles de conflits
 			update_user_meta($_POST['fields']['field_533d6b7fffca0'], 'user_lang', $_POST['lang']);
 			update_post_meta($id, 'has_bourse', $_POST['rms_reservation_has_bourse']);
 			update_post_meta($id, 'rms_reservation_start', $_POST['fields']['field_533d686591a5e']);
@@ -1234,30 +1136,6 @@ add_action( 'save_post', 'prfx_meta_save' );
 			"regime"
 		);	
 		
-		/*
-		$userFieldArray = array(
-			"first_name",
-			"last_name",
-			"birthday",
-			"sex",
-			"nationality",
-			"email",
-			"street",
-			"number",
-			"postal",
-			"city",
-			"iso",
-			"phone_1",
-			"phone_2",
-			"university_title",
-			"affiliation",
-			"function",
-			"references",
-			"theme",
-			"regime"
-		);
-		*/
-		
 		
 		// Parcourir les champs à mettre à jour
 		foreach($userFieldArray as $field_name)
@@ -1314,7 +1192,15 @@ add_action( 'save_post', 'prfx_meta_save' );
 			$user_data_id = $user_data;
 						
 		$user_lang = get_user_meta( $user_data_id,'user_lang', true);
-			
+		
+		
+		$random_password = wp_generate_password( $length=8, $include_standard_special_chars=false );
+		
+		wp_set_password( $random_password, $user_data_id );
+		$user_info = get_userdata( $user_data_id );
+		$username = $user_info -> user_login;
+		$password = $random_password;
+	
 		if( !get_post_meta( $post -> ID, 'has_bourse', true ) )
 						{
 							// Parcourir langue
@@ -1326,12 +1212,17 @@ add_action( 'save_post', 'prfx_meta_save' );
 	Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch
+
+	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :
+
+	Nom d'utilisateur : " . $username . "
+	Mot de Passe : " . $password . "
+	
 	Si vous avez des questions concernant votre prochain séjour, n’hésitez pas à nous contacter.
 	Nous vous remercions de votre intérêt pour la Fondation Hardt et nous réjouissons de vous accueillir prochainement.
 
 	Avec nos remerciements et nos salutations les meilleures,
-	Fondation Hardt
-	";
+	Fondation Hardt";
 							break;
 							
 							default:
@@ -1339,13 +1230,17 @@ add_action( 'save_post', 'prfx_meta_save' );
 	Please find here attached your letter of confirmation and invoice.
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch
+	Please find below your login details for your account on our website :
+
+	Username : " . $username . "
+	
+	Password : " . $password . "
+	
 	Do not hesitate to contact us if you have any inquiry concerning your future stay.
 	We thank you very much for your interest in the Hardt Foundation and look forward to welcoming you soon.
 
 	Best wishes,
-
-	Hardt Foundation
-	";
+	Hardt Foundation";
 								break;
 								
 							}// Fin switch ($_POST['lang'])
@@ -1361,12 +1256,17 @@ add_action( 'save_post', 'prfx_meta_save' );
 	Vous trouverez en pièce jointe votre lettre d’invitation.
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch
+
+	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :
+
+	Nom d'utilisateur : " . $username . "
+	Mot de Passe : " . $password . "
+	
 	Si vous avez des questions concernant votre prochain séjour, n’hésitez pas à nous contacter.
 	Nous vous remercions de votre intérêt pour la Fondation Hardt et nous réjouissons de vous accueillir prochainement.
 
 	Avec nos remerciements et nos salutations les meilleures,
-	Fondation Hardt
-	";
+	Fondation Hardt";
 							break;
 							
 						default:
@@ -1374,13 +1274,17 @@ add_action( 'save_post', 'prfx_meta_save' );
 	Please find here attached your letter of confirmation.
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch
+	Please find below your login details for your account on our website :
+
+	Username : " . $username . "
+	
+	Password : " . $password . "
+	
 	Do not hesitate to contact us if you have any inquiry concerning your future stay.
 	We thank you very much for your interest in the Hardt Foundation and look forward to welcoming you soon.
 
 	Best wishes,
-
-	Hardt Foundation
-	";
+	Hardt Foundation";
 							break;
 							
 							}// Fin switch ($_POST['lang'])
@@ -1441,6 +1345,86 @@ add_action( 'save_post', 'prfx_meta_save' );
 		
 		die();
 	}// function
+	
+	// Requête Ajax retournant le texte de l'email de confirmation
+	add_action( 'wp_ajax_user_get_mail', 'rms_getUserTextMail' );
+	function rms_getUserTextMail()
+	{
+	
+	$random_password = wp_generate_password( $length=8, $include_standard_special_chars=false );
+	
+	wp_set_password( $random_password, $_POST['user_id'] );
+	$user_info = get_userdata( $_POST['user_id'] );
+	$username = $user_info -> user_login;
+	$password = $random_password;
+	
+$array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classique a le plaisir de confirmer votre inscription à un séjour d’étude scientifique.<br/>
+	Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.<br/>
+	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
+	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch<br/>
+<br/>
+	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
+<br/>
+	Nom d'utilisateur : " . $username . "<br/>
+	Mot de Passe : " . $password . "<br/>
+	<br/>
+	Si vous avez des questions concernant votre prochain séjour, n’hésitez pas à nous contacter.<br/>
+	Nous vous remercions de votre intérêt pour la Fondation Hardt et nous réjouissons de vous accueillir prochainement.<br/>
+<br/>
+	Avec nos remerciements et nos salutations les meilleures,<br/>
+	Fondation Hardt",
+	"Nous avons le plaisir de vous annoncer qu’une bourse vous a été attribuée pour un séjour d’étude scientifique à la Fondation Hardt.<br/>
+	Vous trouverez en pièce jointe votre lettre d’invitation.<br/>
+	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
+	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch<br/>
+<br/>
+	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
+<br/>
+	Nom d'utilisateur : " . $username . "<br/>
+	Mot de Passe : " . $password . "<br/>
+	<br/>
+	Si vous avez des questions concernant votre prochain séjour, n’hésitez pas à nous contacter.<br/>
+	Nous vous remercions de votre intérêt pour la Fondation Hardt et nous réjouissons de vous accueillir prochainement.<br/>
+<br/>
+	Avec nos remerciements et nos salutations les meilleures,<br/>
+	Fondation Hardt");
+	
+	$array_en = array("We are pleased to confirm your registration for a research stay at the Hardt Foundation.<br/>
+	Please find here attached your letter of confirmation and invoice.<br/>
+	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
+	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch<br/>
+	Please find below your login details for your account on our website :<br/>
+<br/>
+	Username : " . $username . "<br/>
+	<br/>
+	Password : " . $password . "<br/>
+	<br/>
+	Do not hesitate to contact us if you have any inquiry concerning your future stay.<br/>
+	We thank you very much for your interest in the Hardt Foundation and look forward to welcoming you soon.<br/>
+<br/>
+	Best wishes,<br/>
+	Hardt Foundation",
+	"We are pleased to inform you that you have been granted a bursary for a research stay at the Hardt Foundation.<br/>
+	Please find here attached your letter of confirmation.<br/>
+	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
+	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch<br/>
+	Please find below your login details for your account on our website :<br/>
+<br/>
+	Username : " . $username . "<br/>
+	<br/>
+	Password : " . $password . "<br/>
+	<br/>
+	Do not hesitate to contact us if you have any inquiry concerning your future stay.<br/>
+	We thank you very much for your interest in the Hardt Foundation and look forward to welcoming you soon.<br/>
+<br/>
+	Best wishes,<br/>
+	Hardt Foundation");
+	
+		echo ${"array_" . $_POST['mail_lang']}[$_POST['has_bourse']];
+	
+		die();
+
+	}// Fin rms_getUserTextMail()
 	
 	// Permet de récupérer l'id de l'attachement par son url
 	function pn_get_attachment_id_from_url( $attachment_url = '' ) {
