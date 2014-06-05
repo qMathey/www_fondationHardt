@@ -101,6 +101,9 @@
 			"Confirmer" => "Confirm",
 			"J'ai lu et j'accepte" => "I have read and agree",
 			" les conditions générales" => " the terms and conditions",
+			"Homme" => "Male",
+			"Femme" => "Female",
+			"Autre" => "Other"
 			
 		);
 		

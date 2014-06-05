@@ -75,7 +75,7 @@ jQuery(document).ready(function($){
 	$('select[name=country]').change(function()
 	{
 	
-		$('input[name=iso]').val($(this).val().toUpperCase());
+		$('input[name=iso]').val($(this).find(":selected").attr('data-iso-value').toUpperCase());
 		
 	});
 	
@@ -83,7 +83,7 @@ jQuery(document).ready(function($){
 	$('select[name=fact_country]').change(function()
 	{
 	
-		$('input[name=fact_iso]').val($(this).val().toUpperCase());
+		$('input[name=fact_iso]').val($(this).find(":selected").attr('data-iso-value').toUpperCase());
 		
 	});
 	// Action bouton de choix de chambre, etape 3
@@ -158,7 +158,6 @@ jQuery(document).ready(function($){
 									// Aller jusqu'à l'étape de confirmation
 									$("a[href^='step_" + "']").parent('li').addClass('active').addClass('done').prev().removeClass('active').addClass('done');
 									$("a[href='step_4" + "']").removeClass('disabled');
-								console.log(data);
 									// Afficher le message
 									if(data == 'user_id_error')
 									{

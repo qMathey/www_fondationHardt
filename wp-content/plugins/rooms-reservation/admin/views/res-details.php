@@ -65,6 +65,7 @@
 		get_user_meta( $post_author_id, 'number', true ),
 		get_user_meta( $post_author_id, 'postal', true ),
 		get_user_meta( $post_author_id, 'city', true ),
+		get_user_meta( $post_author_id, 'country', true ),
 		get_user_meta( $post_author_id, 'iso', true ),
 		get_user_meta( $post_author_id, 'phone_1', true ),
 		get_user_meta( $post_author_id, 'phone_2', true ),
