@@ -34,13 +34,13 @@
 	}// Fin excel_encode()
 	
 	// Headers
-/*	header("Content-Type: application/force-download");
+	header("Content-Type: application/force-download");
 	header("Content-Type: application/octet-stream");
 	header("Content-Type: application/download");
 	header("Content-Disposition: attachment; filename=\"exportlst2_".date("Y-m-d")."_" . mb_substr(sha1(time()), 0, 5) .".xls\"");
 	header("Content-Transfer-Encoding: binary");
 	header("Pragma: no-cache");
-	header("Expires: 0");*/
+	header("Expires: 0");
 
 	// Démarrer l'export
 	xlsBOF();
@@ -65,58 +65,12 @@
 	
 	$reservations_list = $wpdb->get_results("
 		SELECT * FROM $wpdb->posts WHERE ID IN (
-		SELECT post_id
-		FROM  $wpdb->postmeta
-			WHERE (
-			(
-				meta_key =  'rms_reservation_start'
-				AND meta_value >=" . $start_date . "
-				AND meta_value <=" . $end_date . "
+			SELECT post_id FROM $wpdb->postmeta WHERE (
+				meta_key = 'rms_reservation_end' AND meta_value >= " . $start_date . "
 			)
-			OR (
-				meta_key =  'rms_reservation_end'
-				AND meta_value >=" . $start_date . "
-				AND meta_value <=" . $end_date . "
+			AND post_id IN (
+				SELECT post_id FROM $wpdb->postmeta WHERE meta_key = 'rms_reservation_start' AND meta_value <= " . $end_date . "
 			)
-			OR (
-				(
-					meta_key =  'rms_reservation_start'
-					AND meta_value <=" . $start_date . "
-				)
-					AND (
-					meta_key =  'rms_reservation_end'
-					AND meta_value >=" . $end_date . "
-				)
-			)
-		)
-		)"
-	);
-	echo ("
-		SELECT * FROM $wpdb->posts WHERE ID IN (
-		SELECT post_id
-		FROM  $wpdb->postmeta
-			WHERE (
-			(
-				meta_key =  'rms_reservation_start'
-				AND meta_value >=" . $start_date . "
-				AND meta_value <=" . $end_date . "
-			)
-			OR (
-				meta_key =  'rms_reservation_end'
-				AND meta_value >=" . $start_date . "
-				AND meta_value <=" . $end_date . "
-			)
-			OR (
-				(
-					meta_key =  'rms_reservation_start'
-					AND meta_value <=" . $start_date . "
-				)
-					AND (
-					meta_key =  'rms_reservation_end'
-					AND meta_value >=" . $end_date . "
-				)
-			)
-		)
 		)"
 	);
 		
