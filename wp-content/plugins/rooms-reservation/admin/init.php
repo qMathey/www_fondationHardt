@@ -665,8 +665,8 @@ add_action( 'save_post', 'prfx_meta_save' );
 				$message = $_POST['fields']['field_536c86cc29766'];
 				
 				// parse message remove les slashes /
-				$message = stripslashes_deep ( $message );
-				
+				$message = nl2br( stripslashes_deep ( $message ) );
+		
 				// Mettre à jour le meta d'envoi d'email
 				if( wp_mail( $mail, $mail_title, $message, $headers, $attachments) )
 					update_post_meta( $post -> ID, 'rms_reservation_email', 1 );
