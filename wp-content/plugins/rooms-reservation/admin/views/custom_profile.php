@@ -18,6 +18,7 @@
 		get_user_meta( $user_id, 'number', true ),
 		get_user_meta( $user_id, 'postal', true ),
 		get_user_meta( $user_id, 'city', true ),
+		get_user_meta( $user_id, 'country', true ),
 		get_user_meta( $user_id, 'iso', true ),
 		get_user_meta( $user_id, 'phone_1', true ),
 		get_user_meta( $user_id, 'phone_2', true ),
@@ -26,7 +27,8 @@
 		get_user_meta( $user_id, 'function', true ),
 		get_user_meta( $user_id, 'references', true ),
 		get_user_meta( $user_id, 'theme', true ),
-		get_user_meta( $user_id, 'regime', true )
+		get_user_meta( $user_id, 'regime', true ),
+		get_user_meta( $user_id, 'remarks', true )
 	);
 	?>
 	<table class="form-table">
@@ -72,8 +74,12 @@
 									// Afficher lien
 									echo '<textarea name="' . $data[2] . '" cols=5 rows=6>' . $arrDemoUserData[$i] . '</textarea>';
 									break;
-								case "radio" :
-									echo '<label><input type="radio" name="sex" value="0" checked>Male</label> <label><input type="radio" name="sex" value="1">Female</label>';
+								case "radio" :									
+									echo '<select name="sex">
+											<option value="H" '; if( $arrDemoUserData[$i] == 'M') echo 'selected'; echo '>Homme</option> 
+											<option value="F" '; if( $arrDemoUserData[$i] == 'F') echo 'selected'; echo '>Femme</option> 
+											<option value="O" '; if( $arrDemoUserData[$i] == 'O') echo 'selected'; echo '>Autre</option>
+										</select>';
 									break;
 								default :
 									// Sinon afficher donnees

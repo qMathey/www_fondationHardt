@@ -1017,7 +1017,8 @@ add_action( 'save_post', 'prfx_meta_save' );
 			array(__("Fonction actuelle", "rms_reservation"), __("Etudes"), "function", "text"),
 			array(__("Références", "rms_reservation"), __("Etudes"), "references", "text"),
 			array(__("Thème de la recherche durant le séjour", "rms_reservation"),__("Etudes"), "theme", "textarea"),
-			array(__("Régimes/allergies", "rms_reservation"),__("General"), "regime","textarea")
+			array(__("Régimes/allergies", "rms_reservation"),__("General"), "regime","textarea"),
+			array(__("Remarques", "rms_reservation"),__("General"), "remarks","textarea")
 		);
 		
 		// Retourner le tableau
@@ -1138,7 +1139,8 @@ add_action( 'save_post', 'prfx_meta_save' );
 			"function",
 			"references",
 			"theme",
-			"regime"
+			"regime",
+			"remarks"
 		);	
 		
 		
