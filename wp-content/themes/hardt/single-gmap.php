@@ -103,6 +103,13 @@
 					// correction mobile pour le placement
 					jQuery("div.page_content_wrap").css("margin-top", "165px");
 					jQuery("div.container").css("margin-top", "0px");
+					
+					// spécificité Android 
+					if( isAndroid ) {
+						jQuery("#map").css("top", "-385px");
+						jQuery("#map").css("position", "absolute");
+					}
+					
 				}
 				else { // desktop
 				
@@ -113,6 +120,8 @@
 					jQuery(".logo").css("margin-top", "7%");
 					jQuery("div.page_content_wrap").css("margin-top", "5%");
 				}
+				
+				
 			});
 		
 		
