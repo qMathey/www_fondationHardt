@@ -73,7 +73,6 @@
 			)
 		)"
 	);
-		
 	$i = 0;
 	// Parcourir les réservations
 	foreach ( $reservations_list as $post )
@@ -83,8 +82,8 @@
 	
 		$i++;
 		
-		// Données de l'utilisateur (TODO)
-		$post_author_id = get_post_field( 'post_author', get_the_ID() );
+		// Données de l'utilisateur
+		$post_author_id = get_post_meta(get_the_ID(), 'rms_reservation_client', true );
 		
 		$usr_lastname = get_user_meta( $post_author_id, 'last_name', true ); 
 		$usr_firstname = get_user_meta( $post_author_id, 'first_name', true ); 
