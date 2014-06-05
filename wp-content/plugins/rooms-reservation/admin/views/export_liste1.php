@@ -75,6 +75,7 @@
 	
 	$i = 0;
 	
+	// Parcourir labels
 	foreach( $arrBasicUserMeta as $meta=>$label )
 	{
 	
@@ -82,7 +83,7 @@
 		
 		$i++;
 	}
-		
+	
 	xlsWriteLabel( 0, $i, utf8_decode('Chambre') );
 	xlsWriteLabel( 0, $i+1, utf8_decode('Tarif/nuitée') );
 	xlsWriteLabel( 0, $i+2, utf8_decode('Date d\'arrivée') );
@@ -110,17 +111,20 @@
 		
 		$loop->the_post();
 		
-		// Données de l'utilisateur (TODO)
-		$post_author_id = get_post_field( 'post_author', get_the_ID() );
+		// Données de l'utilisateur
+		$post_author_id = get_post_meta(get_the_ID(), 'rms_reservation_client', true );
+		
 		$j = 0;
 	
-	foreach( $arrBasicUserMeta as $meta=>$label )
-	{
-	
-		xlsWriteLabel( $i, $j, utf8_decode( get_user_meta($post_author_id, $meta, true) ) );
+		// Parcourir données réservations
+		foreach( $arrBasicUserMeta as $meta=>$label )
+		{
 		
-		$j++;
-	}
+			xlsWriteLabel( $i, $j, utf8_decode( get_user_meta($post_author_id, $meta, true) ) );
+			
+			$j++;
+		}
+		
 		$usr_last_name = get_user_meta( $post_author_id, 'last_name', true );
 		
 		$usr_first_name = get_user_meta( $post_author_id, 'first_name', true );
