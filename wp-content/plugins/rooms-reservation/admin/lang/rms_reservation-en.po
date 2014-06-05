@@ -1,0 +1,189 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Rooms reservation\n"
+"POT-Creation-Date: 2014-06-05 13:50+0100\n"
+"PO-Revision-Date: 2014-06-05 13:52+0100\n"
+"Last-Translator: Damien Fayet <damien.fayet@think-webdesign.ch>\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\www_fondationHardt\\wp-content\\plugins"
+"\\rooms-reservation\\admin\\views\n"
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:93
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:94
+msgid "Voir le détail"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:121
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:126
+msgid "Dates en conflit"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:124
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:129
+msgid "Aucun email n'a été envoyé"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:132
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:137
+msgid "<strong>! DATES EN CONFLITS !</strong>"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:151
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:162
+msgid "Séjour N°"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:152
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:163
+msgid "Hôte"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:153
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:164
+msgid "Dates"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:154
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:165
+msgid "Chambre"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:155
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:168
+msgid "Etat"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:267
+msgid "Archives des réservations"
+msgstr "Archives"
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:271
+msgid "Consulter la liste des réservations archivées"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:276
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:301
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:281
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:295
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:306
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:332
+msgid "Réservation refusée"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:277
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:303
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:282
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:296
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:307
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:333
+msgid "Réservation en attente"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:278
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:302
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:284
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:298
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:309
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:335
+msgid "Réservation acceptée"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/archives.php:290
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:321
+msgid "Rechercher"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:148
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:173
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:176
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:200
+msgid "Chambre N°"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:274
+msgid "Planning des réservations"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:283
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/calendar.php:297
+msgid "Conflit de dates"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/custom_profile.php:124
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/res-details.php:98
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/res-details.php:213
+msgid "Voir le document"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/export.php:6
+msgid "Exporter des données"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/export.php:8
+msgid ""
+"Vous avez la possibilités de récupérer des données ( chambres, hôtes, "
+"réservations) au format Excel (.xlsx)"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/export.php:10
+msgid "Choisissez ce que vous voulez exporter"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/export.php:13
+msgid "Réservation par chambre avec informations hôte"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/export.php:20
+msgid "Occupation des chambres par semaine"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/res-details.php:159
+msgid "Détail de la réservation N°"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/res-details.php:160
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:95
+msgid "Editer la réservation"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/res-details.php:165
+msgid "Informations concernant le séjour"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/res-details.php:235
+msgid "Information concernant l'hôte"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:166
+msgid "Coût du séjour"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:167
+msgid "Date de réservation"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:296
+msgid "Liste des réservations"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:297
+msgid "Ajouter une réservation"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:301
+msgid "Consulter la liste des récentes réservations"
+msgstr ""
+
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:308
+#: C:\wamp\www\www_fondationHardt\wp-content\plugins\rooms-reservation\admin\views/reservation.php:334
+msgid "En attente, conflit de dates"
+msgstr ""
