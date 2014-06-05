@@ -610,10 +610,6 @@ $message = "Nous vous remercions de votre intérêt pour la Fondation Hardt.<br/
 <br/>
 Votre demande de bourse pour un séjour scientifique à la Fondation a bien été enregistrée. Votre dossier sera examiné dès la fin du délai de candidature (30 novembre / 30 avril). Nous vous contacterons dès que le processus d’attribution des bourses sera terminé.
 <br/>
-Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
-Nom d'utilisateur : " . $user_name . "<br/>
-Mot de Passe : " . $random_password . "<br/>
-<br/>
 Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 Avec nos remerciements et nos salutations les meilleures,<br/>
 <br/>
@@ -628,9 +624,6 @@ $message = "Thank you very much for your interest in The Hardt Foundation. We ha
 All applications will be examined after the submission deadline (30th November / 30th April). We will contact you as soon as the selection process is over.<br/>
 <br/>
 Please find below your login details for your account on our website :<br/>
-<br/>
-Username : " . $user_name . "<br/>
-Password : " . $random_password . "<br/>
 <br/>
 For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 <br/>
@@ -657,9 +650,6 @@ Nous vous confirmerons la réservation dès que possible.<br/>
  <br/>
 Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
 <br/>
-Nom d'utilisateur : " . $user_name . "<br/>
-Mot de Passe : " . $random_password . "<br/>
-<br/>
 Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 Avec nos remerciements et nos salutations les meilleures,<br/>
 <br/>
@@ -677,10 +667,6 @@ We have received your request for a scientific stay at the Foundation. Please no
 We will contact you as soon as possible to confirm the reservation.<br/>
 <br/>
 Please find below your login details for your account on our website :<br/>
-<br/>
-Username : " . $user_name . "<br/>
-<br/>
-Password : " . $random_password . "<br/>
 <br/>
 For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 <br/>
