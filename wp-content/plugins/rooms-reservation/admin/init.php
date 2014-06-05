@@ -529,6 +529,9 @@ add_action( 'save_post', 'prfx_meta_save' );
 		
 		$user_lang = get_user_meta(get_post_meta($post -> ID, 'rms_reservation_client', true), 'user_lang',true);
 		
+		if( !$user_lang )
+			$user_lang = "fr";
+		
 		wp_localize_script( 'rms_admin_js', 'local_text',
 			array( 'lang' => $user_lang, 'bourse' => get_post_meta($post -> ID, 'has_bourse', true) ? 1 : 0)
 		);
@@ -1183,23 +1186,28 @@ add_action( 'save_post', 'prfx_meta_save' );
 		global $post;
 		
 		$user_data = get_field('rms_reservation_client', $post -> ID);
-		 
+		
+		$username = "";
+		$password = "";
 		// Correction Bug offset 'ID' undefined
 		$user_data_id = 0;
 		if(isset($user_data['ID']))
+		{
 			$user_data_id = $user_data['ID'];
+			$random_password = wp_generate_password( $length=8, $include_standard_special_chars=false );
+		
+			wp_set_password( $random_password, $user_data_id );
+			$user_info = get_userdata( $user_data_id );
+			$username = $user_info -> user_login;
+			$password = $random_password;
+		}
 		else
 			$user_data_id = $user_data;
-						
+	
 		$user_lang = get_user_meta( $user_data_id,'user_lang', true);
 		
-		
-		$random_password = wp_generate_password( $length=8, $include_standard_special_chars=false );
-		
-		wp_set_password( $random_password, $user_data_id );
-		$user_info = get_userdata( $user_data_id );
-		$username = $user_info -> user_login;
-		$password = $random_password;
+		if( !$user_lang )
+			$user_lang = "fr";	
 	
 		if( !get_post_meta( $post -> ID, 'has_bourse', true ) )
 						{
