@@ -208,9 +208,17 @@
 			$this->_column_headers = array($columns, $hidden, $sortable);
 			
 			$data = array();
+			$search = "";
+			
+			// Si recherche demandée, on la prend en compte
+			if( isset( $_POST['s'] ) ) {
+			
+				$search = $_POST['s'];
+			
+			}// Fin if()
 			
 			// Obtenir la liste des réservations
-			$args = array( 'post_type' => 'rms_reservation', 'posts_per_page' => 200, 'post_status' => 'publish' );
+			$args = array( 'post_type' => 'rms_reservation', 'posts_per_page' => 200, 'post_status' => 'publish', 's' => $search );
 			
 			$loop = new WP_Query( $args );
 			
@@ -251,6 +259,7 @@
 				$roomLink = '<a href="' . get_edit_post_link($roomData -> ID) . '">' . $roomNumber . ' / ' . $roomData -> post_title . '</a>';
 				
 				$data[] = array('id' => get_the_ID(), 'title' => get_the_title(), 'hote' =>  $post_author_id, 'dates' => $dates, 'room' => $roomLink , 'price' => $dataPrice, 'state'=> $status, 'email' => $email, 'date_res' => get_post_time('U', true));
+				
 
 			}
 		
@@ -288,9 +297,7 @@
     // Charger la table de donnees
     $rmsTable = new rmsReservation_datatable();
     $rmsTable->prepare_items();
-    
 ?>
-
 <div class="wrap rms_reservation">
 	<h2>
 		<?php _e( 'Liste des réservations' ); ?>
@@ -312,14 +319,9 @@
 	
 	<form method="post">
 		<input type="hidden" name="page" value="my_list_test" />
-		<p class="search-box" style="margin-bottom:5px;">
-			<label class="screen-reader-text" for="search_id-search-input">
-				search:
-			</label> 
-			
-			<input id="search_id-search-input" type="text" name="s" value="" /> 
-			<input id="search-submit" class="button" type="submit" name="" value="<?php _e( 'Rechercher', 'rms_reservation' ); ?>" />
-		</p>
+		
+		<?php $rmsTable->search_box('Rechercher', 'search_id'); ?>
+		
 	</form>
 	
 	<form id="reservation-list" method="get">
