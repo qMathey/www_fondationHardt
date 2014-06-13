@@ -156,6 +156,7 @@
 					else
 					{
 						$user_id = get_current_user_id();
+						$user_email = sanitize_email( $_POST['email'] );
 							// Vérifier si cas de bourse
 		if( $_POST['gimme_scolarship'] )
 		{
