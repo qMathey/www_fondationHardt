@@ -7,6 +7,18 @@ var isIphone = false;
 
 jQuery(document).ready(function($){
 
+	// Afficher-masquer overflow selon taille fenêtre
+	$( window ).resize(function()
+	{
+		if( $( window ).width() < 1325)
+		{
+			$('body').css('overflowX', 'visible'); 
+		}
+		else
+			$('body').css('overflowX', 'hidden');
+		
+	});
+	
 	isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 	isAndroid = /Android|webOS|BlackBerry/i.test(navigator.userAgent);
 	isIpad = /iPad/i.test(navigator.userAgent);
