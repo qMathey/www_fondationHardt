@@ -45,7 +45,10 @@ if ( is_admin_bar_showing() )
 	$i = 0;
 	$args = array( 'post_type' => 'home_post', 'posts_per_page' => 10 );
 	$loop = new WP_Query( $args );
+	?>
 	
+<div class="bounce_arrow"></div>
+<?php
 	while ( $loop->have_posts() ) : $loop->the_post();
 	
 ?>
@@ -81,6 +84,7 @@ if ( is_admin_bar_showing() )
 	$i++;
 	
 	endwhile;
-
+?>
+<?php
 	get_footer();
 ?>

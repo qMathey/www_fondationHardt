@@ -505,3 +505,77 @@ section.home .logo {
 #map {
 	height: 100%;
 }
+
+.bounce_arrow {
+	position: absolute;
+	width:80px;
+	height:52px;
+	bottom:20px;
+	opacity: 0.5;
+	margin-left: auto;
+	margin-right: auto;
+	z-index:5;
+	background:url('img/arrow.png');
+	-moz-animation:bounce 1.5s linear infinite;
+	-webkit-animation:bounce 1.5s linear infinite;
+	-o-animation:bounce 1.5s linear infinite;
+	animation:bounce 1.5s linear infinite;
+}
+
+
+@-moz-keyframes bounce {
+	from{top:106px;}
+	10%{top:99px;}
+	20%{top:93px;}
+	30%{top:89px;}
+	40%{top:87px;}
+	50%{top:86px;}
+	60%{top:87px;}
+	70%{top:89px;}
+	80%{top:93px;}
+	90%{top:99px;}
+	to{top:106px;}
+}
+ 
+@-webkit-keyframes bounce {
+	from{top:106px;}
+	10%{top:99px;}
+	20%{top:93px;}
+	30%{top:89px;}
+	40%{top:87px;}
+	50%{top:86px;}
+	60%{top:87px;}
+	70%{top:89px;}
+	80%{top:93px;}
+	90%{top:99px;}
+	to{top:106px;}
+}
+
+@-o-keyframes bounce {
+	from{top:106px;}
+	10%{top:99px;}
+	20%{top:93px;}
+	30%{top:89px;}
+	40%{top:87px;}
+	50%{top:86px;}
+	60%{top:87px;}
+	70%{top:89px;}
+	80%{top:93px;}
+	90%{top:99px;}
+	to{top:106px;}
+}
+
+
+@keyframes bounce {
+	from{top:106px;}
+	10%{top:99px;}
+	20%{top:93px;}
+	30%{top:89px;}
+	40%{top:87px;}
+	50%{top:86px;}
+	60%{top:87px;}
+	70%{top:89px;}
+	80%{top:93px;}
+	90%{top:99px;}
+	to{top:106px;}
+}

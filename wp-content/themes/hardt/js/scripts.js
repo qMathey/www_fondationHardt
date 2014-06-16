@@ -7,6 +7,26 @@ var isIphone = false;
 
 jQuery(document).ready(function($){
 
+	// On scroll
+	$(window).scroll(function() {
+		// Si plus bas que le top, masquer flèche
+		if ($(this).scrollTop() > 0) {
+		
+			$('.bounce_arrow').fadeOut();
+			
+		}
+		else
+		{
+			// Afficher flèche
+			$('.bounce_arrow').fadeIn();
+			
+		}
+		
+	});// scroll
+	
+	// place la fleche indiquant de scroller par défaut
+	placementFlecheScrollBottom($);
+
 	// Afficher-masquer overflow selon taille fenêtre
 	$( window ).resize(function()
 	{
@@ -16,6 +36,9 @@ jQuery(document).ready(function($){
 		}
 		else
 			$('body').css('overflowX', 'hidden');
+			
+		// place la flèche indiquant de scroller au middle bottom
+		placementFlecheScrollBottom($);
 		
 	});
 	
@@ -339,4 +362,24 @@ function isHomepage($) {
 		return true;
 	else
 		return false;
+}
+
+/**
+ * Permet de placer en bas au millieu la flèche qui indique qu'il faut scroll vers le bas
+ */
+function placementFlecheScrollBottom($) {
+	var winWidth = $(window).width();
+	var winHeight = $(window).height();
+	
+	var $fleche = $(".bounce_arrow").first();
+	var flecheWidth = $fleche.width();
+	var flecheHeight = $fleche.height();
+	
+	var navigationHeight = $(".navigation").first().outerHeight();
+	
+	console.log(navigationHeight);
+	
+	$fleche.css("margin-left", (winWidth/2 - flecheWidth /2)+"px");
+	$fleche.css("margin-top", (winHeight - flecheHeight - navigationHeight - 150)+"px");
+	
 }
