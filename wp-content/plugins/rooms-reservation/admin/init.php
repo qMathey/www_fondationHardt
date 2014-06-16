@@ -1501,4 +1501,70 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 
 		return trim($string, ' -');
 	}
+	
+	/**
+	 * Modifie le message lors du reset password 
+	 */
+	function reset_password_message( $message, $key ) {
+
+		global $wpdb;
+	
+		if ( strpos($_POST['user_login'], '@') ) {
+			$user_data = get_user_by('email', trim($_POST['user_login']));
+		} else {
+			$login = trim($_POST['user_login']);
+			$user_data = get_user_by('login', $login);
+		}
+		
+		$user_login = $user_data->user_login;
+		
+		$linkToReset = network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login');
+		
+
+		// Default message
+		$msg = __('Someone requested that the password be reset for the following account:'). "<br />";
+		$msg .= network_site_url() . "<br />";
+		$msg .= sprintf(__('Username: %s'), $user_login) . "<br />";
+		$msg .= __('If this was a mistake, just ignore this email and nothing will happen.') . "<br />";
+		$msg .= __('To reset your password, visit the following address:');
+		$msg .=  "<br />";
+		$msg .= '<a href="'.$linkToReset.'">'.$linkToReset.'</a>'. "\r\n";
+			
+		
+		// A la demande d'agencies, si l'utilisateur n'a pas de réservation confirmée, on indique par email qu'il n'a pas encore de réservation confirmée.
+		$requete = $wpdb->get_row("SELECT * FROM $wpdb->postmeta as postmeta1 INNER JOIN $wpdb->postmeta as postmeta2 ON postmeta1.post_id = postmeta2.post_id WHERE postmeta1.meta_key = 'rms_reservation_status' AND postmeta1.meta_value = 1 AND postmeta2.meta_key =  'rms_reservation_client' AND postmeta2.meta_value = ".$user_data->ID);
+		
+		if($requete == null) {
+		
+			$msgAnglais = "You have no confirmed registration. We can not give your password yet."."<br />";
+			$msgAnglais .= "For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a>"."<br />";
+			$msgAnglais .= "Best wishes,"."<br />";
+			$msgAnglais .= "Hardt Foundation";
+			
+			$msgFrancais = "Vous n'avez pas de réservation confirmée. Nous ne pouvons pas vous envoyer votre mot de passe."."<br />";
+			$msgFrancais .= "Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a>"."<br />";
+			$msgFrancais .= "Avec nos remerciements et nos salutations les meilleures,"."<br />";
+			$msgFrancais .= "Fondation Hardt";
+			
+			$lang = get_user_meta($user_data->ID, "user_lang", true);
+			
+			switch($lang) {
+				case 'fr' :
+					$msg = $msgFrancais;
+					break;
+				case 'en' :
+					$msg = $msgAnglais;
+				break ;
+				default :
+					$msg = $msgAnglais;
+					break;
+			}
+		
+		}
+
+		return $msg;
+
+	}
+
+	add_filter('retrieve_password_message', reset_password_message, null, 2);
 ?>
