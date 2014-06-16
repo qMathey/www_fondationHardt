@@ -668,12 +668,16 @@ add_action( 'save_post', 'prfx_meta_save' );
 				// parse message remove les slashes /
 				$message = nl2br( stripslashes_deep ( $message ) );
 		
-		
-				wp_set_password( $_POST['password'], $_POST['fields']['field_533d6b7fffca0'] );
 				
 				// Mettre à jour le meta d'envoi d'email
 				if( wp_mail( $mail, $mail_title, $message, $headers, $attachments) )
+				{
 					update_post_meta( $post -> ID, 'rms_reservation_email', 1 );
+					
+					
+					if( isset( $_POST['user_password'] ))
+						wp_set_password( $_POST['user_password'], $_POST['fields']['field_533d6b7fffca0'] );
+				}
 				
 			}// Fin if( !get_post_meta( $post -> ID, 'rms_reservation_email', true ) )
 			
