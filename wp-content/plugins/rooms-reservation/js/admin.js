@@ -130,7 +130,8 @@ else
 			action: "user_get_mail",
 			"has_bourse": bourse_index,
 			"mail_lang": lang_index,
-			"user_id": $("#acf-field-rms_reservation_client").val()
+			"user_id": $("#acf-field-rms_reservation_client").val(),
+			"user_password": $("#user_password").val(),
 		}, function( data ) {
 			// Mettre à jour le message
 			

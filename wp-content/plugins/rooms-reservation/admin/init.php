@@ -590,6 +590,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 		// Vérifier si il s'agit d'une réservation
 		if( $post -> post_type == 'rms_reservation' )
 		{
+		
 			// Forcer la mise à jour des meta avant les contrôles de conflits
 			update_user_meta($_POST['fields']['field_533d6b7fffca0'], 'user_lang', $_POST['lang']);
 			update_post_meta($id, 'has_bourse', $_POST['rms_reservation_has_bourse']);
@@ -667,6 +668,9 @@ add_action( 'save_post', 'prfx_meta_save' );
 				// parse message remove les slashes /
 				$message = nl2br( stripslashes_deep ( $message ) );
 		
+		
+				wp_set_password( $_POST['password'], $_POST['fields']['field_533d6b7fffca0'] );
+				
 				// Mettre à jour le meta d'envoi d'email
 				if( wp_mail( $mail, $mail_title, $message, $headers, $attachments) )
 					update_post_meta( $post -> ID, 'rms_reservation_email', 1 );
@@ -1223,13 +1227,15 @@ add_action( 'save_post', 'prfx_meta_save' );
 			$user_data_id = $user_data['ID'];
 			$random_password = wp_generate_password( $length=8, $include_standard_special_chars=false );
 		
-			wp_set_password( $random_password, $user_data_id );
 			$user_info = get_userdata( $user_data_id );
 			$username = $user_info -> user_login;
 			$password = $random_password;
+			
+			echo '<input type="hidden" name="user_password" id="user_password" value="' . $password . ' " />';
 		}
 		else
 			$user_data_id = $user_data;
+	
 	
 		$user_lang = get_user_meta( $user_data_id,'user_lang', true);
 		
@@ -1386,12 +1392,9 @@ add_action( 'save_post', 'prfx_meta_save' );
 	function rms_getUserTextMail()
 	{
 	
-	$random_password = wp_generate_password( $length=8, $include_standard_special_chars=false );
-	
-	wp_set_password( $random_password, $_POST['user_id'] );
 	$user_info = get_userdata( $_POST['user_id'] );
 	$username = $user_info -> user_login;
-	$password = $random_password;
+	$password = $_POST['user_password'];
 	
 $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classique a le plaisir de confirmer votre inscription à un séjour d’étude scientifique.<br/>
 	Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.<br/>
