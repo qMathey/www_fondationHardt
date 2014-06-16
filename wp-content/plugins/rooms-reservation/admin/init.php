@@ -793,11 +793,11 @@ add_action( 'save_post', 'prfx_meta_save' );
 					// rien
 					break;
 				
-				case 1 : // statut "refusé"
+				case 1 : // statut "accepté"
 					// rien
 					break;
 				
-				case 2 : // statut "accepté"
+				case 2 : // statut "refusé"
 					// rien
 					break;
 				
@@ -1018,16 +1018,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 			array(__("Références", "rms_reservation"), __("Etudes"), "references", "text"),
 			array(__("Thème de la recherche durant le séjour", "rms_reservation"),__("Etudes"), "theme", "textarea"),
 			array(__("Régimes/allergies", "rms_reservation"),__("General"), "regime","textarea"),
-			array(__("Remarques", "rms_reservation"),__("General"), "remarks","textarea"),
-			array(__("Adresse", "rms_reservation"),__("General"), "fact_street","text"),
-			array(__("N°", "rms_reservation"),__("General"), "fact_number","text"),
-			array(__("Ville de facturation", "rms_reservation"),__("General"), "fact_city","text"),
-			array(__("Code postal", "rms_reservation"),__("General"), "fact_postal","text"),
-			array(__("Pays", "rms_reservation"),__("General"), "fact_country","country_select"),
-			array(__("ISO", "rms_reservation"),__("General"), "fact_iso","text"),
-			array(__("Téléphone 1", "rms_reservation"),__("General"), "fact_phone_1","text"),
-			array(__("Téléphone 2", "rms_reservation"),__("General"), "fact_phone_2","text"),
-			array(__("Email de facturation", "rms_reservation"),__("General"), "fact_email","text")
+			array(__("Remarques", "rms_reservation"),__("General"), "remarks","textarea")
 		);
 		
 		// Retourner le tableau
@@ -1050,7 +1041,6 @@ add_action( 'save_post', 'prfx_meta_save' );
 			array("Numéro de rue",  "Facturation", "text"),
 			array("Ville",  "Facturation", "text"),
 			array("Code postal",  "Facturation", "text"),
-			array("Pays",  "Facturation", "text"),
 			array("Code ISO",  "Facturation", "text"),
 			array("Téléphone 1",  "Facturation", "text"),
 			array("Téléphone 2",  "Facturation", "text"),
@@ -1153,26 +1143,13 @@ add_action( 'save_post', 'prfx_meta_save' );
 			"remarks"
 		);	
 		
+		
 		// Parcourir les champs à mettre à jour
 		foreach($userFieldArray as $field_name)
 		{
 			// Mettre à jour les metas de l'utilisateur
 			update_user_meta( $user_id, $field_name, $_POST[$field_name] );
 		}
-		
-		// Données de facturation différentes
-		if( empty( $_POST['is_same_fact'] ) )
-		{
-			update_user_meta( $user_id, "fact_street", $_POST["fact_street"] );
-			update_user_meta( $user_id, "fact_number", $_POST["fact_number"] );
-			update_user_meta( $user_id, "fact_city", $_POST["fact_city"] );
-			update_user_meta( $user_id, "fact_postal", $_POST["fact_postal"] );
-			update_user_meta( $user_id, "fact_country", $_POST["fact_country"] );
-			update_user_meta( $user_id, "fact_iso", $_POST["fact_iso"] );
-			update_user_meta( $user_id, "fact_email", $_POST["fact_email"] );
-			update_user_meta( $user_id, "fact_phone_1", $_POST["fact_phone_1"] );
-			update_user_meta( $user_id, "fact_phone_2", $_POST["fact_phone_2"] );			
-		}// Fin if()
 		
 		// cas particulier pour sex
 		
@@ -1501,4 +1478,74 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 
 		return trim($string, ' -');
 	}
+	
+	/**
+	 * Modifie le message lors du reset password 
+	 */
+	function reset_password_message( $message, $key ) {
+
+		global $wpdb;
+	
+		if ( strpos($_POST['user_login'], '@') ) {
+			$user_data = get_user_by('email', trim($_POST['user_login']));
+		} else {
+			$login = trim($_POST['user_login']);
+			$user_data = get_user_by('login', $login);
+		}
+		
+		$user_login = $user_data->user_login;
+		
+		$linkToReset = network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login');
+		
+
+		// Default message
+		$msg = __('Someone requested that the password be reset for the following account:'). "<br />";
+		$msg .= network_site_url() . "<br />";
+		$msg .= sprintf(__('Username: %s'), $user_login) . "<br />";
+		$msg .= __('If this was a mistake, just ignore this email and nothing will happen.') . "<br />";
+		$msg .= __('To reset your password, visit the following address:');
+		$msg .=  "<br />";
+		$msg .= '<a href="'.$linkToReset.'">'.$linkToReset.'</a>'. "\r\n";
+			
+		
+		// A la demande d'agencies, si l'utilisateur n'a pas de réservation confirmée, on indique par email qu'il n'a pas encore de réservation confirmée.
+		$requete = $wpdb->get_row("SELECT * FROM $wpdb->postmeta as postmeta1 INNER JOIN $wpdb->postmeta as postmeta2 ON postmeta1.post_id = postmeta2.post_id WHERE postmeta1.meta_key = 'rms_reservation_status' AND postmeta1.meta_value = 1 AND postmeta2.meta_key =  'rms_reservation_client' AND postmeta2.meta_value = ".$user_data->ID);
+		
+		if($requete == null) {
+		
+			$msgAnglais = "You have no confirmed registration. We can not give your password yet."."<br />";
+			$msgAnglais .= "For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a>"."<br />";
+			$msgAnglais .= "Best wishes,"."<br />";
+			$msgAnglais .= "Hardt Foundation";
+			
+			$msgFrancais = "Vous n'avez pas de réservation confirmée. Nous ne pouvons pas vous envoyer votre mot de passe."."<br />";
+			$msgFrancais .= "Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a>"."<br />";
+			$msgFrancais .= "Avec nos remerciements et nos salutations les meilleures,"."<br />";
+			$msgFrancais .= "Fondation Hardt";
+			
+			$lang = get_user_meta($user_data->ID, "user_lang", true);
+			
+			switch($lang) {
+				case 'fr' :
+					$msg = $msgFrancais;
+					break;
+				case 'en' :
+					$msg = $msgAnglais;
+				break ;
+				default :
+					$msg = $msgAnglais;
+					break;
+			}
+		
+		}
+
+		return $msg;
+
+	}
+
+	add_filter('retrieve_password_message', reset_password_message, null, 2);
+	
+	
+	
+	
 ?>
