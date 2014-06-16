@@ -5,6 +5,7 @@
 	// Initialiser le frontend
 	rms_reservation_frontend();
 		
+	$blnMultipleCols = ( isset($blnMultipleCols) ? $blnMultipleCols : 0);
 	
 	$i = 0;
 	if ( have_posts() ) : while ( have_posts() ) : the_post(); 

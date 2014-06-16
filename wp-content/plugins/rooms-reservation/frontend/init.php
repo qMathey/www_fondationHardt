@@ -13,7 +13,8 @@
 		
 		// Propriétés Ajax
 		wp_localize_script( 'rms_frontend_js', 'ajax_object',
-			array( 'ajax_url' => plugins_url('/rooms-reservation/frontend/frontend_ajax.php'))
+			array( 'ajax_url' => plugins_url('/rooms-reservation/frontend/frontend_ajax.php'),
+					'ajax_url_admin' => admin_url('admin-ajax.php'))
 		);
 		
 	}// Fin rms_reservation_frontend()
@@ -103,7 +104,9 @@
 			" les conditions générales" => " the terms and conditions",
 			"Homme" => "Male",
 			"Femme" => "Female",
-			"Autre" => "Other"
+			"Autre" => "Other",
+			"Générer un mot de passe" => "Get New Password",
+			"Identifiant ou adresse de messagerie" => "Username or E-mail"
 			
 		);
 		
@@ -125,4 +128,5 @@
 	{
 		return 'text/html';
 	}
+
 ?>

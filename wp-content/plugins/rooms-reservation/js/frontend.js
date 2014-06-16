@@ -667,6 +667,78 @@ jQuery(document).ready(function($){
 		}
 	});
 	
+	// Afficher/masquer formulaire de récupération du mot de passe
+	$('.toggle_passwordform').click(function(e){
+	
+		e.preventDefault();
+		
+		$("#lostpasswordform").slideToggle();
+	});
+	
+	// Traiter formulaire
+	$('#reset_pwd_submit').click(function(e){
+	
+		e.preventDefault();
+		
+		$('p.step_content').empty();
+		
+		var result_text = '';
+		
+		var user_lang = $('.right_top_lang_menu li a.active').text();
+		
+		var defaultSubmitText = $(this).val();
+		var waiting_string = "";
+		
+		if( user_lang == 'fr' )
+			waiting_string = "Veuillez patienter...";
+		else
+			waiting_string = "Please wait...";
+			
+		$(this).val( waiting_string );
+		
+		$(this).attr("disabled", "disabled");
+		
+		$('#lostpasswordform p.fields').hide();
+		
+		jQuery.post(ajax_object.ajax_url_admin, {
+			action: "reset_password",
+			user_login: $("#user_login").val()
+		}, function( data ) {
+		
+		console.log(data);
+			if( data == 1 )
+			{
+				if( user_lang == 'fr')
+					result_text = "Un email avec votre nouveau mot de passe vous a été envoyé";
+				else
+					result_text = "We send your new password to your email adress.";
+				
+				$("#lostpasswordform").slideToggle();
+				$('#lostpasswordform p.fields').show();
+				$('#reset_pwd_submit').val(defaultSubmitText);
+				$('p.step_content').html('<span class="success">' + result_text + '</span>');
+				$('#reset_pwd_submit').removeAttr("disabled");
+				
+			}
+			else
+			{
+				if( user_lang == 'fr')
+					result_text = "Une erreur est survenue lors de la mise à jour du mot de passe"
+				else
+					result_text = "An error occurred during the reset of your password";
+				
+				$('#lostpasswordform p.fields').show();
+				$('#reset_pwd_submit').val(defaultSubmitText);
+				$('p.step_content').html('<span class="error">' + result_text + '</span>');
+				$('#reset_pwd_submit').removeAttr("disabled");
+			}
+			
+				
+		});
+		
+	});
+	
+	
 });
 
 // Fonction de validation de date

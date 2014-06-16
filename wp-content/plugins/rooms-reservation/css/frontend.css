@@ -274,3 +274,21 @@ input.file, input.cv_file {
 .ui-state-active {
 	text-decoration: underline !important;
 }
+
+span.error {
+	padding: 6px;
+	margin: 7px;
+	display: block;
+	background: #FFA6A6;
+	border: 1px solid #FF4E4E;
+	color: #A00000;
+}
+
+span.success {
+	padding: 6px;
+	margin: 7px;
+	display: block;
+	background: #a6ffa9;
+	border: 1px solid #4fff5b;
+	color: #00a129;
+}

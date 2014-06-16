@@ -1,5 +1,6 @@
 <?php
-		
+	// Constante d'email
+	define("ADMIN_MAIL", "admin@fondationhardt.ch"); 
 	// Fichier de fonction de l'administration du plugin
 	add_action( 'edit_user_profile', 'custom_user_fields', 10);
 	add_action( 'show_user_profile', 'custom_user_fields', 10);
@@ -1256,7 +1257,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	$field['default_value']  = "La Fondation Hardt pour l’étude de l’Antiquité classique a le plaisir de confirmer votre inscription à un séjour d’étude scientifique.
 	Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .
-	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch
+	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " + ADMIN_MAIL + "
 
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :
 
@@ -1274,7 +1275,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	$field['default_value']  = "We are pleased to confirm your registration for a research stay at the Hardt Foundation.
 	Please find here attached your letter of confirmation and invoice.
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
-	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch
+	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " + ADMIN_MAIL + "
 	Please find below your login details for your account on our website :
 
 	Username : " . $username . "
@@ -1300,7 +1301,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	$field['default_value']  = "Nous avons le plaisir de vous annoncer qu’une bourse vous a été attribuée pour un séjour d’étude scientifique à la Fondation Hardt.
 	Vous trouverez en pièce jointe votre lettre d’invitation.
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .
-	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch
+	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " + ADMIN_MAIL + "
 
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :
 
@@ -1318,7 +1319,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	$field['default_value']  = "We are pleased to inform you that you have been granted a bursary for a research stay at the Hardt Foundation.
 	Please find here attached your letter of confirmation.
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
-	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch
+	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " + ADMIN_MAIL + "
 	Please find below your login details for your account on our website :
 
 	Username : " . $username . "
@@ -1403,7 +1404,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classique a le plaisir de confirmer votre inscription à un séjour d’étude scientifique.<br/>
 	Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.<br/>
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
-	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch<br/>
+	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " + ADMIN_MAIL + "<br/>
 <br/>
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
 <br/>
@@ -1418,7 +1419,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	"Nous avons le plaisir de vous annoncer qu’une bourse vous a été attribuée pour un séjour d’étude scientifique à la Fondation Hardt.<br/>
 	Vous trouverez en pièce jointe votre lettre d’invitation.<br/>
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
-	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à admin@fondationhardt.ch<br/>
+	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " + ADMIN_MAIL + "<br/>
 <br/>
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
 <br/>
@@ -1434,7 +1435,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	$array_en = array("We are pleased to confirm your registration for a research stay at the Hardt Foundation.<br/>
 	Please find here attached your letter of confirmation and invoice.<br/>
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
-	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch<br/>
+	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " + ADMIN_MAIL + "<br/>
 	Please find below your login details for your account on our website :<br/>
 <br/>
 	Username : " . $username . "<br/>
@@ -1449,7 +1450,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	"We are pleased to inform you that you have been granted a bursary for a research stay at the Hardt Foundation.<br/>
 	Please find here attached your letter of confirmation.<br/>
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
-	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at admin@fondationhardt.ch<br/>
+	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " + ADMIN_MAIL + "<br/>
 	Please find below your login details for your account on our website :<br/>
 <br/>
 	Username : " . $username . "<br/>
@@ -1512,29 +1513,40 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	/**
 	 * Modifie le message lors du reset password 
 	 */
-	function reset_password_message( $message, $key ) {
+	function reset_password_message() {
 
-		global $wpdb;
+		global $wpdb, $wp_hasher;
 	
 		if ( strpos($_POST['user_login'], '@') ) {
 			$user_data = get_user_by('email', trim($_POST['user_login']));
+			
 		} else {
 			$login = trim($_POST['user_login']);
 			$user_data = get_user_by('login', $login);
 		}
 		
 		$user_login = $user_data->user_login;
+		$user_email = $user_data-> user_email;
+		$user_pass = wp_generate_password( $length=8, $include_standard_special_chars=false );
+		$lang = get_user_meta($user_data->ID, "user_lang", true);
 		
-		$linkToReset = network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login');
-		
+		$linkToReset = network_site_url("?page_id=214", 'login');
 
 		// Default message
 		$msg = __('Someone requested that the password be reset for the following account:'). "<br />";
 		$msg .= network_site_url() . "<br />";
 		$msg .= sprintf(__('Username: %s'), $user_login) . "<br />";
-		$msg .= __('If this was a mistake, just ignore this email and nothing will happen.') . "<br />";
-		$msg .= __('To reset your password, visit the following address:');
+		$msg .= sprintf(__('Password: %s'), $user_pass) . "<br />";
+		//$msg .= __('If this was a mistake, just ignore this email and nothing will happen.') . "<br />";
+		//$msg .= __('To reset your password, visit the following address:');
 		$msg .=  "<br />";
+		
+		if( $lang == "fr" )		
+			$msg .= "Accédez dès maintenant à la page de connexion : " . "<br />";
+		else
+			$msg .= "Connect you now on : ". "<br />";
+			
+		
 		$msg .= '<a href="'.$linkToReset.'">'.$linkToReset.'</a>'. "\r\n";
 			
 		
@@ -1544,17 +1556,15 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 		if($requete == null) {
 		
 			$msgAnglais = "You have no confirmed registration. We can not give your password yet."."<br />";
-			$msgAnglais .= "For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a>"."<br />";
+			$msgAnglais .= "For further information, please contact us at <a href=\"mailto:" + ADMIN_MAIL + "\">" + ADMIN_MAIL + "</a>"."<br />";
 			$msgAnglais .= "Best wishes,"."<br />";
 			$msgAnglais .= "Hardt Foundation";
 			
 			$msgFrancais = "Vous n'avez pas de réservation confirmée. Nous ne pouvons pas vous envoyer votre mot de passe."."<br />";
-			$msgFrancais .= "Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a>"."<br />";
+			$msgFrancais .= "Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:" + ADMIN_MAIL + "\">" + ADMIN_MAIL + "</a>"."<br />";
 			$msgFrancais .= "Avec nos remerciements et nos salutations les meilleures,"."<br />";
 			$msgFrancais .= "Fondation Hardt";
-			
-			$lang = get_user_meta($user_data->ID, "user_lang", true);
-			
+						
 			switch($lang) {
 				case 'fr' :
 					$msg = $msgFrancais;
@@ -1568,10 +1578,22 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 			}
 		
 		}
+		else
+		{
+		
+			wp_set_password( $user_pass, $user_data->ID );
+			
+		}
+		
+		$mail_title = sprintf( __('[%s] Password Reset'), "Hardt" );
+		$headers = 'From: Fondation Hardt <' + ADMIN_MAIL + '>' . "\r\n";
+		
+		echo wp_mail( $user_email, $mail_title, $msg, $headers );
+		
+		die();
+	}// function
+	
+	add_action( 'wp_ajax_nopriv_reset_password', 'reset_password_message' );
+	add_action( 'wp_ajax_reset_password', 'reset_password_message' );
 
-		return $msg;
-
-	}
-
-	add_filter('retrieve_password_message', reset_password_message, null, 2);
 ?>
