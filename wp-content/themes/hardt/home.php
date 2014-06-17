@@ -47,7 +47,7 @@ if ( is_admin_bar_showing() )
 	$loop = new WP_Query( $args );
 	?>
 	
-<div class="bounce_arrow"></div>
+<div class="bounce_arrow" title="Défiler pour découvrir la Fondation"></div>
 <?php
 	while ( $loop->have_posts() ) : $loop->the_post();
 	
