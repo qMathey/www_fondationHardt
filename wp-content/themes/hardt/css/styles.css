@@ -409,7 +409,7 @@ ul.right_top_lang_menu li a.active{
 	font-size: 20px;
 	position: absolute;
 	right: 0;
-	top: 70%;
+	bottom: 214px;
 	z-index: 1;
 	-webkit-transition: opacity 1s ease-in-out;
 	-moz-transition: opacity 1s ease-in-out;
@@ -434,7 +434,7 @@ section:first-of-type .citation_original {
 	font-size: 16px;
 	position: absolute;
 	right: 0;
-	top: 80%;
+	bottom: 167px;
 	width: auto;
 }
 

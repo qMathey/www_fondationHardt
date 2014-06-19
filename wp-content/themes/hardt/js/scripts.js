@@ -6,7 +6,9 @@ var isIpad = false;
 var isIphone = false;
 
 jQuery(document).ready(function($){
-
+	// Afficher scrollbar horizontal
+	displayOverFlowOnSmallScreen($);
+	
 	// On scroll
 	$(window).scroll(function() {
 		// Si plus bas que le top, masquer flèche
@@ -30,12 +32,9 @@ jQuery(document).ready(function($){
 	// Afficher-masquer overflow selon taille fenêtre
 	$( window ).resize(function()
 	{
-		if( $( window ).width() < 1325)
-		{
-			$('body').css('overflowX', 'visible'); 
-		}
-		else
-			$('body').css('overflowX', 'hidden');
+	
+		// Méthode d'affichage/masquage overflow
+		displayOverFlowOnSmallScreen($);
 			
 		// place la flèche indiquant de scroller au middle bottom
 		placementFlecheScrollBottom($);
@@ -297,35 +296,10 @@ jQuery(document).ready(function($){
 		}// if
 	}// if
 	else { // SI PAS MOBILE ALORS STELLAR JS POUR EFFET PARALAX
-		$.stellar.positionProperty.limit = {
-
-			setTop: function($element, newTop, originalTop) {
-			
-			if(newTop>300)
-			{
-				var limit = 0;
-				
-				// Controler si depassement limite
-				if(newTop - originalTop > limit)
-				{
-				
-					// Appeler position par defaut avec notre limite
-					$.stellar.positionProperty.position.setTop.call(null, $element, originalTop - limit, originalTop);
-				
-				}
-				else
-				{ 
-					//$element.css("opacity","1");
-					$.stellar.positionProperty.position.setTop.apply(null, arguments);
-
-				}
-			}
-		  },
-
-		  // Constuire dans l'adaptateur:
-		  setLeft: $.stellar.positionProperty.position.setLeft
-
-		}// Fin $.stellar.positionProperty.limit
+		
+		$.stellar({
+			horizontalScrolling: false
+		});
 	}
 });
 
@@ -377,9 +351,26 @@ function placementFlecheScrollBottom($) {
 	
 	var navigationHeight = $(".navigation").first().outerHeight();
 	
-	console.log(navigationHeight);
-	
 	$fleche.css("margin-left", (winWidth/2 - flecheWidth /2)+"px");
 	$fleche.css("margin-top", (winHeight - flecheHeight - navigationHeight - 150)+"px");
 	
 }
+
+/**
+ * Permet d'afficher/masquer la scrollbar horizontal en fonction de la taille de l'écran
+ */
+function displayOverFlowOnSmallScreen($) {
+
+	// Vérifier taille actuelle
+	if( $( window ).width() < 1325 ) {
+	
+		$('body').css('overflowX', 'visible');
+		
+	}
+	else {
+	
+		$('body').css('overflowX', 'hidden');
+		
+	}// if
+	
+}// function
