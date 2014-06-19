@@ -369,10 +369,10 @@ ul.right_top_lang_menu li a.active{
 }
 
 .news span.title {
-	/*display: block;*/
 	color: #003366;
 	font-family: HelveticaLT-Bold;
 	text-decoration: none;
+	font-size: 15px;
 }
 
 .news a:hover {
@@ -405,7 +405,6 @@ ul.right_top_lang_menu li a.active{
 	color: #003366;
 	background-color: #ffffff;
 	padding: 10px 20px;
-	margin-top: 35px;
 	font-size: 20px;
 	position: absolute;
 	right: 0;
@@ -430,7 +429,6 @@ section:first-of-type .citation_original {
 	font-family: ACaslon-Italic;
 	background-color: #ffffff;
 	padding: 5px 10px;
-	margin-top: 0px;
 	font-size: 16px;
 	position: absolute;
 	right: 0;

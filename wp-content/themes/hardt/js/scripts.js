@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 	
 	// On scroll
 	$(window).scroll(function() {
-		// Si plus bas que le top, masquer flèche
+		// Si plus bas que le top, masquer flÃ¨che
 		if ($(this).scrollTop() > 0) {
 		
 			$('.bounce_arrow').fadeOut();
@@ -19,24 +19,24 @@ jQuery(document).ready(function($){
 		}
 		else
 		{
-			// Afficher flèche
+			// Afficher flÃ¨che
 			$('.bounce_arrow').fadeIn();
 			
 		}
 		
 	});// scroll
 	
-	// place la fleche indiquant de scroller par défaut
+	// place la fleche indiquant de scroller par dÃ©faut
 	placementFlecheScrollBottom($);
 
-	// Afficher-masquer overflow selon taille fenêtre
+	// Afficher-masquer overflow selon taille fenÃªtre
 	$( window ).resize(function()
 	{
 	
-		// Méthode d'affichage/masquage overflow
+		// MÃ©thode d'affichage/masquage overflow
 		displayOverFlowOnSmallScreen($);
 			
-		// place la flèche indiquant de scroller au middle bottom
+		// place la flÃ¨che indiquant de scroller au middle bottom
 		placementFlecheScrollBottom($);
 		
 	});
@@ -113,13 +113,13 @@ jQuery(document).ready(function($){
 			height:heightMin+"px"
 		}, 500);
 		
-		// déplace les containers
+		// dÃ©place les containers
 		
 			$(".container").animate({
 				marginTop:pixelHeight+"px"
 			}, 500);
 
-		// déplace les news fixed 
+		// dÃ©place les news fixed 
 		$(".open_news.fixed").animate({
 			top: (pixelHeight+199)+"px"
 		}, 500);
@@ -202,7 +202,7 @@ jQuery(document).ready(function($){
 	/* GESTION MOBILE */
 	if( isMobile ){
 		
-		// On défixe les éléments fixed
+		// On dÃ©fixe les Ã©lÃ©ments fixed
 		// navigation
 		$("div.navigation.menu_fixed").removeClass("menu_fixed")
 			.css("position", "inherit !important")
@@ -212,12 +212,12 @@ jQuery(document).ready(function($){
 		// place le container (contenu) sans margin top
 		$("div.container").css("margin-top", "0px");
 		
-		// si ce n'est pas la home page et qu'on est sur android, il faut corrigé le marginTop de -81px
+		// si ce n'est pas la home page et qu'on est sur android, il faut corrigÃ© le marginTop de -81px
 		if( ! isHomepage($) && isAndroid ){	
 			$(".container").css("margin-top", "-81px");
 		}
 		
-		// masque les actualités
+		// masque les actualitÃ©s
 		$("div.open_news.fixed").css("display", "none");
 		$("div.news.fixed").css("display", "none");
 		
@@ -231,12 +231,12 @@ jQuery(document).ready(function($){
 		// n'affiche que le premier visuel
 		$("section.home:not(:first)").hide();
 		
-		// place les contenus avec une marge supplémentaires pour Android uniquement
+		// place les contenus avec une marge supplÃ©mentaires pour Android uniquement
 		if( isAndroid ) {
 			$("div.page_content_wrap").css("margin-top", "100px");
 			$("a.close_cross.close_all_text.cross_img").css("display", "none");
 		}
-		// Spécificité iPad : Les citations se placent trop haut! 
+		// SpÃ©cificitÃ© iPad : Les citations se placent trop haut! 
 		if(/iPad/i.test(navigator.userAgent) ){
 			// replace les citations correctements
 			$(".home").each(function() {
@@ -249,30 +249,27 @@ jQuery(document).ready(function($){
 		}
 		
 		
-		// spécificité Android : menu cliquable + aggrandissement du sous-menu
+		// spÃ©cificitÃ© Android : menu cliquable + aggrandissement du sous-menu
 		if ( isAndroid ) {
 			gestionMenuMobile($);
 			
 			$(".main_top_menu li ul, menu-menu-secondaire li ul").css("width", "400px");
 			
-			// Spécificité Android : Les citations se placent trop haut! 
-			// replace les citations correctements
-			$(".home").each(function() {
-				$citation = $(this).find("article").first();
-				
-				$citation.css("top", "0px");
-				$citation.css("top", "450px");
-				$citation.find(".citation_traduction.shadow").first().css("margin-top", "70px");
+			// replacer les citations correctements
+			positionCitations($, true);
+			
+			// replacer au redimensionnement
+			$(window).resize( function(){
+			
+				positionCitations( $, false);
 				
 			});
 			
+			
 			// content des pages a baisser de 60px
 			$(".page_content_wrap").css("margin-top", "60px");
-			
+		
 		}
-		
-		
-		
 		
 		// retravaille les images de la homepage
 		$(".home, .page").css("background-position", "100% 100%"); 
@@ -284,16 +281,19 @@ jQuery(document).ready(function($){
 		var zoomToScale = parseInt ((($(window).width() * 1 ) / 1500 ) * 100 ) / 100;
 		$('head').append('<meta name="viewport" content="width=device-width; initial-scale='+zoomToScale+'; maximum-scale=1.0; user-scalable=1;">');
 		
-		// cas spécifique pour iPad, l'image de fond est trop petite
+		// cas spÃ©cifique pour iPad, l'image de fond est trop petite
 		if ( isIpad) {
 			$("section.page, #map").css("height", (window.screen.height+180) + "px");
 			$("section.page .footer_container").css("bottom", "-5px");
 		}// if
-		// cas spécifique pour iPhone, l'image de fond est trop petite
+		// cas spÃ©cifique pour iPhone, l'image de fond est trop petite
 		if ( isIphone ) {
 			$("section.page, #map").css("height", ((window.screen.height / zoomToScale) - 1350) + "px");
 			$("section.page .footer_container").css("bottom", "-5px");
 		}// if
+		
+		// Masquer flÃ¨che animÃ©e
+		$('.bounce_arrow').remove();
 	}// if
 	else { // SI PAS MOBILE ALORS STELLAR JS POUR EFFET PARALAX
 		
@@ -304,11 +304,11 @@ jQuery(document).ready(function($){
 });
 
 function gestionMenuMobile($) {
-	// Gestion menu pour mobile : Permet de dérouler sous menu au premier click
+	// Gestion menu pour mobile : Permet de dÃ©rouler sous menu au premier click
 	// si clique sur menu niveau 1
 	$(".menu-item-has-children").find("a:first").on("click", function(event){
 	
-		// retire l'événement
+		// retire l'Ã©vÃ©nement
 		event.stopPropagation();
 		event.preventDefault();
 		
@@ -327,7 +327,7 @@ function gestionMenuMobile($) {
 	}); // click
 }
 
-// Permet de déterminer s'il s'agit de la homepage
+// Permet de dÃ©terminer s'il s'agit de la homepage
 function isHomepage($) {
 	
 	var htmlCurrentMenuItem = $(".current-menu-item").first().find("a").first().html();
@@ -339,7 +339,7 @@ function isHomepage($) {
 }
 
 /**
- * Permet de placer en bas au millieu la flèche qui indique qu'il faut scroll vers le bas
+ * Permet de placer en bas au millieu la flÃ¨che qui indique qu'il faut scroll vers le bas
  */
 function placementFlecheScrollBottom($) {
 	var winWidth = $(window).width();
@@ -357,11 +357,11 @@ function placementFlecheScrollBottom($) {
 }
 
 /**
- * Permet d'afficher/masquer la scrollbar horizontal en fonction de la taille de l'écran
+ * Permet d'afficher/masquer la scrollbar horizontal en fonction de la taille de l'Ã©cran
  */
 function displayOverFlowOnSmallScreen($) {
 
-	// Vérifier taille actuelle
+	// VÃ©rifier taille actuelle
 	if( $( window ).width() < 1325 ) {
 	
 		$('body').css('overflowX', 'visible');
@@ -370,6 +370,40 @@ function displayOverFlowOnSmallScreen($) {
 	else {
 	
 		$('body').css('overflowX', 'hidden');
+		
+	}// if
+	
+}// function
+
+/**
+ * Permet de replacer les citations correctement
+ */
+function positionCitations( $, onload )
+{
+	$('.citation_original').css('bottom', 'initial');
+	$('.citation_traduction').css('bottom', 'initial');
+	
+	// VÃ©rifier premier appel
+	if( onload )
+	{
+		// Masquer les citations pour pne pas voir qu'elles sautent
+		$('.citation_original, .citation_traduction').hide();
+		
+		// Attendre l'applications des autres rÃ¨gles dynamiques
+		$('.home').delay(500).queue(function(){
+			// Replacer les citations
+			$('.citation_original').css("margin-top", $('section.home').first().height()-150+"px");
+			$('.citation_traduction').css("margin-top", $('section.home').first().height()-100+"px");
+			
+			// Afficher les citations
+			$('.citation_original, .citation_traduction').fadeIn();
+		});
+	}
+	else
+	{// Si pas premier appel
+	
+		$('.citation_original').css("margin-top", $('section.home').first().height()-150+"px");
+		$('.citation_traduction').css("margin-top", $('section.home').first().height()-100+"px");
 		
 	}// if
 	
