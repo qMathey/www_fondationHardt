@@ -267,6 +267,7 @@
 						"iso",
 						"phone_1",
 						"phone_2",
+						"references",
 						"remarks",
 						"theme",
 						"regime"
@@ -388,6 +389,7 @@
 							"iso" => "Code ISO",
 							"phone_1" => "Téléphone 1",
 							"phone_2" => "Téléphone 2",
+							"references" => "Références",
 							"remarks" => "Remarques",
 							"theme" => "Sujet de la recherche",
 							"regime" => "Régime/allergies"

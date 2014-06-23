@@ -44,6 +44,7 @@
 						<select name="sex" style="min-width:85px; width:85px;">
 							<option value="M"><?php echo rms_translate("Homme"); ?></option>
 							<option value="F"><?php echo rms_translate("Femme"); ?></option>
+							<option value="O"><?php echo rms_translate("Autre"); ?></option>
 						</select>
 					</div>
 				</div>
@@ -63,6 +64,10 @@
 				
 				<label for="function"><?php echo rms_translate("Fonction actuelle"); ?></label>
 				<input type="text" name="function" value="<?php echo get_user_meta( get_current_user_id(), 'function', true ); ?>">
+				
+				<label for="references"><?php echo rms_translate("Références"); ?></label>
+				<textarea name="references" rows="5"><?php echo get_user_meta( get_current_user_id(), 'references', true ); ?></textarea>
+				
 				
 				<div class="fileinputs">
 					<input type="file" class="cv_file" style="width: 344px; height: 21px; ">

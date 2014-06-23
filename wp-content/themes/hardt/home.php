@@ -9,8 +9,9 @@
 	);
 
 	$category_query1 = new WP_Query( $category_query_args1 );
-	
-	$admin_bar_news_hack =  ( is_admin_bar_showing() ? ' style="top:283px;"' : '' );
+	$admin_bar_news_hack = "";
+if ( is_admin_bar_showing() )
+	$admin_bar_news_hack = ' style="top:229px;"';
 	
 	if($category_query1->have_posts())
 	{
@@ -35,8 +36,8 @@
 		$strNewsData .= '</div>
 
 		<div class="open_news fixed"' . $admin_bar_news_hack . '>
-			<a href="#" class="open_square square_img" title="' . __("Ouvrir les actualités", "hardtheme") . '"></a>
-			<h1 class="no_margin">' . __("Actualités", "hardtheme") . '</h1>
+			<a href="#" class="open_square square_img" title="Ouvrir les actualités"></a>
+			<h1 class="no_margin">Actualités</h1>
 		</div>';
 
 	}

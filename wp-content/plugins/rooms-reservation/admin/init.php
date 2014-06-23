@@ -1024,6 +1024,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 			array(__("Titre(s) universitaire(s)", "rms_reservation"), __("Etudes"), "university_title", "text"),
 			array(__("Affiliation Institutionnelle", "rms_reservation"), __("Etudes"), "affiliation", "text"),
 			array(__("Fonction actuelle", "rms_reservation"), __("Etudes"), "function", "text"),
+			array(__("Références", "rms_reservation"), __("Etudes"), "references", "text"),
 			array(__("Thème de la recherche durant le séjour", "rms_reservation"),__("Etudes"), "theme", "textarea"),
 			array(__("Régimes/allergies", "rms_reservation"),__("General"), "regime","textarea"),
 			array(__("Remarques", "rms_reservation"),__("General"), "remarks","textarea"),
@@ -1155,6 +1156,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 			"university_title",
 			"affiliation",
 			"function",
+			"references",
 			"theme",
 			"regime",
 			"remarks"
