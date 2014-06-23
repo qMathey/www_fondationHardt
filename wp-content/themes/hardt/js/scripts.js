@@ -60,7 +60,7 @@ jQuery(document).ready(function($){
 	
 	
 	// Menu deroulant
-	$(".main_top_menu > li, #menu-menu-secondaire > li").on("mouseenter", function(event) {
+	$(".main_top_menu > li, .right_top_menu > li").on("mouseenter", function(event) {
 	
 			// stop propagation
 			event.stopPropagation();
@@ -72,7 +72,7 @@ jQuery(document).ready(function($){
 				
 				var currentMenuOpen = $(this).find("a").first().html();
 				// masque les autres menu
-				$(".main_top_menu > li, #menu-menu-secondaire > li").each(function() {
+				$(".main_top_menu > li, .right_top_menu > li").each(function() {
 					// si ce n'est pas le menu courant
 					if(currentMenuOpen != $(this).find("a").first().html()){
 						$(this).find(".submenu").hide();
@@ -253,7 +253,7 @@ jQuery(document).ready(function($){
 		if ( isAndroid ) {
 			gestionMenuMobile($);
 			
-			$(".main_top_menu li ul, menu-menu-secondaire li ul").css("width", "400px");
+			$(".main_top_menu li ul, .right_top_menu li ul").css("width", "400px");
 			
 			// replacer les citations correctements
 			positionCitations($, true);
