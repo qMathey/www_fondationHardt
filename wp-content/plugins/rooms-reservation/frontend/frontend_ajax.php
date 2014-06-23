@@ -555,7 +555,6 @@
 		// Récupérer les champs
 		$user_name = sanitize_text_field( strtolower($_POST['last_name']) . '_' . strtolower($_POST['first_name']) );
 		$user_email = sanitize_email( $_POST['email'] );
-		$user_id = username_exists( $user_name );
 		$i = 0;
 		
 		do
@@ -568,9 +567,8 @@
 		}while(username_exists( $user_name ));
 		
 		// Vérifier utilisateur et email disponible
-		if ( !$user_id and !email_exists($user_email)) 
+		if ( !username_exists( $user_name ) and !email_exists($user_email)) 
 		{
-
 			$random_password = wp_generate_password( $length=8, $include_standard_special_chars=false );
 			$user_id = wp_create_user( $user_name, $random_password, $user_email );
 			

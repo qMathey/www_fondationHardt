@@ -56,7 +56,7 @@
 			"Se déconnecter" => "Sign out",
 			"Connexion" => "Sign in",
 			"L'inscription de demande de séjour à la Fondation Hardt se déroule en 4 étapes, merci de compléter les champs suivants" => "Registration request to stay the Hardt Foundation in 4 steps, thank you complete the following fields",
-			"Merci de compéter l'ensemble des champs correctement" => "Please fill all the fields correctly",
+			"Merci de compléter l'ensemble des champs correctement" => "Please fill all the fields correctly",
 			"Civilité" => "Civility",
 			"Nom" => "Last name",
 			"Prénom" => "First name",
