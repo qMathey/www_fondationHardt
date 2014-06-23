@@ -25,7 +25,6 @@
 		get_user_meta( $user_id, 'university_title', true ),
 		get_user_meta( $user_id, 'affiliation', true ),
 		get_user_meta( $user_id, 'function', true ),
-		get_user_meta( $user_id, 'references', true ),
 		get_user_meta( $user_id, 'theme', true ),
 		get_user_meta( $user_id, 'regime', true ),
 		get_user_meta( $user_id, 'remarks', true ),

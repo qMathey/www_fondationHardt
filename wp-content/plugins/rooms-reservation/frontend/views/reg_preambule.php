@@ -7,13 +7,13 @@
 	<ul class="premabule_actions">
 		<li>
 			<a href="<?php echo get_permalink(); ?>&step=1">
-				<?php echo rms_translate("Je suis un nouvel hôte"); ?>
+				<?php echo rms_translate("Je souhaite créer un compte"); ?>
 			</a>
 		</li>
 		
 		<li>
 			<a href="#" class="show_loginform">
-				<?php echo rms_translate("J'ai déjà séjourné à la Fondation"); ?>
+				<?php echo rms_translate("J'ai déjà un compte"); ?>
 			</a>
 		</li>
 	</ul>

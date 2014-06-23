@@ -3,7 +3,7 @@
 ?>
 <div class="rms_wrapper step_4 hidden_step" data-wrapper_size="60">
 		
-	<p><?php echo rms_translate("Votre demande de séjour à la Fondation Hardt devant encore faire l'objet d'une validation de notre part, voici le résumé de votre pré-réservation"); ?> :</p>
+	<p><?php echo rms_translate("Voici le résumé de votre pré-réservation. Veuillez noter que votre demande de séjour à la Fondation Hardt doit encore faire l'objet d'une validation de notre part."); ?></p>
 
 	<fieldset class="data_from_step1">
 	
