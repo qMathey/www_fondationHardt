@@ -1200,7 +1200,6 @@ add_action( 'save_post', 'prfx_meta_save' );
 			$outputFileData = '';
 		foreach($_FILES["upload"]["name"] as $key => $filename)
 		{
-			//var_dump($file);
 			$upld_file = wp_upload_bits( clean_string2($filename), null, @file_get_contents( $_FILES["upload"]['tmp_name'][$key] ) );
 			
 			if ( FALSE === $upld_file['error'] )
@@ -1220,25 +1219,16 @@ add_action( 'save_post', 'prfx_meta_save' );
 		global $post;
 		
 		$user_data = get_field('rms_reservation_client', $post -> ID);
-		
-		$username = "";
-		$password = "";
-		// Correction Bug offset 'ID' undefined
-		$user_data_id = 0;
-		if(isset($user_data['ID']))
-		{
-			$user_data_id = $user_data['ID'];
-			$random_password = wp_generate_password( $length=8, $include_standard_special_chars=false );
-		
-			$user_info = get_userdata( $user_data_id );
-			$username = $user_info -> user_login;
-			$password = $random_password;
-			
-			echo '<input type="hidden" name="user_password" id="user_password" value="' . $password . ' " />';
-		}
-		else
-			$user_data_id = $user_data;
 	
+		$username = "";
+		$password = wp_generate_password( $length=8, $include_standard_special_chars=false );
+		echo '<input type="hidden" name="user_password" id="user_password" value="' . $password . ' " />';
+		
+		// Correction Bug offset 'ID' undefined
+		$user_data_id = ( is_array($user_data) ? $user_data['ID'] : $user_data );
+	
+		$user_info = get_userdata( $user_data_id );
+		$username = $user_info -> user_login;
 	
 		$user_lang = get_user_meta( $user_data_id,'user_lang', true);
 		
@@ -1254,8 +1244,8 @@ add_action( 'save_post', 'prfx_meta_save' );
 						case "fr":
 	$field['default_value']  = "La Fondation Hardt pour l’étude de l’Antiquité classique a le plaisir de confirmer votre inscription à un séjour d’étude scientifique.
 	Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.
-	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .
-	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " + ADMIN_MAIL + "
+	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : " . get_bloginfo("wpurl") . "?page_id=1166 .
+	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " . ADMIN_MAIL . "
 
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :
 
@@ -1273,7 +1263,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	$field['default_value']  = "We are pleased to confirm your registration for a research stay at the Hardt Foundation.
 	Please find here attached your letter of confirmation and invoice.
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
-	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " + ADMIN_MAIL + "
+	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " . ADMIN_MAIL . "
 	Please find below your login details for your account on our website :
 
 	Username : " . $username . "
@@ -1299,7 +1289,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	$field['default_value']  = "Nous avons le plaisir de vous annoncer qu’une bourse vous a été attribuée pour un séjour d’étude scientifique à la Fondation Hardt.
 	Vous trouverez en pièce jointe votre lettre d’invitation.
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .
-	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " + ADMIN_MAIL + "
+	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " . ADMIN_MAIL . "
 
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :
 
@@ -1317,7 +1307,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	$field['default_value']  = "We are pleased to inform you that you have been granted a bursary for a research stay at the Hardt Foundation.
 	Please find here attached your letter of confirmation.
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
-	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " + ADMIN_MAIL + "
+	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " . ADMIN_MAIL . "
 	Please find below your login details for your account on our website :
 
 	Username : " . $username . "
@@ -1402,7 +1392,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classique a le plaisir de confirmer votre inscription à un séjour d’étude scientifique.<br/>
 	Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.<br/>
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
-	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " + ADMIN_MAIL + "<br/>
+	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " . ADMIN_MAIL . "<br/>
 <br/>
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
 <br/>
@@ -1417,7 +1407,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	"Nous avons le plaisir de vous annoncer qu’une bourse vous a été attribuée pour un séjour d’étude scientifique à la Fondation Hardt.<br/>
 	Vous trouverez en pièce jointe votre lettre d’invitation.<br/>
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
-	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " + ADMIN_MAIL + "<br/>
+	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à " . ADMIN_MAIL . "<br/>
 <br/>
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
 <br/>
@@ -1433,7 +1423,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	$array_en = array("We are pleased to confirm your registration for a research stay at the Hardt Foundation.<br/>
 	Please find here attached your letter of confirmation and invoice.<br/>
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
-	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " + ADMIN_MAIL + "<br/>
+	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " . ADMIN_MAIL . "<br/>
 	Please find below your login details for your account on our website :<br/>
 <br/>
 	Username : " . $username . "<br/>
@@ -1448,7 +1438,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	"We are pleased to inform you that you have been granted a bursary for a research stay at the Hardt Foundation.<br/>
 	Please find here attached your letter of confirmation.<br/>
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
-	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " + ADMIN_MAIL + "<br/>
+	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at " . ADMIN_MAIL . "<br/>
 	Please find below your login details for your account on our website :<br/>
 <br/>
 	Username : " . $username . "<br/>
@@ -1554,12 +1544,12 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 		if($requete == null) {
 		
 			$msgAnglais = "You have no confirmed registration. We can not give your password yet."."<br />";
-			$msgAnglais .= "For further information, please contact us at <a href=\"mailto:" + ADMIN_MAIL + "\">" + ADMIN_MAIL + "</a>"."<br />";
+			$msgAnglais .= "For further information, please contact us at <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a>"."<br />";
 			$msgAnglais .= "Best wishes,"."<br />";
 			$msgAnglais .= "Hardt Foundation";
 			
 			$msgFrancais = "Vous n'avez pas de réservation confirmée. Nous ne pouvons pas vous envoyer votre mot de passe."."<br />";
-			$msgFrancais .= "Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:" + ADMIN_MAIL + "\">" + ADMIN_MAIL + "</a>"."<br />";
+			$msgFrancais .= "Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a>"."<br />";
 			$msgFrancais .= "Avec nos remerciements et nos salutations les meilleures,"."<br />";
 			$msgFrancais .= "Fondation Hardt";
 						
@@ -1584,7 +1574,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 		}
 		
 		$mail_title = sprintf( __('[%s] Password Reset'), "Hardt" );
-		$headers = 'From: Fondation Hardt <' + ADMIN_MAIL + '>' . "\r\n";
+		$headers = 'From: Fondation Hardt <' . ADMIN_MAIL . '>' . "\r\n";
 		
 		echo wp_mail( $user_email, $mail_title, $msg, $headers );
 		
