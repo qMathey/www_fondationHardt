@@ -433,7 +433,7 @@ function positionCitations( $, onload )
 		// Attendre l'applications des autres règles dynamiques
 		$('.home').delay(500).queue(function(){
 			// Replacer les citations
-			$('.citation_original').css("margin-top", $('section.home').first().height()-150+"px");
+			$('.citation_original').css("margin-top", $('section.home').first().height()-165+"px");
 			$('.citation_traduction').css("margin-top", $('section.home').first().height()-100+"px");
 			
 			// Afficher les citations
