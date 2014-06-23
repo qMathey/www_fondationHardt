@@ -72,7 +72,6 @@
 		get_user_meta( $post_author_id, 'university_title', true ),
 		get_user_meta( $post_author_id, 'affiliation', true ),
 		get_user_meta( $post_author_id, 'function', true ),
-		get_user_meta( $post_author_id, 'references', true ),
 		get_user_meta( $post_author_id, 'theme', true ),
 		get_user_meta( $post_author_id, 'regime', true ),
 		get_user_meta( $post_author_id, 'remarks', true )
@@ -244,31 +243,35 @@
 								// Parcourir les informations concernant l'hôte
 								foreach($userFieldsData  as $data)
 								{
-									$actualGroup = $data[1];
-									
-									// Afficher titre si groupe different
-									if($tmpGroup != $actualGroup)
+									// Vérifier existence itération
+									if(isset($arrUserData[$i]))
 									{
-										echo '<tr>
-													<th scope="row">
-														<h3>' . $data[1] . '</h3>
-													</th>
-													<td></td>
-												</tr>';
-									}// Fin if()
+										$actualGroup = $data[1];
 										
-									echo '<tr>';
-										echo '<th scope="row">' . $data[0] . '</th>';
-									
-										echo '<td>';
+										// Afficher titre si groupe different
+										if($tmpGroup != $actualGroup)
+										{
+											echo '<tr>
+														<th scope="row">
+															<h3>' . $data[1] . '</h3>
+														</th>
+														<td></td>
+													</tr>';
+										}// Fin if()
+											
+										echo '<tr>';
+											echo '<th scope="row">' . $data[0] . '</th>';
 										
-											//echo $data[1];
-											echo $arrUserData[$i];
-										echo '</td>';
-									echo '</tr>';
+											echo '<td>';
+											
+												//echo $data[1];
+												echo $arrUserData[$i];
+											echo '</td>';
+										echo '</tr>';
+									}// if
 									
 									$tmpGroup = $data[1];
-									$i ++;
+									$i++;
 								}// Fin foreach
 								echo '<tr>';
 										echo '<th scope="row">Séjours précédents</th>';
