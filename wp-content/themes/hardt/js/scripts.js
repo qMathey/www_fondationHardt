@@ -6,6 +6,7 @@ var isIpad = false;
 var isIphone = false;
 
 jQuery(document).ready(function($){
+
 	// Afficher scrollbar horizontal
 	displayOverFlowOnSmallScreen($);
 	
@@ -51,11 +52,10 @@ jQuery(document).ready(function($){
 	backgroundOffsetY = 25;
 	
 	// Hack Safari : changer de police pour la Homepage
-	if ( $.browser.safari ) {
+/*	if ( $.browser.safari || isAndroid ) {
 		$(".citation_original, .citation_author").css("font-family", "ACaslon-Semibold");
 		//alert($(".citation_original").css("font-family"));
-	}
-	
+	}*/
 	// correction sur les autres pages que la HP
 	
 	
@@ -172,30 +172,7 @@ jQuery(document).ready(function($){
 		$('.page_content_wrap').animate({marginRight:'0'});
 	});
 	
-	// Afficher actualites au survol
-	$('.open_news').mouseenter(function(){
 	
-		$('.open_news .open_square').removeClass('open_square square_img').addClass('close_cross close_news cross_img');
-		
-		$('.open_news').animate( {width: parseInt($('.news').css('width'))+8}, function()
-			{
-				$('.news').slideDown();
-			}
-		);
-	});
-	
-	// Masquer actualites
-	$('.close_news').live('click',function(e){
-		e.preventDefault();
-		
-		$('.news').slideUp(function(){
-			$('.open_news').animate({width:'125'}, function(){
-				$('.close_news').removeClass('close_cross close_news cross_img');
-			});
-			
-			$('.close_news').addClass('open_square square_img');
-		});
-	});
 	
 
 	
@@ -218,8 +195,8 @@ jQuery(document).ready(function($){
 		}
 		
 		// masque les actualités
-		$("div.open_news.fixed").css("display", "none");
-		$("div.news.fixed").css("display", "none");
+	//	$("div.open_news.fixed").css("display", "none");
+		//$("div.news.fixed").css("display", "none");
 		
 		// place le logo dans un autre div et le defixed
 		$logo = $("a.logo.fixed");
@@ -228,6 +205,18 @@ jQuery(document).ready(function($){
 		$logo.appendTo("#mobileLogoContainer");
 		$logo.css("display", "block");
 		
+		// place les actualités dans un autre div et les defixed
+		$newsTitle = $(".open_news.fixed");
+		$newsTitle.removeClass("fixed");
+		//$newsTitle.remove();
+		//$newsTitle.css("display", "block");
+		$newsTitle.appendTo("#mobileLogoContainer");
+		$news = $(".news.fixed");
+		$news.removeClass("fixed");
+		//$news.remove();
+		$news.appendTo("#mobileLogoContainer");
+		
+		//$('.open_news a').remove();
 		// n'affiche que le premier visuel
 		$("section.home:not(:first)").hide();
 		
@@ -294,11 +283,63 @@ jQuery(document).ready(function($){
 		
 		// Masquer flèche animée
 		$('.bounce_arrow').remove();
+		
+		// Afficher actualites au clic
+		$('.open_news').toggle(function() {
+		
+			$('.open_news .open_square').removeClass('open_square square_img').addClass('close_cross close_news cross_img');
+			
+			$('.open_news').animate( {width: parseInt($('.news').css('width'))+8}, function()
+				{
+					$('.news').slideDown();
+				}
+			);
+		},
+		function() {
+			
+			$('.news').slideUp(function(){
+			
+				$('.open_news').animate({width:'125'}, function(){
+				
+					$('.close_news').removeClass('close_cross close_news cross_img');
+					
+				});
+				
+				$('.close_news').addClass('open_square square_img');
+				
+			});
+			
+		});
 	}// if
 	else { // SI PAS MOBILE ALORS STELLAR JS POUR EFFET PARALAX
 		
 		$.stellar({
 			horizontalScrolling: false
+		});
+		
+		// Afficher actualites au survol
+		$('.open_news').mouseenter(function(){
+		
+			$('.open_news .open_square').removeClass('open_square square_img').addClass('close_cross close_news cross_img');
+			
+			$('.open_news').animate( {width: parseInt($('.news').css('width'))+8}, function()
+				{
+					$('.news').slideDown();
+				}
+			);
+		});
+		
+		// Masquer actualites
+		$('.close_news').live('click',function(e){
+			e.preventDefault();
+			
+			$('.news').slideUp(function(){
+				$('.open_news').animate({width:'125'}, function(){
+					$('.close_news').removeClass('close_cross close_news cross_img');
+				});
+				
+				$('.close_news').addClass('open_square square_img');
+			});
 		});
 	}
 });

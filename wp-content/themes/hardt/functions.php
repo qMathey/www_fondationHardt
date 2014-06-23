@@ -46,7 +46,25 @@
 
 		}
 	  
-	}	
+	}			
+	add_action('init', 'remove_admin_bar');
+
+	// Supprimer barre administration
+	function remove_admin_bar()
+	{
+		if ( !current_user_can('administrator')  ) {
+		
+			add_filter('show_admin_bar', '__return_false');
+			
+		}
+		else
+		{
+		
+			add_filter('show_admin_bar', '__return_true');
+		}
+		
+	}// Fin remove_admin_bar()
+	
 	// Ajout du bouton dans l'editeur tinymce
 	if(current_user_can('edit_posts') &&  current_user_can('edit_pages'))
 	{
