@@ -52,10 +52,10 @@ jQuery(document).ready(function($){
 	backgroundOffsetY = 25;
 	
 	// Hack Safari : changer de police pour la Homepage
-/*	if ( $.browser.safari || isAndroid ) {
+	if ( $.browser.safari || isAndroid ) {
 		$(".citation_original, .citation_author").css("font-family", "ACaslon-Semibold");
 		//alert($(".citation_original").css("font-family"));
-	}*/
+	}
 	// correction sur les autres pages que la HP
 	
 	

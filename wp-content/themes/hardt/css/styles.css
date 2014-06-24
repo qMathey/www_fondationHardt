@@ -389,6 +389,7 @@ ul.right_top_lang_menu li a.active{
 	left: 0;
 	z-index: 3;
 	display: none;
+	margin-top: 25px;
 }
 
 .news span.title {
@@ -400,11 +401,6 @@ ul.right_top_lang_menu li a.active{
 
 .news a:hover {
 	text-decoration: underline;
-}
-
-.news .separator:first-of-type,  .news .separator:first-of-type hr {
-	color:#fff !important;
-	border:0 !important;
 }
 
 .open_news {
