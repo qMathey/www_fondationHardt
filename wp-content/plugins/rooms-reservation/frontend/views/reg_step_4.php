@@ -85,10 +85,11 @@
 			TOTAL : <span class="total_cost"></span> CHF
 		</div>	
 	<?php
-		$icl_condGen_id = icl_object_id(945, 'page', true);
+		// Obtenir l'id des cg selon la langue
+		$cgFileID = ( ICL_LANGUAGE_CODE == 'fr' ? 1548 : 1549 );
 	?>
 		<div class="" style="text-align:right;">
-			<input type="checkbox" name="tou_agree" /><?php echo rms_translate("J'ai lu et j'accepte"); echo '<a href="' . get_permalink($icl_condGen_id) . '" target="_blank">';echo rms_translate(" les conditions générales"); echo '</a>'; ?>
+			<input type="checkbox" name="tou_agree" /><?php echo rms_translate("J'ai lu et j'accepte"); echo ' <a href="' . wp_get_attachment_url( $cgFileID ) . '" target="_blank">';echo rms_translate("les conditions générales"); echo '</a>'; ?>
 		</div>
 		<input type="submit" class="submit_reservation" value="<?php echo rms_translate("Confirmer"); ?>" />
 	</fieldset>

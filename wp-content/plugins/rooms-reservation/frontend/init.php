@@ -87,7 +87,7 @@
 			"Voici le résumé de votre pré-réservation. Veuillez noter que votre demande de séjour à la Fondation Hardt doit encore faire l'objet d'une validation de notre part." => "Here is a summary of your pre-booking. Please note that your request need to be valided by the Foundation.",
 			"Confirmer" => "Confirm",
 			"J'ai lu et j'accepte" => "I have read and agree",
-			" les conditions générales" => " the terms and conditions",
+			"les conditions générales" => "the terms and conditions",
 			"Homme" => "Male",
 			"Femme" => "Female",
 			"Autre" => "Other",
