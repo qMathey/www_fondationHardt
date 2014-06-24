@@ -24,6 +24,8 @@
 					<option value="">Choisissez</option>
 					<option value="Dr">Docteur</option>
 					<option value="Prof">Professeur</option>
+					<option value="M"><?php echo rms_translate("Homme"); ?></option>
+					<option value="F"><?php echo rms_translate("Femme"); ?></option>
 					<option> - </option>
 				</select>
 				
@@ -34,17 +36,9 @@
 				<input type="text" name="first_name" value="<?php echo get_user_meta( get_current_user_id(), 'first_name', true ); ?>">
 				
 				<div>
-					<div style="width: 36%; margin-right: 49%; float: left;">	
+					<div style="width: 70%; margin-right: 43%; float: left;">	
 						<label for="birthday"><span title="Format: dd/-.mm/-.yyyy"><?php echo rms_translate("Date de naissance"); ?></span></label>
 						<input type="text" placeholder="ex: 15.08.1985" name="birthday" value="<?php echo get_user_meta( get_current_user_id(), 'birthday', true ); ?>" style="max-width:110px; min-width:110px;">
-					</div>
-					
-					<div style="width: 15%; float: right;">
-						<label for="sex"><?php echo rms_translate("Sexe"); ?></label>
-						<select name="sex" style="min-width:85px; width:85px;">
-							<option value="M"><?php echo rms_translate("Homme"); ?></option>
-							<option value="F"><?php echo rms_translate("Femme"); ?></option>
-						</select>
 					</div>
 				</div>
 				

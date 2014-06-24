@@ -58,7 +58,6 @@
 		get_user_meta( $post_author_id, 'first_name', true ),
 		get_user_meta( $post_author_id, 'last_name', true ),
 		get_user_meta( $post_author_id, 'birthday', true ),
-		get_user_meta( $post_author_id, 'sex', true ),
 		get_user_meta( $post_author_id, 'nationality', true ),
 		$user_info -> user_email,
 		get_user_meta( $post_author_id, 'street', true ),

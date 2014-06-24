@@ -11,7 +11,6 @@
 		get_user_meta( $user_id, 'first_name', true ),
 		get_user_meta( $user_id, 'last_name', true ),
 		get_user_meta( $user_id, 'birthday', true ),
-		get_user_meta( $user_id, 'sex', true ),
 		get_user_meta( $user_id, 'nationality', true ),
 		$profileuser -> user_email,
 		get_user_meta( $user_id, 'street', true ), 
@@ -340,13 +339,6 @@
 										<option data-iso-value="zw">Zimbabwe</option>
 									</select>';
 								break;
-								case "select" :									
-									echo '<select name="sex">
-											<option value="H" '; if( $arrDemoUserData[$i] == 'M') echo 'selected'; echo '>Homme</option> 
-											<option value="F" '; if( $arrDemoUserData[$i] == 'F') echo 'selected'; echo '>Femme</option> 
-											<option value="O" '; if( $arrDemoUserData[$i] == 'O') echo 'selected'; echo '>Autre</option>
-										</select>';
-									break;
 								default :
 									// Sinon afficher donnees
 									echo '<input id="' . $data[2] . '" name="' . $data[2] . '" type="' . $data[3] . '" value="' . $arrDemoUserData[$i] . '" class="regular-text"/>';

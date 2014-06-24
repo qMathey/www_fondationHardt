@@ -1010,7 +1010,6 @@ add_action( 'save_post', 'prfx_meta_save' );
 			array(__("Prénom", "rms_reservation") ,  __("General"), "first_name","text"),
 			array(__("Nom", "rms_reservation"),  __("General"), "last_name","text"),
 			array(__("Date de naissance", "rms_reservation"), __("General"), "birthday","text"),
-			array(__("Sexe", "rms_reservation"),  __("General"), "sex","select"),
 			array(__("Nationalité", "rms_reservation"), __("Contact"), "nationality","text"),
 			array(__("Adresse mail", "rms_reservation"), __("Contact"), "email","text"),
 			array(__("Adresse postale", "rms_reservation"),  __("Contact"), "street","text"),
@@ -1142,7 +1141,6 @@ add_action( 'save_post', 'prfx_meta_save' );
 			"first_name",
 			"last_name",
 			"birthday",
-			"sex",
 			"nationality",
 			"email",
 			"street",
@@ -1180,8 +1178,6 @@ add_action( 'save_post', 'prfx_meta_save' );
 			update_user_meta( $user_id, "fact_phone_1", $_POST["fact_phone_1"] );
 			update_user_meta( $user_id, "fact_phone_2", $_POST["fact_phone_2"] );			
 		}// Fin if()
-		
-		// cas particulier pour sex
 		
 		// Si il y a des documents à uploader
 		$user_uid = get_user_meta ( $user_id, 'user_uid',true);
