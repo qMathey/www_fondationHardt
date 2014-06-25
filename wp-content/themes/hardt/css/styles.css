@@ -525,10 +525,9 @@ section.home .logo {
 
 .bounce_arrow {
 	position: absolute;
-	width:64px;
-	height:34px;
+	width:24px;
+	height:13px;
 	bottom:20px;
-	opacity: 0.6;
 	margin-left: auto;
 	margin-right: auto;
 	z-index:5;
