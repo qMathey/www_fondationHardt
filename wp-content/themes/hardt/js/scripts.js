@@ -393,7 +393,7 @@ function placementFlecheScrollBottom($) {
 	
 	var navigationHeight = $(".navigation").first().outerHeight();
 	
-	$fleche.css("margin-left", (winWidth - flecheWidth /2)-30 +"px");
+	$fleche.css("margin-left", (winWidth - flecheWidth /2)-70 +"px");
 	$fleche.css("margin-top", "-55px");
 	
 }

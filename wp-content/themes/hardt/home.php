@@ -46,7 +46,7 @@
 	$loop = new WP_Query( $args );
 	?>
 	
-<div class="bounce_arrow" title="Défiler pour découvrir la Fondation"></div>
+<div class="bounce_arrow" title="Utilisez la barre de défilement pour découvrir la Fondation"></div>
 <?php
 	while ( $loop->have_posts() ) : $loop->the_post();
 	

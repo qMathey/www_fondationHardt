@@ -16,17 +16,13 @@
 		<div class="left_col">
 			
 			<p><?php echo rms_translate("L'inscription de demande de séjour à la Fondation Hardt se déroule en 4 étapes, merci de compléter les champs suivants"); ?> :</p>
-			<p class="rms_label_error rms_form_error_info"><?php echo rms_translate("Merci de compéter l'ensemble des champs correctement"); ?></p>
+			<p class="rms_label_error rms_form_error_info"><?php echo rms_translate("Merci de compléter l'ensemble des champs correctement"); ?></p>
 			<fieldset>
 			
 				<label for="civil"><?php echo rms_translate("Civilité"); ?></label>
 				<select name="civil">
-					<option value="">Choisissez</option>
-					<option value="Dr">Docteur</option>
-					<option value="Prof">Professeur</option>
 					<option value="M"><?php echo rms_translate("Homme"); ?></option>
 					<option value="F"><?php echo rms_translate("Femme"); ?></option>
-					<option> - </option>
 				</select>
 				
 				<label for="nom"><?php echo rms_translate("Nom"); ?></label>
@@ -52,7 +48,7 @@
 				<label for="university_title"><?php echo rms_translate("Titre(s) universitaire(s)"); ?></label>
 				<input type="text" name="university_title" value="<?php echo get_user_meta( get_current_user_id(), 'university_title', true ); ?>">
 				
-				<label for="affiliation"><?php echo rms_translate("Affilitation institutionnelle"); ?></label>
+				<label for="affiliation"><?php echo rms_translate("Affiliation institutionnelle"); ?></label>
 				<input type="text" name="affiliation" value="<?php echo get_user_meta( get_current_user_id(), 'affiliation', true ); ?>">
 				
 				<label for="function"><?php echo rms_translate("Fonction actuelle"); ?></label>

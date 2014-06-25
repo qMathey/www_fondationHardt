@@ -91,7 +91,7 @@
 	body {
 		overflow-y: scroll;
 	}
-</style>
+</style></div>
 <?php
 	get_footer();
 ?>

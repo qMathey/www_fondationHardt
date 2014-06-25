@@ -51,7 +51,7 @@
 			"Nationalité" => "Nationality",
 			"Sexe" => "Sex",
 			"Titre(s) universitaire(s)" => "University degrees",
-			"Affilitation institutionnelle" => "Institution affilitation",
+			"Affiliation institutionnelle" => "Institution affiliation",
 			"Fonction actuelle" => "Current position held",
 			"Rue" => "Address",
 			"N°" => "N°",
