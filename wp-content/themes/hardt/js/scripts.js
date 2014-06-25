@@ -12,8 +12,9 @@ jQuery(document).ready(function($){
 	
 	// On scroll
 	$(window).scroll(function() {
+	
 		// Si plus bas que le top, masquer flèche
-		if ($(this).scrollTop() > 0) {
+		if ( ($(this).scrollTop() > 0 ) || ( $(this).scrollLeft() > 0 ) ) {
 		
 			$('.bounce_arrow').fadeOut();
 			
