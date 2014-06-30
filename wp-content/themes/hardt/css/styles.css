@@ -276,8 +276,8 @@ ul.right_top_menu li {
 	padding-right: 10px;
 }
 
-ul.right_top_lang_menu li {
-	padding: 5px;
+ul.right_top_lang_menu li:first-child {
+	padding-left: 5px;
 }
 
 ul.right_top_lang_menu li a.active{
