@@ -184,7 +184,7 @@ p {
 	margin: 0 auto;
 }
 
-.navigation .fix_width_menu > ul {
+.navigation .fix_width_menu > ul, .navigation .fix_width_menu .menu_float_right > ul {
 	display: inline;
 	margin: 0;
 	padding: 0;
@@ -239,6 +239,11 @@ p {
 	float:inherit;
 }
 
+.menu_float_right {
+	float: right;
+}
+
+
 .submenu {
 	display: none;
 	padding: 0;
@@ -267,12 +272,8 @@ p {
 	display:none;
 }
 
-ul.right_top_menu li:first-child {
+ul.right_top_menu li {
 	padding-right: 10px;
-}
-
-ul.right_top_lang_menu {
-	float: right;
 }
 
 ul.right_top_lang_menu li {

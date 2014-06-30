@@ -27,23 +27,26 @@
 					);
 				
 					wp_nav_menu($args);
-				
-					// Afficher menu secondaire
-					$args = array(
-						'theme_location'  => 'header_right',
-						'container' => false,
-						'menu_class' => 'right_top_menu',
-						'walker' => new custom_walker_menu()
-					);
-				
-					wp_nav_menu($args);
 				?>
-				
-				<ul class="right_top_lang_menu">
+				<div class="menu_float_right">
 					<?php
-						icl_post_languages();
+						// Afficher menu secondaire
+						$args = array(
+							'theme_location'  => 'header_right',
+							'container' => false,
+							'menu_class' => 'right_top_menu',
+							'walker' => new custom_walker_menu()
+						);
+					
+						wp_nav_menu($args);
 					?>
-				</ul>
+					
+					<ul class="right_top_lang_menu">
+						<?php
+							icl_post_languages();
+						?>
+					</ul>
+				</div>
 			</div>
 			
 			<div class="submenu_wrapper"></div>
