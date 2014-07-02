@@ -50,29 +50,35 @@
 					// Récupérer les données des séjours ayant lieu durant notre durée choisie
 					$reservations_list = $wpdb->get_results("
 						SELECT post_id, meta_value FROM $wpdb->postmeta WHERE meta_key = 'rms_reservation_room' AND post_id IN (
-						SELECT post_id
-						FROM  $wpdb->postmeta
-							WHERE (
-							(
-								meta_key =  'rms_reservation_start'
-								AND meta_value >=" . date( 'Ymd', strtotime($startDate) ) . "
-								AND meta_value <=" . date( 'Ymd', strtotime($endDate) ) . "
+						SELECT ID
+						FROM $wpdb->posts AS postReservation
+						-- Joint postmeta date début
+						INNER JOIN ht_postmeta AS pmResDateDebut ON postReservation.ID = pmResDateDebut.post_id
+						AND pmResDateDebut.meta_key =  'rms_reservation_start'
+						-- Joint postmeta date fin
+						INNER JOIN ht_postmeta AS pmResDateFin ON postReservation.ID = pmResDateFin.post_id
+						AND pmResDateFin.meta_key =  'rms_reservation_end'
+						WHERE (
+						-- 1er cas, la réservation couvre les 2 dates
+							pmResDateDebut.meta_value <= " . date( 'Ymd', strtotime($startDate) ) . "
+							AND
+							pmResDateFin.meta_value >= " . date( 'Ymd', strtotime($endDate) ) . "
+						)
+						OR (
+						-- 2ème cas, une des date tombe dans une réservation
+						   (
+						   -- test 1ère date
+							" . date( 'Ymd', strtotime($startDate) ) . " >= pmResDateDebut.meta_value
+							AND
+							" . date( 'Ymd', strtotime($startDate) ) . " <= pmResDateFin.meta_value
 							)
 							OR (
-								meta_key =  'rms_reservation_end'
-								AND meta_value >=" . date( 'Ymd', strtotime($startDate) ) . "
-								AND meta_value <=" . date( 'Ymd', strtotime($endDate) ) . "
-							)
-							OR (
-								(
-									meta_key =  'rms_reservation_start'
-									AND meta_value <=" . date( 'Ymd', strtotime($startDate) ) . "
-								)
-									AND (
-									meta_key =  'rms_reservation_end'
-									AND meta_value >=" . date( 'Ymd', strtotime($endDate) ) . "
-								)
-							)
+							-- test 2ème date
+							" . date( 'Ymd', strtotime($endDate) ) . " >= pmResDateDebut.meta_value
+							AND
+							" . date( 'Ymd', strtotime($endDate) ) . " <= pmResDateFin.meta_value
+							
+							)    
 						)
 						)"
 					);
