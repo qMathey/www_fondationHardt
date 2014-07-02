@@ -65,7 +65,13 @@
 							pmResDateFin.meta_value >= " . date( 'Ymd', strtotime($endDate) ) . "
 						)
 						OR (
-						-- 2ème cas, une des date tombe dans une réservation
+						-- 2ème cas, nos dates couvrent la réservation
+							" . date( 'Ymd', strtotime($startDate) ) . " <= pmResDateDebut.meta_value
+							AND
+							" . date( 'Ymd', strtotime($endDate) ) . " >= pmResDateFin.meta_value
+						)
+						OR (
+						-- 3ème cas, une des date tombe dans une réservation
 						   (
 						   -- test 1ère date
 							" . date( 'Ymd', strtotime($startDate) ) . " >= pmResDateDebut.meta_value
@@ -78,7 +84,7 @@
 							AND
 							" . date( 'Ymd', strtotime($endDate) ) . " <= pmResDateFin.meta_value
 							
-							)    
+							)
 						)
 						)"
 					);
