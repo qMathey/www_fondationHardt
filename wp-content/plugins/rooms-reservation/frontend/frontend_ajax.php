@@ -365,9 +365,13 @@
 							add_post_meta( $post_id, 'rms_reservation_client', $user_id );
 							
 							
-							echo check_conflicts($post_id);
-											
+							// Vérifier conflits
+							check_conflicts($post_id);
+							
 							add_post_meta( $post_id, 'rms_reservation_cost', $_POST['cost'] );
+							
+							// Vérifier conflits
+							check_conflicts($post_id);
 							
 						}
 						

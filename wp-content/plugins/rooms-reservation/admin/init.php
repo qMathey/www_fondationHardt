@@ -747,31 +747,44 @@ add_action( 'save_post', 'prfx_meta_save' );
 		// Récupérer  toutes réservations aux mêmes données, sauf la courante pour éviter conflit sur elle-même
 		$reservations_list = $wpdb->get_results("
 		SELECT post_id FROM $wpdb->postmeta WHERE meta_key =  'rms_reservation_room' AND meta_value LIKE '%a:1:{i:0;s:3:\"" . $room_id . "\";}%' AND post_id != " . $post_id . " AND post_id IN (
-			SELECT post_id
-				FROM  $wpdb->postmeta
-				WHERE (
-					(
-						meta_key =  'rms_reservation_start'
-						AND meta_value >= " . $start_date . "
-						AND meta_value <= " . $end_date . "
-					)
-					OR (
-						meta_key =  'rms_reservation_end'
-						AND meta_value >= " . $start_date . "
-						AND meta_value <= " . $end_date . "
-					)
-					OR (
-						(
-							meta_key =  'rms_reservation_start'
-							AND meta_value <= " . $start_date . "
-						)
-							AND (
-							meta_key =  'rms_reservation_end'
-							AND meta_value >= " . $end_date . "
-						)
-					)
-				) GROUP BY post_id
+		
+			SELECT ID
+			FROM $wpdb->posts AS postReservation
+			-- Joint postmeta date début
+			INNER JOIN ht_postmeta AS pmResDateDebut ON postReservation.ID = pmResDateDebut.post_id
+			AND pmResDateDebut.meta_key =  'rms_reservation_start'
+			-- Joint postmeta date fin
+			INNER JOIN ht_postmeta AS pmResDateFin ON postReservation.ID = pmResDateFin.post_id
+			AND pmResDateFin.meta_key =  'rms_reservation_end'
+			WHERE (
+			-- 1er cas, la réservation couvre les 2 dates
+				pmResDateDebut.meta_value <= " . $start_date . "
+				AND
+				pmResDateFin.meta_value >= " . $end_date . "
+			)
+			OR (
+			-- 2ème cas, nos dates couvrent la réservation
+				" . $start_date . " <= pmResDateDebut.meta_value
+				AND
+				" . $end_date . " >= pmResDateFin.meta_value
+			)
+			OR (
+			-- 3ème cas, une des date tombe dans une réservation
+			   (
+			   -- test 1ère date
+				" . $start_date . " >= pmResDateDebut.meta_value
+				AND
+				" . $start_date . " <= pmResDateFin.meta_value
 				)
+				OR (
+				-- test 2ème date
+				" . $end_date . " >= pmResDateDebut.meta_value
+				AND
+				" . $end_date . " <= pmResDateFin.meta_value
+				
+				)
+			)
+		)
 		");
 		
 		// Parcourir les réservations ayant des conflits
