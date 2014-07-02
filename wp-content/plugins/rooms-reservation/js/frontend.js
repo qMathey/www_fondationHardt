@@ -1,5 +1,7 @@
 var files, CV, user_age;
 var form_submited = false;
+var mail = "admin@fondationhardt.ch";
+
 jQuery(document).ready(function($){
  
 	// Charger les datepickers
@@ -181,7 +183,7 @@ jQuery(document).ready(function($){
 												"Votre demande de réservation pour un séjour scientifique à la Fondation a bien été enregistrée. Veuillez noter que la disponibilité affichée des chambres ne peut être assurée et qu’il ne s’agit pas d’une réservation définitive. <br/>" +
 												"Nous vous confirmerons la réservation dès que possible.<br/>" +
 												"&nbsp;<br/>" +
-												"Pour toute information complémentaire, veuillez vous adresser à admin@fondationhardt.ch<br/>" +
+												"Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:" + mail + "\">" + mail + "</a><br/>" +
 												"Avec nos remerciements et nos salutations les meilleures,<br/>" +
 												"Fondation Hardt");
 										else
@@ -193,7 +195,7 @@ jQuery(document).ready(function($){
 												"&nbsp;<br/>" +
 												"We will contact you as soon as possible to confirm the reservation.<br/>" +
 												"&nbsp;<br/>" +
-												"For further information, please contact us at admin@fondationhardt.ch<br/>" +
+												"For further information, please contact us at <a href=\"mailto:" + mail + "\">" + mail + "</a><br/>" +
 												"&nbsp;<br/>" +
 												"Best wishes,<br/>" +
 												"&nbsp;<br/>" +
@@ -423,7 +425,7 @@ jQuery(document).ready(function($){
 												"Un accusé de réception vous a été envoyé à l'adresse email entrée lors de l'inscription. <br/>" +
 												"&nbsp;<br/>" +
 												"Votre demande de bourse pour un séjour scientifique à la Fondation a bien été enregistrée. Votre dossier sera examiné dès la fin du délai de candidature (30 novembre/30 avril). Nous vous contacterons dès que le processus d’attribution des bourses sera terminé.<br/>" +
-												"Pour toute information complémentaire, veuillez vous adresser à admin@fondationhardt.ch<br/>" +
+												"Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:" + mail + "\">" + mail + "</a><br/>" +
 												"&nbsp;<br/>" +
 												"Avec nos remerciements et nos salutations les meilleures,<br/>" +
 												"&nbsp;<br/>" +
@@ -435,7 +437,7 @@ jQuery(document).ready(function($){
 												"&nbsp;<br/>" +
 												"We have received your application for a grant for a scientific stay at the Hardt Foundation. All applications will be examined after the submission deadline (30th November/30th April). We will contact you as soon as the selection process is over.<br/>" +
 												"&nbsp;<br/>" +
-												"For further information, please contact us at admin@fondationhardt.ch<br/>" +
+												"For further information, please contact us at <a href=\"mailto:" + mail + "\">" + mail + "</a><br/>" +
 												"&nbsp;<br/>" +
 												"Best wishes,<br/>" +
 												"&nbsp;<br/>" +
