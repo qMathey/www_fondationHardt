@@ -90,6 +90,7 @@
 			"les conditions générales" => "the terms and conditions",
 			"Monsieur" => "Mr.",
 			"Madame" => "Mrs.",
+			"Mademoiselle" => "Ms.",
 			"Autre" => "Other",
 			"Générer un mot de passe" => "Get New Password",
 			"Identifiant ou adresse de messagerie" => "Username or E-mail"
