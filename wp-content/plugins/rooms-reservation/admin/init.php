@@ -1253,7 +1253,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 						case "fr":
 	$field['default_value']  = "La Fondation Hardt pour l’étude de l’Antiquité classique a le plaisir de confirmer votre inscription à un séjour d’étude scientifique.
 	Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.
-	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : " . get_bloginfo("wpurl") . "?page_id=1166 .
+	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a>
 
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :
@@ -1271,7 +1271,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 							default:
 	$field['default_value']  = "We are pleased to confirm your registration for a research stay at the Hardt Foundation.
 	Please find here attached your letter of confirmation and invoice.
-	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
+	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a>
 	Please find below your login details for your account on our website :
 
@@ -1297,7 +1297,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 						case "fr":
 	$field['default_value']  = "Nous avons le plaisir de vous annoncer qu’une bourse vous a été attribuée pour un séjour d’étude scientifique à la Fondation Hardt.
 	Vous trouverez en pièce jointe votre lettre d’invitation.
-	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .
+	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a>
 
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :
@@ -1315,7 +1315,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 						default:
 	$field['default_value']  = "We are pleased to inform you that you have been granted a bursary for a research stay at the Hardt Foundation.
 	Please find here attached your letter of confirmation.
-	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .
+	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a>
 	Please find below your login details for your account on our website :
 
@@ -1400,7 +1400,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	
 $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classique a le plaisir de confirmer votre inscription à un séjour d’étude scientifique.<br/>
 	Vous trouverez en pièces jointes la lettre de confirmation et le décompte de votre participation aux frais de séjour.<br/>
-	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
+	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.<br/>
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a><br/>
 <br/>
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
@@ -1415,7 +1415,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	Fondation Hardt",
 	"Nous avons le plaisir de vous annoncer qu’une bourse vous a été attribuée pour un séjour d’étude scientifique à la Fondation Hardt.<br/>
 	Vous trouverez en pièce jointe votre lettre d’invitation.<br/>
-	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
+	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.<br/>
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a><br/>
 <br/>
 	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
@@ -1431,7 +1431,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	
 	$array_en = array("We are pleased to confirm your registration for a research stay at the Hardt Foundation.<br/>
 	Please find here attached your letter of confirmation and invoice.<br/>
-	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
+	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.<br/>
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a><br/>
 	Please find below your login details for your account on our website :<br/>
 <br/>
@@ -1446,7 +1446,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	Hardt Foundation",
 	"We are pleased to inform you that you have been granted a bursary for a research stay at the Hardt Foundation.<br/>
 	Please find here attached your letter of confirmation.<br/>
-	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: ".get_bloginfo("wpurl")."?page_id=1166 .<br/>
+	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.<br/>
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a><br/>
 	Please find below your login details for your account on our website :<br/>
 <br/>
