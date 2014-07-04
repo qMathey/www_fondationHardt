@@ -15,7 +15,7 @@
 	
 		<div class="left_col">
 			
-			<p><?php echo rms_translate("L'inscription de demande de séjour à la Fondation Hardt se déroule en 4 étapes, merci de compléter les champs suivants"); ?> :</p>
+			<p><?php echo rms_translate("La demande de réservation pour un séjour à la Fondation Hardt se déroule en 4 étapes, merci de compléter les champs suivants"); ?> :</p>
 			<p class="rms_label_error rms_form_error_info"><?php echo rms_translate("Merci de compléter l'ensemble des champs correctement"); ?></p>
 			<fieldset>
 			

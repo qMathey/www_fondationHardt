@@ -164,9 +164,9 @@ jQuery(document).ready(function($){
 									if(data == 'user_id_error')
 									{
 										if( $('.right_top_lang_menu li a.active').text() == 'fr')
-											$('p.step_content').html("L'adresse email est déjà utilisée, veuillez la corriger");
+											$('p.step_content').html("Cette adresse email est déjà enregistrée. Veuillez vous connecter par le lien « J’ai déjà un compte ». En cas de problème de connexion, contactez-nous à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a>");
 										else
-											$('p.step_content').html("The email address is already in use, please correct");
+											$('p.step_content').html("This email address is already registered. Please log in using the link “I already have an online account.” In case you have problems logging in, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a>");
 											
 										$('input[name="email"]').addClass('rms_field_error');
 										
@@ -604,7 +604,7 @@ jQuery(document).ready(function($){
 						if( !data )
 							$('.step_3 .res_room_list').html('<p class="rms_wrapper_step_descr">Unfortunately there are no rooms available for the period from ' + $('#start_date').val() + ' to' + $('#end_date').val() + '</p><input type="button" data-step="step_2" class="rms_edit_go_to_step" value="Modifier les dates" />');
 						else
-							$('.step_3 .res_room_list').html('<p class="rms_wrapper_step_descr">Here is the list of available rooms for the requested dates:</p>' + data);
+							$('.step_3 .res_room_list').html('<p class="rms_wrapper_step_descr">Please choose one of the available rooms for the requested dates:</p>' + data);
 					}
 					
 				});

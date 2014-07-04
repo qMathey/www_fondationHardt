@@ -86,7 +86,7 @@
 		</div>	
 	<?php
 		// Obtenir l'id des cg selon la langue
-		$cgFileID = ( ICL_LANGUAGE_CODE == 'fr' ? 1548 : 1549 );
+		$cgFileID = ( ICL_LANGUAGE_CODE == 'fr' ? 1729 : 1730 );
 	?>
 		<div class="" style="text-align:right;">
 			<input type="checkbox" name="tou_agree" /><?php echo rms_translate("J'ai lu et j'accepte"); echo ' <a href="' . wp_get_attachment_url( $cgFileID ) . '" target="_blank">';echo rms_translate("les conditions générales"); echo '</a>'; ?>
