@@ -183,8 +183,6 @@
 			<br/>
 			Votre demande de bourse pour un séjour scientifique à la Fondation a bien été enregistrée. Votre dossier sera examiné dès la fin du délai de candidature (30 novembre/30 avril). Nous vous contacterons dès que le processus d’attribution des bourses sera terminé.
 			<br/>
-			Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
-			<br/>
 			Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 			Avec nos remerciements et nos salutations les meilleures,<br/>
 			<br/>
@@ -197,8 +195,6 @@
 			$message = "Thank you very much for your interest in The Hardt Foundation. We have received your application for a grant for a scientific stay at the Hardt Foundation.<br/>
 			<br/>
 			All applications will be examined after the submission deadline (30th November/30th April). We will contact you as soon as the selection process is over.<br/>
-			<br/>
-			Please find below your login details for your account on our website :<br/>
 			<br/>
 			For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 			<br/>
@@ -222,8 +218,6 @@
 			<br/>
 			Votre demande de réservation pour un séjour scientifique à la Fondation a bien été enregistrée. Veuillez noter que la disponibilité affichée des chambres ne peut être assurée et qu’il ne s’agit pas d’une réservation définitive.<br/>
 			Nous vous confirmerons la réservation dès que possible.<br/>
-			 <br/>
-			Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
 			<br/>
 			Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 			Avec nos remerciements et nos salutations les meilleures,<br/>
@@ -240,8 +234,6 @@
 			We have received your request for a scientific stay at the Foundation. Please note that room availability cannot be guaranteed and that this is not a final reservation.<br/>
 			<br/>
 			We will contact you as soon as possible to confirm the reservation.<br/>
-			<br/>
-			Please find below your login details for your account on our website :<br/>
 			<br/>
 			For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 			<br/>
