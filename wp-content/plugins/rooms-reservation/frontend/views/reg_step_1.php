@@ -21,9 +21,9 @@
 			
 				<label for="civil"><?php echo rms_translate("Civilité"); ?></label>
 				<select name="civil">
-					<option value="M"><?php echo rms_translate("Monsieur"); ?></option>
-					<option value="F"><?php echo rms_translate("Madame"); ?></option>
-					<option value="O"><?php echo rms_translate("Mademoiselle"); ?></option>
+					<option value="Monsieur"><?php echo rms_translate("Monsieur"); ?></option>
+					<option value="Madame"><?php echo rms_translate("Madame"); ?></option>
+					<option value="Mademoiselle"><?php echo rms_translate("Mademoiselle"); ?></option>
 				</select>
 				
 				<label for="nom"><?php echo rms_translate("Nom"); ?></label>

@@ -55,6 +55,7 @@
 	
 	// Donnees fictives pour demo
 	$arrUserData = array(
+		get_user_meta( $post_author_id, 'civil', true ),
 		get_user_meta( $post_author_id, 'first_name', true ),
 		get_user_meta( $post_author_id, 'last_name', true ),
 		get_user_meta( $post_author_id, 'birthday', true ),

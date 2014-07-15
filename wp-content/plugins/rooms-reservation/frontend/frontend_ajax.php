@@ -272,7 +272,8 @@
 						"phone_2",
 						"remarks",
 						"theme",
-						"regime"
+						"regime",
+						"remarks"
 					);
 					
 					// Parcourir les colonnes à ajouter
@@ -412,7 +413,7 @@
 							
 						}// Fin foreach()
 						
-							// Ajouter méta adresse facturation, si nécessaire
+						// Ajouter méta adresse facturation, si nécessaire
 						if( !$_POST['same_addr'] )
 						{
 							$message_admin .= "<br><h4>Adresse de facturation</h4><br/>";

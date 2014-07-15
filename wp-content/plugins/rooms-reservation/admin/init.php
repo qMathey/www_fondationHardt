@@ -1020,6 +1020,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 		// tableau des champs
 		$arrFields = array(
 			// General user infos
+			array(__("Civilité", "rms_reservation") ,  __("General"), "civil","civil_select"),
 			array(__("Prénom", "rms_reservation") ,  __("General"), "first_name","text"),
 			array(__("Nom", "rms_reservation"),  __("General"), "last_name","text"),
 			array(__("Date de naissance", "rms_reservation"), __("General"), "birthday","text"),
@@ -1151,6 +1152,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	{
 		
 		$userFieldArray = array(
+			"civil",
 			"first_name",
 			"last_name",
 			"birthday",
@@ -1160,6 +1162,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 			"number",
 			"postal",
 			"city",
+			"country",
 			"iso",
 			"phone_1",
 			"phone_2",

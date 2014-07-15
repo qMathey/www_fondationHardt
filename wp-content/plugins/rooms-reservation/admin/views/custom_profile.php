@@ -8,6 +8,7 @@
 	$arrUserFields = user_custom_fields();
 	
 	$arrDemoUserData = array(
+		get_user_meta( $user_id, 'civil', true ),
 		get_user_meta( $user_id, 'first_name', true ),
 		get_user_meta( $user_id, 'last_name', true ),
 		get_user_meta( $user_id, 'birthday', true ),
@@ -337,6 +338,13 @@
 										<option data-iso-value="ye">Yemen</option>
 										<option data-iso-value="zm">Zambia</option>
 										<option data-iso-value="zw">Zimbabwe</option>
+									</select>';
+								break;
+								case "civil_select":
+									echo'<select name="' . $data[2] . '">
+										<option value="Monsieur"' . ($arrDemoUserData[$i] == "Monsieur" ? ' selected' : '') . '>Monsieur</option>
+										<option value="Madame"' . ($arrDemoUserData[$i] == "Madame" ? ' selected' : '') . '>Madame</option>
+										<option value="Mademoiselle"' . ($arrDemoUserData[$i] == "Mademoiselle" ? ' selected' : '') . '>Mademoiselle</option>
 									</select>';
 								break;
 								default :
