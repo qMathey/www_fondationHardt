@@ -342,9 +342,9 @@
 								break;
 								case "civil_select":
 									echo'<select name="' . $data[2] . '">
-										<option value="Monsieur"' . ($arrDemoUserData[$i] == "Monsieur" ? ' selected' : '') . '>Monsieur</option>
-										<option value="Madame"' . ($arrDemoUserData[$i] == "Madame" ? ' selected' : '') . '>Madame</option>
-										<option value="Mademoiselle"' . ($arrDemoUserData[$i] == "Mademoiselle" ? ' selected' : '') . '>Mademoiselle</option>
+										<option value="Monsieur"' . ( ($arrDemoUserData[$i] == "Monsieur") || ($arrDemoUserData[$i] == "M") ? ' selected' : '') . '>Monsieur</option>
+										<option value="Madame"' . ( ($arrDemoUserData[$i] == "Madame") || ($arrDemoUserData[$i] == "F") ? ' selected' : '') . '>Madame</option>
+										<option value="Mademoiselle"' . ( ($arrDemoUserData[$i] == "Mademoiselle") || ($arrDemoUserData[$i] == "O") ? ' selected' : '') . '>Mademoiselle</option>
 									</select>';
 								break;
 								default :
