@@ -618,7 +618,7 @@ jQuery(document).ready(function($){
 			// Calculer le nombre de nuitées
 			var start_date   = $('#start_date').datepicker('getDate');
 			var end_date = $('#end_date').datepicker('getDate');
-			var nights   = ( end_date - start_date )/1000/60/60/24;
+			var nights   = Math.round( (end_date - start_date)/1000/60/60/24 );
 			
 			// Afficher le nombre de nuit
 			$('.nb_nights').text(nights);

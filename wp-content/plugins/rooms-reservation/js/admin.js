@@ -33,7 +33,7 @@ else
 			var arrEndDate = jQuery("#acf-rms_reservation_start input[type=text]").val().split('/');
 		
 			// Afficher la valeur dans le champs prévu
-			jQuery("#rms_reservation_nigths").val( ( new Date(arrStartDate[2], arrStartDate[1]-1, arrStartDate[0] ) - new Date( arrEndDate[2], arrEndDate[1]-1, arrEndDate[0]) ) / 1000 / (60 * 60 * 24) );
+			jQuery("#rms_reservation_nigths").val( Math.round( ( new Date(arrStartDate[2], arrStartDate[1]-1, arrStartDate[0] ) - new Date( arrEndDate[2], arrEndDate[1]-1, arrEndDate[0]) ) / 1000 / (60 * 60 * 24) ) );
 			
 		}// Fin if()
 			
