@@ -1210,17 +1210,23 @@ add_action( 'save_post', 'prfx_meta_save' );
 		
 		if($outputFileData == false)
 			$outputFileData = '';
-		foreach($_FILES["upload"]["name"] as $key => $filename)
-		{
-			$upld_file = wp_upload_bits( clean_string2($filename), null, @file_get_contents( $_FILES["upload"]['tmp_name'][$key] ) );
-			
-			if ( FALSE === $upld_file['error'] )
-			{	
-				// Ajouter meta du document à l'utilisateur
-				$outputFileData .= $upld_file['url'] . "|";
-			}
-			
-		}
+                
+                // Vérifier présence _FILES
+                if( isset($_FILES["upload"]["name"]) )
+                {
+                    foreach($_FILES["upload"]["name"] as $key => $filename)
+                    {
+                           $upld_file = wp_upload_bits( clean_string2($filename), null, @file_get_contents( $_FILES["upload"]['tmp_name'][$key] ) );
+
+                           if ( FALSE === $upld_file['error'] )
+                           {	
+                                   // Ajouter meta du document à l'utilisateur
+                                   $outputFileData .= $upld_file['url'] . "|";
+                           }
+
+                    }
+                }// if
+                
 		// met à jour l'option avec les files
 		update_option($user_uid , $outputFileData);
 		
