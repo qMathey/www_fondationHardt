@@ -466,7 +466,7 @@
 							
 							$message_admin .= "Période 2 :     du " . $_POST['start_2'] . " au " . $_POST['end_2'] . "<br/>";
 						}
-						//wp_mail( "admin@fondationhardt.ch", "Demande pour un séjour", $message_admin, $headers_admin);
+						wp_mail( "admin@fondationhardt.ch", "Demande pour un séjour", $message_admin, $headers_admin);
 		
 					}
 					else
