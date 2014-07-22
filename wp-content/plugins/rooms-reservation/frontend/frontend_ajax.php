@@ -651,7 +651,7 @@ $message = "Nous vous remercions de votre intérêt pour la Fondation Hardt.<br/
 Votre demande de réservation pour un séjour scientifique à la Fondation a bien été enregistrée. Veuillez noter que la disponibilité affichée des chambres ne peut être assurée et qu’il ne s’agit pas d’une réservation définitive.<br/>
 Nous vous confirmerons la réservation dès que possible.<br/>
  <br/>
-Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
+Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet, qui vous serviront pour une réservation ultérieure :<br/>
 <br/>
 Pour toute information complémentaire, veuillez vous adresser à <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 Avec nos remerciements et nos salutations les meilleures,<br/>
@@ -669,7 +669,7 @@ We have received your request for a scientific stay at the Foundation. Please no
 <br/>
 We will contact you as soon as possible to confirm the reservation.<br/>
 <br/>
-Please find below your login details for your account on our website :<br/>
+Please find below your login details for your account on our website, which you will use for your next reservation :<br/>
 <br/>
 For further information, please contact us at <a href=\"mailto:admin@fondationhardt.ch\">admin@fondationhardt.ch</a><br/>
 <br/>
