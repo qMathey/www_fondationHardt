@@ -1265,7 +1265,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a>
 
-	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :
+	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet, qui vous serviront pour une réservation ultérieure :
 
 	Nom d'utilisateur : " . $username . "
 	Mot de Passe : " . $password . "
@@ -1282,7 +1282,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	Please find here attached your letter of confirmation and invoice.
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a>
-	Please find below your login details for your account on our website :
+	Please find below your login details for your account on our website, which you will use for your next reservation :
 
 	Username : " . $username . "
 	
@@ -1309,7 +1309,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a>
 
-	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :
+	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet, which you will use for your next reservation :
 
 	Nom d'utilisateur : " . $username . "
 	Mot de Passe : " . $password . "
@@ -1326,7 +1326,7 @@ add_action( 'save_post', 'prfx_meta_save' );
 	Please find here attached your letter of confirmation.
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a>
-	Please find below your login details for your account on our website :
+	Please find below your login details for your account on our website, which you will use for your next reservation :
 
 	Username : " . $username . "
 	
@@ -1412,7 +1412,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.<br/>
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a><br/>
 <br/>
-	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
+	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet, qui vous serviront pour une réservation ultérieure :<br/>
 <br/>
 	Nom d'utilisateur : " . $username . "<br/>
 	Mot de Passe : " . $password . "<br/>
@@ -1427,7 +1427,7 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	Des informations pratiques sur la Fondation et sur votre voyage jusqu’à Vandœuvres sont disponibles ici : <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.<br/>
 	Afin que nous puissions vous accueillir dans les meilleures conditions, nous vous prions de bien vouloir nous communiquer en temps voulu votre heure approximative d’arrivée et le moyen de transport prévu pour atteindre la Fondation à <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a><br/>
 <br/>
-	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet :<br/>
+	Veuillez trouver ci-après vos paramètres d'accès à votre compte sur notre site internet, qui vous serviront pour une réservation ultérieure :<br/>
 <br/>
 	Nom d'utilisateur : " . $username . "<br/>
 	Mot de Passe : " . $password . "<br/>
@@ -1442,10 +1442,9 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	Please find here attached your letter of confirmation and invoice.<br/>
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.<br/>
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a><br/>
-	Please find below your login details for your account on our website :<br/>
+	Please find below your login details for your account on our website, which you will use for your next reservation :<br/>
 <br/>
 	Username : " . $username . "<br/>
-	<br/>
 	Password : " . $password . "<br/>
 	<br/>
 	Do not hesitate to contact us if you have any inquiry concerning your future stay.<br/>
@@ -1457,10 +1456,9 @@ $array_fr = array("La Fondation Hardt pour l’étude de l’Antiquité classiqu
 	Please find here attached your letter of confirmation.<br/>
 	Practical information about the Hardt Foundation as well as travelling to Vandœuvres is available here: <a href=\"" . get_bloginfo("wpurl") . "?page_id=1166\">" . get_bloginfo("wpurl") . "?page_id=1166</a>.<br/>
 	In order for us to welcome you as well as possible, please let us know the scheduled date and time of your arrival and the means of transport you will use to get to the Foundation at <a href=\"mailto:" . ADMIN_MAIL . "\">" . ADMIN_MAIL . "</a><br/>
-	Please find below your login details for your account on our website :<br/>
+	Please find below your login details for your account on our website, which you will use for your next reservation :<br/>
 <br/>
 	Username : " . $username . "<br/>
-	<br/>
 	Password : " . $password . "<br/>
 	<br/>
 	Do not hesitate to contact us if you have any inquiry concerning your future stay.<br/>
