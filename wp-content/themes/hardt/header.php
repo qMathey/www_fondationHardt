@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<title>Fondation Hardt</title>
+                <title><?php wp_title( '|', true, 'right' ); ?></title>
 		<!--[if lt IE 9]>
 		<script src="<?php echo get_template_directory_uri();?>/js/html5shiv.min.js"></script>
 		<![endif]-->
