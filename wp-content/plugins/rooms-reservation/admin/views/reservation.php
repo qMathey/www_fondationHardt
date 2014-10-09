@@ -143,7 +143,7 @@
 		// Afficher colonne hôte
 		function column_hote( $data )
 		{			
-			return '<a href="' . get_edit_user_link($data['hote']) . '">' . get_user_meta( $data['hote'], 'first_name', true) . ' ' . get_user_meta( $data['hote'], 'last_name', true) . '</a>';
+                    return $data['hote'];
 		
 		}// Fin column_hote()
 		
@@ -235,7 +235,8 @@
 				{
 					$post_author_id = get_post_field( 'post_author', get_the_ID() );
 				}
-				
+				$author = '<span class="user" data-username="'.get_user_meta( $post_author_id, 'first_name', true) . ' ' . get_user_meta( $post_author_id, 'last_name', true) . '" data-url="' . get_edit_user_link($post_author_id) . '"';
+		
 				$dates = '<span class="timestamp_date_jq">' . strtotime( get_field('rms_reservation_start') ) . '</span> - ' . date( "d.m.Y", strtotime( get_field('rms_reservation_end') ) );
 				
 				$status = get_post_meta( get_the_ID(), 'rms_reservation_status', true );
@@ -258,11 +259,11 @@
 				$dataPrice .= 'CHF (' . $dataPrice_nbNight . ' nuits)';
 				$roomLink = '<a href="' . get_edit_post_link($roomData -> ID) . '">' . $roomNumber . ' / ' . $roomData -> post_title . '</a>';
 				
-				$data[] = array('id' => get_the_ID(), 'title' => get_the_title(), 'hote' =>  $post_author_id, 'dates' => $dates, 'room' => $roomLink , 'price' => $dataPrice, 'state'=> $status, 'email' => $email, 'date_res' => get_post_time('U', true));
+				$data[] = array('id' => get_the_ID(), 'title' => get_the_title(), 'hote' =>  $author, 'dates' => $dates, 'room' => $roomLink , 'price' => $dataPrice, 'state'=> $status, 'email' => $email, 'date_res' => get_post_time('U', true));
 				
 
 			}
-		
+                        
 			// Charger données triées
 			usort( $data, array( &$this, 'sort_data' ) );
 			

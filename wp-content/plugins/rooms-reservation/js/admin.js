@@ -214,8 +214,11 @@ else
 		
 		jQuery(this).text(("0" + day).slice(-2) + "." + ("0" + month).slice(-2) + "." + year);
 	});
-	
-	
+        
+	jQuery('.column-hote span.user').each(function(){
+		jQuery(this).html('<a href="' + $(this).attr('data-url') + '">' + $(this).attr('data-username') + '</a>');
+	});
+        
 })(jQuery);	
 
 
